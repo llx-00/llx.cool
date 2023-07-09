@@ -1,6 +1,8 @@
 .DS_Store
 
+dist
 node_modules
+.vite-ssg-temp
 auto-imports.d.ts
 components.d.ts
 pnpm-lock.yaml

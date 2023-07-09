@@ -1,5 +1,4 @@
 export default [
-  "你好",
   "Hello",
   "Hola",
   "Bonjour",

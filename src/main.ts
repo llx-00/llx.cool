@@ -10,13 +10,12 @@ import App from './App.vue'
 const routes = autoRoutes.map((i) => {
   return {
     ...i,
-    alias: i.path.endsWith('/')
-      ? `${i.path}index.html`
-      : `${i.path}.html`,
+    // alias: i.path.endsWith('/')
+    //   ? `${i.path}index.html`
+    //   : `${i.path}.html`,
   }
 })
 
-console.log('autoRoutes', autoRoutes)
 console.log('routes', routes)
 
 export const createApp = ViteSSG(

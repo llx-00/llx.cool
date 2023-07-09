@@ -1,7 +1,8 @@
 {
   "packageManager": "pnpm@7.33.3",
+  "type": "module",
   "scripts": {
-    "build": "npm run static && cross-env NODE_ENV=production vite-ssg build",
+    "build": "cross-env NODE_ENV=production vite-ssg build",
     "dev": "vite --port 3333 --host"
   },
   "dependencies": {

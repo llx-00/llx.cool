@@ -11,7 +11,6 @@ import matter from 'gray-matter'
 import IconsResolver from 'unplugin-icons/resolver'
 
 
-
 export default defineConfig({
   resolve: {
     alias: {
@@ -34,10 +33,9 @@ export default defineConfig({
         if (path.endsWith('.md')) {
           const md = fs.readFileSync(path, 'utf-8')
           const { data } = matter(md)
-          console.log(`matter(md).data: ${JSON.stringify(data, null, 2)}`)
+          // console.log(`matter(md).data: ${JSON.stringify(data, null, 2)}`)
           route.meta = Object.assign(route.meta || {}, { frontmatter: data })
         }
-
         return route
       },
     }),
@@ -47,24 +45,6 @@ export default defineConfig({
         quotes: '""\'\'',
       },
       headEnabled: true,
-      frontmatterPreprocess(frontmatter, options, id, defaults) {
-        (() => {
-          if (!id.endsWith('.md'))
-            return
-          const route = basename(id, '.md')
-          if (route === 'index' || frontmatter.image || !frontmatter.title)
-            return
-          // const path = `og/${route}.png`
-          // promises.push(
-          //   fs.existsSync(`${id.slice(0, -3)}.png`)
-          //     ? fs.copy(`${id.slice(0, -3)}.png`, `public/${path}`)
-          //     : genreateOg(frontmatter.title!.replace(/\s-\s.*$/, '').trim(), `public/${path}`),
-          // )
-          // frontmatter.image = `https://antfu.me/${path}`
-        })()
-        const head = defaults(frontmatter, options)
-        return { head, frontmatter }
-      },
     }),
 
     AutoImport({ // https://github.com/antfu/unplugin-auto-import
@@ -93,3 +73,4 @@ export default defineConfig({
 
   ]
 })
+

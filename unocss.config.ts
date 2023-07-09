@@ -3,7 +3,7 @@ import {
   presetAttributify,
   presetIcons,
   presetUno,
-  // presetWebFonts,
+  presetWebFonts,
   // transformerDirectives,
   // transformerVariantGroup,
 } from 'unocss'
@@ -23,12 +23,13 @@ export default defineConfig({
         'vertical-align': 'text-bottom',
       },
     }),
-    // presetWebFonts({
-    //   fonts: {
-    //     sans: 'Inter:400,600,800',
-    //     mono: 'DM Mono',
-    //   },
-    // }),
+    presetWebFonts({
+      provider: 'google',
+      fonts: {
+        sans: 'Inter:400,600,800',
+        mono: ['Fira Code', 'Fira Mono:400,700'],
+      },
+    }),
   ],
   // transformers: [
   //   transformerDirectives(),
