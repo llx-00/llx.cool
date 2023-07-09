@@ -1,4 +1,15 @@
-# <Hello :iterval='2000'/>
+---
+title: Longxiang Li
+---
 
-I am Longxiang Li, a rookie front-end development.
+# <Hello defaultVal="你好" :iterval="2000" />
 
+我是李龙翔, 2019年开始接触前端开发，目前在上海一家互联网公司写`CRUD`。
+
+<!-- 有些社恐，又希望能多认识些朋友。 -->
+
+自认为：摄影技术📷 > 厨艺👨🏻‍🍳 > 编码👨🏻‍💻，也在不断开发新技能🥷🏻。
+
+在[这里](/posts)记录日常的一些~~胡言乱语~~想法、照片、代码。
+
+写了些小玩具[Projects](/projects)，欢迎来玩。
