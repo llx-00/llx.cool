@@ -20,7 +20,9 @@ a {
   text-decoration: none;
 }
 
-#root {
+#app {
   width: 100vw;
   min-width: 300px;
+
+  overflow-x: hidden;
 }
