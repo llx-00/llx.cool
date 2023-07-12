@@ -1,9 +1,8 @@
 <template>
-  <nav flex p-4 text-base>
-    <RouterLink to="/" absolute select-none outline-none>
+  <nav flex justify-between items-start p-4 text-base>
+    <RouterLink to="/" select-none outline-none>
       <img :src="isDark ? '/logo-dark.svg' : '/logo.svg'" w-6 lg:w-10 alt="logo">
     </RouterLink>
-    <div flex-1 />
     <div flex gap-6 items-center>
       <RouterLink to="/posts" title="Blog" link>
         <span lt-sm:hidden>Blog</span>
