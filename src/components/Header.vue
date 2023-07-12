@@ -1,6 +1,6 @@
 <template>
-  <nav flex justify-between items-start p-4 text-base>
-    <RouterLink to="/" select-none outline-none>
+  <nav flex justify-end items-start p-4 text-base>
+    <RouterLink to="/" select-none outline-none absolute left-4>
       <img :src="isDark ? '/logo-dark.svg' : '/logo.svg'" w-6 lg:w-10 alt="logo">
     </RouterLink>
     <div flex gap-6 items-center>
@@ -8,7 +8,10 @@
         <span lt-sm:hidden>Blog</span>
         <i i-lucide-file-text sm:hidden />
       </RouterLink>
-
+      <RouterLink to="/games" title="Games" link>
+        <span lt-sm:hidden>Games</span>
+        <i i-lucide-gamepad-2 sm:hidden />
+      </RouterLink>
       <RouterLink to="/projects" title="Projects" link>
         <span lt-sm:hidden>Projects</span>
         <i i-lucide-lightbulb sm:hidden />

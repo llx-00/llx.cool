@@ -29,7 +29,7 @@ export default defineConfig({
       dirs: 'pages',
       extendRoute(route) {
         const path = resolve(__dirname, route.component.slice(1))
-        console.log(`pages: ${path}`)
+        console.log(`pages: .${route.component}`, path)
         if (path.endsWith('.md')) {
           const md = fs.readFileSync(path, 'utf-8')
           const { data } = matter(md)
@@ -52,6 +52,7 @@ export default defineConfig({
         'vue',
         'vue-router',
         '@vueuse/core',
+        '@vueuse/head',
       ],
       dts: true,
       dirs: [

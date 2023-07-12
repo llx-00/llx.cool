@@ -1,46 +1,38 @@
 <script setup lang="ts">
-defineProps<{ projects: Record<string, any[]> }>()
+import { Project } from '~/types'
+
+
+const { projects } = defineProps<{ projects: Record<string, Project[]> }>()
 </script>
 
 <template>
-  <template v-for="key in Object.keys(projects)" :key="key">
-    <h4 class="mt-10 font-bold">
-      {{ key }}
-    </h4>
-    <div class="project-grid py-2 -mx-3 gap-2">
-      <a v-for="item, idx in projects[key]" :key="idx" class="item relative flex items-center" :href="item.link"
-        target="_blank" :class="!item.link ? 'opacity-0 pointer-events-none h-0 -mt-8 -mb-4' : ''" :title="item.name">
-        <div v-if="item.icon" class="pt-2 pr-5">
-          <Slidev v-if="item.icon === 'slidev'" class="text-4xl opacity-50" />
-          <VueUse v-else-if="item.icon === 'vueuse'" class="text-4xl opacity-50" />
-          <VueReactivity v-else-if="item.icon === 'vue-reactivity'" class="text-4xl opacity-50" />
-          <VueDemi v-else-if="item.icon === 'vue-demi'" class="text-4xl opacity-50" />
-          <Unocss v-else-if="item.icon === 'unocss'" class="text-4xl opacity-50" />
-          <Vitest v-else-if="item.icon === 'vitest'" class="text-4xl opacity-50" />
-          <div v-else class="text-3xl opacity-50" :class="item.icon || 'i-carbon-unknown'" />
-        </div>
-        <div class="flex-auto">
-          <div class="text-normal">{{ item.name }}</div>
-          <div class="desc text-sm opacity-50 font-normal" v-html="item.desc" />
-        </div>
-      </a>
-    </div>
-  </template>
+  <PageTitle />
+  <ul>
+    <li v-for="key in Object.keys(projects)" :key="key">
+      <h2 my-5 font-bold>{{ key }}</h2>
+      <div p2 flex flex-wrap gap-4>
+        <a v-for="item in projects[key]" target="_blank" :key="item.name" :title="item.name" :href="item.link" flex
+          justify-between items-center my-2 class="mx-0! min-w-45%">
+          <img v-if="item.logo" :src="item.logo" alt="project logo" px-2 w-6 h-6>
+          <div text-left flex-1 ml-2>
+            <div>
+              <img v-show="key === 'Components'" src="/npm.svg" alt="npm logo" h-3 mx-1>
+              {{ item.name }}
+            </div>
+            <div text-sm opacity-50 font-normal>{{ item.desc }}</div>
+          </div>
+        </a>
+      </div>
+    </li>
+  </ul>
 </template>
 
-<style scoped>
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
+<style scoped lang="scss">
+a {
+  text-decoration: none;
 
-.project-grid a.item {
-  padding: 0.8em 1em;
-  background: transparent;
-  font-size: 1.1rem;
-}
-
-.project-grid a.item:hover {
-  background: #88888808;
+  &::before {
+    display: none;
+  }
 }
 </style>
