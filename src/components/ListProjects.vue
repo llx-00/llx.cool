@@ -9,17 +9,17 @@ const { projects } = defineProps<{ projects: Record<string, Project[]> }>()
   <PageTitle />
   <ul>
     <li v-for="key in Object.keys(projects)" :key="key">
-      <h2 my-5 font-bold>{{ key }}</h2>
-      <div p2 flex flex-wrap gap-4>
+      <h2 my5 font-bold>{{ key }}</h2>
+      <div p2 flex flex-wrap gap4>
         <a v-for="item in projects[key]" target="_blank" :key="item.name" :title="item.name" :href="item.link" flex
-          justify-between items-center my-2 class="mx-0! min-w-45%">
-          <img v-if="item.logo" :src="item.logo" alt="project logo" px-2 w-6 h-6>
-          <div text-left flex-1 ml-2>
+          justify-between items-center my2 class="mx0! min-w-45%">
+          <img v-if="item.logo" :src="item.logo" alt="project logo" px2 w6 h6>
+          <div text-left flex-1 ml2>
             <div>
-              <img v-show="key === 'Components'" src="/npm.svg" alt="npm logo" h-3 mx-1>
+              <img v-show="key === 'Components'" src="/npm.svg" alt="npm logo" h2 mx1>
               {{ item.name }}
             </div>
-            <div text-sm opacity-50 font-normal>{{ item.desc }}</div>
+            <div text-sm op50 font-normal>{{ item.desc }}</div>
           </div>
         </a>
       </div>
