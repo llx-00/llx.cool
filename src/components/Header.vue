@@ -1,10 +1,10 @@
 <template>
   <nav flex justify-end items-start p-4 text-base>
     <RouterLink to="/" select-none outline-none absolute left-4>
-      <img :src="isDark ? '/logo-dark.svg' : '/logo.svg'" w-6 lg:w-10 alt="logo">
+      <img :src="isDark ? '/logo-dark.svg' : '/logo.svg'" w-6 alt="logo">
     </RouterLink>
     <div flex gap-6 items-center>
-      <RouterLink to="/posts" title="Blog" link>
+      <RouterLink to="/blog" title="Blog" link>
         <span lt-sm:hidden>Blog</span>
         <i i-lucide-file-text sm:hidden />
       </RouterLink>
