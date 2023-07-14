@@ -1,4 +1,5 @@
 ## Preview
+
 [Vue SPA Template](https://vue-spa-tem.netlify.app/)
 
 ## Features
@@ -21,7 +22,6 @@
 
 - 🚧 Markdown
 
-
 ## Pre-packed
 
 ### UI Frameworks
@@ -34,6 +34,7 @@
 - [Pure CSS Icons via UnoCSS](https://github.com/antfu/unocss/tree/main/packages/preset-icons)
 
 ### Plugins
+
 - [`unplugin-auto-import`](https://github.com/antfu/unplugin-auto-import) - Directly use Vue Composition API and others without importing
 - [`unplugin-vue-components`](https://github.com/antfu/unplugin-vue-components) - components auto import
 - [VueUse](https://github.com/antfu/vueuse) - collection of useful composition APIs
