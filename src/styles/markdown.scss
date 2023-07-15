@@ -1,3 +1,5 @@
+@import './font-face.scss';
+
 .markdown-body {
   h1 {
     height: 3rem;
@@ -52,11 +54,15 @@
 
   pre,
   code {
-    font-family: "Fira Code", "Fira Mono", ui-monospace, SFMono-Regular, Menlo,
-      Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: "JetBrainsMono", monospace;
   }
 
   pre {
     overflow-x: scroll;
+    font-size: 0.8rem;
+    margin: 0;
+    padding: 0.5rem;
+
+    background-color: #888;
   }
 }

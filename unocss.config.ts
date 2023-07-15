@@ -27,7 +27,6 @@ export default defineConfig({
       provider: 'google',
       fonts: {
         sans: 'Inter:400,600,800',
-        mono: ['Fira Code', 'Fira Mono:400,700'],
       },
     }),
   ],
