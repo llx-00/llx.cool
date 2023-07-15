@@ -6,7 +6,7 @@
   const router = useRouter();
   const routes: Post[] = router
     .getRoutes()
-    .filter(i => i.path.startsWith("/posts/"))
+    .filter(i => i.path.startsWith("/post/"))
     .map(i => ({
       path: i.path,
       title: i.meta.frontmatter.title,
