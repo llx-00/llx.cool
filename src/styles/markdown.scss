@@ -1,10 +1,6 @@
 @import './font-face.scss';
 
 .markdown-body {
-  h1 {
-    height: 3rem;
-    line-height: 3rem;
-  }
 
   a {
     text-align: center;
@@ -23,7 +19,6 @@
 
     &[href^="/posts/"] {
       margin: 0;
-      text-decoration: none;
 
       &::before {
         display: none;
@@ -44,11 +39,9 @@
   code:not(pre code) {
     margin: 0 0.2rem;
     padding: 0.1em 0.4em;
-    font-weight: bold;
     font-size: 0.8em;
     white-space: break-spaces;
     border-radius: 6px;
-    box-sizing: border-box;
     background-color: rgba(175, 184, 193, 0.2);
   }
 
