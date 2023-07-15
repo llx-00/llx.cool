@@ -11,4 +11,4 @@ export default [
   "Merhaba",
   "Hallo",
   "Hej",
-]
+];
