@@ -12,7 +12,7 @@
     </RouterLink>
     <div class="flex gap6 items-center">
       <RouterLink
-        to="/post"
+        to="/posts"
         title="Blog"
         class="link"
       >
