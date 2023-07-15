@@ -305,7 +305,7 @@
       class="btn-replay"
       @click="initGame"
     >
-      REPLAY
+      <i i-lucide-rotate-cw /> Replay
     </button>
   </div>
   <h3 class="text-center">
@@ -448,15 +448,13 @@
     > button.btn-replay {
       user-select: none;
       border-radius: $cell-radius;
-      width: $cell-size * 2;
-      height: $cell-size;
       margin-bottom: $grp * 2;
       background-color: $bgc-null;
 
       border: none;
       outline: none;
       font-size: 2rem;
-      padding: 0;
+      padding: 2rem;
       margin: 0;
 
       &:hover {
