@@ -258,7 +258,12 @@
 </script>
 
 <template>
-  <div class="game-container">
+  <div
+    class="game-container"
+    @click="e => e.stopPropagation()"
+    @mousemove="e => e.stopPropagation()"
+    @touchmove="e => e.stopPropagation()"
+  >
     <div class="title">
       <span>Top: {{ topScore }}</span>
       <span>Score: {{ score }}</span>
