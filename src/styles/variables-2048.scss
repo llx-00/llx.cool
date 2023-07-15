@@ -1,0 +1,75 @@
+$grp : .2rem;
+$cell-size : 4rem;
+$cell-radius: .3rem;
+
+$font-size1: 2.5rem; // 2 4 8 16 32 64 128 256 512
+$font-size2: 2rem; // 1024 2048 4096 8192
+$font-size3: 1.5rem; // 16384
+
+$color-font: #776e65;
+$bgc-main: #bbada0;
+$bgc-null: #cdc1b4;
+$bgc-num2: #eee4da;
+$bgc-num4: #eee1c9;
+$bgc-num8: #f3b27a;
+$bgc-num16: #f69664;
+$bgc-num32: #f77c5f;
+$bgc-num64: #f75f3b;
+$bgc-num128: #edd073;
+$bgc-num256: #eddc62;
+$bgc-num512: #edd950;
+$bgc-num1024: #edd53f;
+$bgc-num2048: #edd22e;
+$bgc-num4096: #eddb20;
+$bgc-num8192: #edd914;
+$bgc-num16384: #edd500;
+
+$bgc-main-dark: #342e29;
+$bgc-null-dark: #443d36;
+$bgc-num2-dark: #1f1b18;
+$bgc-num4-dark: #201e1c;
+$bgc-num8-dark: #6b4b39;
+$bgc-num16-dark: #6e3f2f;
+$bgc-num32-dark: #743b35;
+$bgc-num64-dark: #752e24;
+$bgc-num128-dark: #8c7d3a;
+$bgc-num256-dark: #8c8133;
+$bgc-num512-dark: #8d7e2c;
+$bgc-num1024-dark: #8d7a28;
+$bgc-num2048-dark: #8d7524;
+$bgc-num4096-dark: #8d7d21;
+$bgc-num8192-dark: #8d781a;
+$bgc-num16384-dark: #8d7100;
+
+$bgc-numbers: (
+  $bgc-num2,
+  $bgc-num4,
+  $bgc-num8,
+  $bgc-num16,
+  $bgc-num32,
+  $bgc-num64,
+  $bgc-num128,
+  $bgc-num256,
+  $bgc-num512,
+  $bgc-num1024,
+  $bgc-num2048,
+  $bgc-num4096,
+  $bgc-num8192,
+  $bgc-num16384
+);
+$bgc-numbers-dark: (
+  $bgc-num2-dark,
+  $bgc-num4-dark,
+  $bgc-num8-dark,
+  $bgc-num16-dark,
+  $bgc-num32-dark,
+  $bgc-num64-dark,
+  $bgc-num128-dark,
+  $bgc-num256-dark,
+  $bgc-num512-dark,
+  $bgc-num1024-dark,
+  $bgc-num2048-dark,
+  $bgc-num4096-dark,
+  $bgc-num8192-dark,
+  $bgc-num16384-dark
+);
