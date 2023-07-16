@@ -1,4 +1,4 @@
-import path, { basename, resolve } from "path";
+import path, { resolve } from "path";
 import fs from "fs-extra";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
@@ -9,6 +9,8 @@ import Pages from "vite-plugin-pages";
 import Markdown from "vite-plugin-vue-markdown";
 import matter from "gray-matter";
 import IconsResolver from "unplugin-icons/resolver";
+import MarkdownIt from "markdown-it";
+import Shiki from "markdown-it-shiki";
 
 export default defineConfig({
   resolve: {
@@ -44,6 +46,15 @@ export default defineConfig({
         quotes: "\"\"''",
       },
       headEnabled: true,
+      markdownItSetup(md) {
+        md.use(Shiki, {
+          theme: {
+            dark: "github-dark",
+            light: "github-light",
+          },
+          highlightLines: true,
+        });
+      },
     }),
 
     AutoImport({

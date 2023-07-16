@@ -1,3 +1,11 @@
+---
+title: Test1
+date: 2023-7-1
+---
+
+# Test1
+
+```scss
 @import "./font-face.scss";
 
 .markdown-body {
@@ -35,20 +43,12 @@
     list-style: none;
   }
 
-  p {
-    display: inline-block;
-  }
-
   code:not(pre code) {
     margin: 0 0.2rem;
-    padding: 0.1em 0.2em;
-    height: 1em;
-    line-height: 1em;
+    padding: 0.1em 0.4em;
     font-size: 0.8em;
-    display: inline-block;
-    vertical-align: middle;
     white-space: break-spaces;
-    border-radius: 5px;
+    border-radius: 6px;
     background-color: rgba(175, 184, 193, 0.2);
   }
 
@@ -89,3 +89,4 @@ html {
     }
   }
 }
+```
