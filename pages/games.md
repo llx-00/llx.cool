@@ -9,6 +9,9 @@ games:
   - name: "2048"
     link: "game/2048"
     desc: "由 Gabriele Cirulli 发明"
+  - name: "木鱼"
+    link: "game/muyu"
+    desc: "积攒功德"
 ---
 
 <ListGames :games="frontmatter.games" />
