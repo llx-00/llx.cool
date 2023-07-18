@@ -66,8 +66,17 @@
 <template>
   <div class="flex place-items-center">
     <img
+      v-show="isDark"
       class="muyu w-80% max-w-xl mx-auto select-none"
-      :src="isDark ? ImgMuyuDark : ImgMuyuLight"
+      :src="ImgMuyuDark"
+      alt="木鱼"
+      ref="refImg"
+      @click="onClickHandle"
+    />
+    <img
+      v-show="!isDark"
+      class="muyu w-80% max-w-xl mx-auto select-none"
+      :src="ImgMuyuLight"
       alt="木鱼"
       ref="refImg"
       @click="onClickHandle"
