@@ -11,7 +11,7 @@ games:
     desc: "由 Gabriele Cirulli 发明"
   - name: "木鱼"
     link: "game/muyu"
-    desc: "积攒功德"
+    desc: "敲电子木鱼，见赛博佛主"
 ---
 
 <ListGames :games="frontmatter.games" />
