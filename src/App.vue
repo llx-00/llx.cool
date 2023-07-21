@@ -17,6 +17,7 @@
     <WrapperPost />
     <Footer />
   </div>
+  <BackgroundImg />
 </template>
 
 <style scoped lang="scss">
