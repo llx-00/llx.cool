@@ -20,3 +20,14 @@ function add(...arg: number[]) {
   return f;
 }
 ```
+
+## 利用 `Array.prototype.reduce()` 统计字符串 CountMap
+
+```ts
+function getStrCountMap(str: string) {
+  return str.split("").reduce((map, item) => {
+    map.set(item, (map.get(item) || 0) + 1);
+    return map;
+  }, new Map<string, number>());
+}
+```
