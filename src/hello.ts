@@ -11,4 +11,5 @@ export default [
   "Merhaba",
   "Hallo",
   "Hej",
+  "你好",
 ];
