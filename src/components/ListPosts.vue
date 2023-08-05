@@ -5,7 +5,11 @@
   const router = useRouter();
   const routes: Post[] = router
     .getRoutes()
-    .filter(i => i.path.startsWith("/post/"))
+    .filter(
+      i =>
+        i.path.startsWith("/post/") &&
+        (import.meta.env.DEV ? true : i.meta.frontmatter.date)
+    )
     .map(i => ({
       path: i.path,
       title: i.meta.frontmatter.title,
@@ -15,6 +19,8 @@
   const posts = computed(() =>
     routes.sort((a, b) => +new Date(b.date) - +new Date(a.date))
   );
+
+  console.log();
 </script>
 
 <template>

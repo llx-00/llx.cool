@@ -3,7 +3,8 @@
   "type": "module",
   "scripts": {
     "build": "cross-env NODE_ENV=production vite-ssg build",
-    "dev": "vite --port 3333 --host"
+    "dev": "cross-env NODE_ENV=dev vite --port 3333 --host",
+    "dev:prod": "cross-env NODE_ENV=production vite --port 3333 --host"
   },
   "dependencies": {
     "@vueuse/core": "^9.13.0",
