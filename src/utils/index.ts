@@ -1,10 +1,9 @@
 import dayjs from "dayjs";
 import lodash from "lodash";
 
-export function formatDate(d: string | Date, onlyDate = true) {
+export function formatDate(d: string | Date) {
   const date = dayjs(d);
-  if (onlyDate || date.year() === dayjs().year()) return date.format("MMM D");
-  return date.format("MMM D, YYYY");
+  return date.format("YYYY/MM/DD");
 }
 
 /**
