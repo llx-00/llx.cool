@@ -4,15 +4,15 @@
 
 <template>
   <h1>
-    <span class="mr-2">{{
-      meta.frontmatter.display || meta.frontmatter.title
-    }}</span>
-    <span
+    <div class="mr-2">
+      {{ meta.frontmatter.display || meta.frontmatter.title }}
+    </div>
+    <div
       v-if="meta.frontmatter.date"
       class="text-base ws-nowrap font-normal"
     >
       {{ formatDate(meta.frontmatter.date) }}
-    </span>
+    </div>
   </h1>
   <p class="font-italic text-base mb-10">
     {{ meta.frontmatter.subtitle }}
