@@ -104,7 +104,7 @@
     <div>
       <div class="mb-8 flex justify-around items-center">
         <div h-16>
-          <div mb-2>winner</div>
+          <div mb-2>Winner</div>
           <div
             class="flex justify-center items-center"
             v-show="typeof winner === 'boolean'"
@@ -120,7 +120,7 @@
           </div>
         </div>
         <div h-16>
-          <div mb-2>player</div>
+          <div mb-2>Player</div>
           <div class="flex justify-center items-center">
             <i
               v-if="isRound"
