@@ -15,7 +15,8 @@
     localCount.value = count.value;
   });
 
-  const refImg = ref<HTMLImageElement | null>(null);
+  const refImg1 = ref<HTMLImageElement | null>(null);
+  const refImg2 = ref<HTMLImageElement | null>(null);
   const refAudio = ref<HTMLAudioElement | null>(null);
 
   const onClickHandle = useThrottleFn(() => {
@@ -34,10 +35,13 @@
     document.body.appendChild(elMeg);
 
     // 确保动画播从头开始
-    refImg.value?.classList.remove("click-animation");
-    refImg.value?.classList.add("click-animation");
+    refImg1.value?.classList.remove("click-animation");
+    refImg1.value?.classList.add("click-animation");
+    refImg2.value?.classList.remove("click-animation");
+    refImg2.value?.classList.add("click-animation");
     setTimeout(() => {
-      refImg.value?.classList.remove("click-animation");
+      refImg1.value?.classList.remove("click-animation");
+      refImg2.value?.classList.remove("click-animation");
     }, 400); // 立即结束未完成的动画
     setTimeout(() => {
       if (refAudio.value) {
@@ -70,7 +74,7 @@
       class="muyu w-80% max-w-xl mx-auto select-none"
       :src="ImgMuyuDark"
       alt="木鱼"
-      ref="refImg"
+      ref="refImg1"
       @click="onClickHandle"
     />
     <img
@@ -78,7 +82,7 @@
       class="muyu w-80% max-w-xl mx-auto select-none"
       :src="ImgMuyuLight"
       alt="木鱼"
-      ref="refImg"
+      ref="refImg2"
       @click="onClickHandle"
     />
     <audio
