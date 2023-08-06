@@ -12,7 +12,7 @@
 </script>
 <template>
   <Header />
-  <div class="body max-w-800px box-border mx-auto mt8 p4">
+  <div class="body max-w-800px box-border mx-auto p4">
     <RouterView />
     <WrapperPost />
     <Footer />

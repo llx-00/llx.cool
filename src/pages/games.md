@@ -1,7 +1,6 @@
 ---
 title: Games - Longxiang Li
-display: Games
-subtitle: 一些小游戏，希望你开心
+display: 一些小游戏，希望你开心
 games:
   - name: "井字棋"
     link: "tic-tac-toe"
