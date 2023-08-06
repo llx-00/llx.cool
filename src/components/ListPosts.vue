@@ -19,19 +19,10 @@
   const posts = computed(() =>
     routes.sort((a, b) => +new Date(b.date) - +new Date(a.date))
   );
-
-  console.log();
 </script>
 
 <template>
-  <div
-    v-if="!posts.length"
-    class="py2"
-  >
-    <h1>空空如也</h1>
-    <p class="font-italic text-base mb-10">There's nothing here</p>
-  </div>
-  <PageTitle v-else />
+  <PageTitle />
   <template v-if="posts.length">
     <div
       v-for="route in posts"

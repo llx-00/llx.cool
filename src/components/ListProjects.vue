@@ -1,42 +1,27 @@
 <script setup lang="ts">
   import { Project } from "~/types";
 
-  const { projects } = defineProps<{ projects: Record<string, Project[]> }>();
+  const { projects } = defineProps<{ projects?: Project[] }>();
 </script>
 
 <template>
   <PageTitle />
-  <ul>
-    <li
-      v-for="key in Object.keys(projects)"
-      :key="key"
+  <div class="p2 flex flex-wrap gap8">
+    <div
+      v-for="project in projects"
+      :key="project.name"
+      class="flex flex-col flex-1 items-start min-w-350px"
     >
-      <h3 class="my5 font-bold">
-        {{ key }}
-      </h3>
-      <div class="p2 flex flex-wrap gap8">
-        <div
-          v-for="item in projects[key]"
-          :key="item.name"
-          class="flex-1 min-w-350px"
-        >
-          <h5>
-            <a
-              target="_blank"
-              :href="item.link"
-            >
-              {{ item.name }}
-            </a>
-          </h5>
-          <div class="text-left flex-1">
-            <div class="text-sm op50 font-normal">
-              {{ item.desc }}
-            </div>
-          </div>
-        </div>
+      <h5 class="my5 font-bold">
+        <RouterLink :to="`project/${project.link}`">
+          {{ project.name }}
+        </RouterLink>
+      </h5>
+      <div class="text-sm op50 font-normal">
+        {{ project.desc }}
       </div>
-    </li>
-  </ul>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">

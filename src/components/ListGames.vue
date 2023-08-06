@@ -13,7 +13,7 @@
       class="flex flex-col flex-1 items-start min-w-350px"
     >
       <h5 class="my5 font-bold">
-        <RouterLink :to="game.link">
+        <RouterLink :to="`game/${game.link}`">
           {{ game.name }}
         </RouterLink>
       </h5>
@@ -27,7 +27,6 @@
 <style scoped lang="scss">
   a {
     margin: 0;
-    text-decoration: none;
 
     &::before {
       display: none;

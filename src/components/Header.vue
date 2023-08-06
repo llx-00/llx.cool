@@ -29,14 +29,14 @@
         <i class="i-lucide-gamepad-2 sm:hidden" />
       </RouterLink>
 
-      <!-- <RouterLink
-        to="/project"
+      <RouterLink
+        to="/projects"
         title="Projects"
         class="link"
       >
-        <span class="lt-sm:hidden">Project</span>
+        <span class="lt-sm:hidden">Projects</span>
         <i class="i-lucide-lightbulb sm:hidden" />
-      </RouterLink> -->
+      </RouterLink>
 
       <a
         class="link i-lucide-twitter"
