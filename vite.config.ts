@@ -30,7 +30,7 @@ export default defineConfig({
       dirs: "src/pages",
       extendRoute(route) {
         const path = resolve(__dirname, route.component.slice(1));
-        console.log(`pages: .${route.component}`, path);
+        console.log(`pages: .${route.component}`);
         if (path.endsWith(".md")) {
           const md = fs.readFileSync(path, "utf-8");
           const { data } = matter(md);
