@@ -6,10 +6,9 @@ import Unocss from "unocss/vite";
 import Components from "unplugin-vue-components/vite";
 import AutoImport from "unplugin-auto-import/vite";
 import Pages from "vite-plugin-pages";
-import Markdown from "vite-plugin-vue-markdown";
+import Markdown from "unplugin-vue-markdown/vite";
 import matter from "gray-matter";
 import IconsResolver from "unplugin-icons/resolver";
-import MarkdownIt from "markdown-it";
 import Shiki from "markdown-it-shiki";
 
 export default defineConfig({
