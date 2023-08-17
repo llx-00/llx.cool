@@ -8,7 +8,7 @@ date: 2023-8-16
 
 ## `any` & `unknown`
 
-`any` 类型除了关闭类型检查，还会污染其他具有正确类型的变量
+`any` 类型除了关闭类型检查，还会污染其他具有正确类型的变量。
 
 ```ts
 let x: any = "hello";
@@ -85,4 +85,38 @@ class MyClass {
 }
 
 console.log(new MyClass().prop1); // Logs: HELLO!
+```
+
+### 方法装饰器
+
+更改或增强方法的行为。
+
+```ts
+function log<This, Args extends any[], Return>(
+  target: (this: This, ...args: Args) => Return,
+  context: ClassMethodDecoratorContext<
+    This,
+    (this: This, ...args: Args) => Return
+  >
+) {
+  const methodName = String(context.name);
+
+  function replacementMethod(this: This, ...args: Args): Return {
+    console.log(`LOG: Entering method '${methodName}'.`);
+    const result = target.call(this, ...args);
+    console.log(`LOG: Exiting method '${methodName}'.`);
+    return result;
+  }
+
+  return replacementMethod;
+}
+
+class MyClass {
+  @log
+  sayHello() {
+    console.log("Hello!");
+  }
+}
+
+console.log(new MyClass().sayHello()); // Logs: Hello!
 ```
