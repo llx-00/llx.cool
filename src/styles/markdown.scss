@@ -1,6 +1,8 @@
 @import "./font-face.scss";
 
 .markdown-body {
+  font-size: 1rem;
+
   a {
     text-align: center;
     margin: 0 0.2rem;
@@ -35,10 +37,6 @@
     list-style: none;
   }
 
-  p {
-    display: inline-block;
-  }
-
   code:not(pre code) {
     margin: 0 0.2rem;
     padding: 0.1em 0.2em;
@@ -58,7 +56,7 @@
   }
 
   pre {
-    overflow-x: scroll;
+    overflow-x: auto;
     font-size: 0.8rem;
     line-height: 1.45;
     margin: 0;
