@@ -100,13 +100,13 @@
 </script>
 
 <template>
-  <div class="flex justify-center items-center mx-auto">
+  <div class="xy-center mx-auto">
     <div>
       <div class="mb-8 flex justify-around items-center">
         <div h-16>
           <div mb-2>Winner</div>
           <div
-            class="flex justify-center items-center"
+            class="xy-center"
             v-show="typeof winner === 'boolean'"
           >
             <i
@@ -121,7 +121,7 @@
         </div>
         <div h-16>
           <div mb-2>Player</div>
-          <div class="flex justify-center items-center">
+          <div class="xy-center">
             <i
               v-if="isRound"
               class="inline-block i-lucide-circle w-6 h-6"

@@ -12,6 +12,7 @@ export default defineConfig({
       "link",
       "cursor-pointer select-none transition duration-200 ease-in-out op-70 hover:op-100",
     ],
+    ["xy-center", "flex justify-center items-center"],
   ],
   presets: [
     presetUno(),

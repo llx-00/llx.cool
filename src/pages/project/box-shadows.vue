@@ -37,7 +37,7 @@
           @click="showCode = !showCode"
         />
       </div>
-      <div class="flex-1 min-h-240px flex justify-center items-center">
+      <div class="flex-1 min-h-240px xy-center">
         <div
           v-if="!showCode"
           ref="refBox"
