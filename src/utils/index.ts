@@ -73,3 +73,12 @@ export function rotateMatrix<T>(matrix: T[][]) {
 
   return _matrix;
 }
+
+/**
+ * 仅在dev环境下log
+ */
+export function devLog(...arg: any[]) {
+  if (import.meta.env.DEV) {
+    console.log(...arg);
+  }
+}
