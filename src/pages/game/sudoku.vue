@@ -1,10 +1,17 @@
 <script setup lang="ts">
-  const boardSize = 9,
-    subgridSize = 3;
+  import { shuffle } from "lodash";
+
+  const boardSize = 9;
+  const subgridSize = 3;
 
   function generateSudokuBoard(): { map: number[][]; ans: number[][] } {
-    const board: number[][] = Array.from({ length: boardSize }, () =>
-      Array(boardSize).fill(0)
+    const board: number[][] = Array(boardSize)
+      .fill(0)
+      .map(() => Array(boardSize).fill(0));
+    board[0] = shuffle(
+      Array(boardSize)
+        .fill(0)
+        .map((_, index) => index + 1)
     );
 
     function isValid(num: number, row: number, col: number): boolean {
@@ -75,7 +82,7 @@
 </script>
 
 <template>
-  <div class="xy-center mx-auto select-none text-base">
+  <div class="xy-center select-none text-xl">
     <table class="border-collapse font-mono">
       <colgroup
         v-for="i in 3"
@@ -93,7 +100,7 @@
         >
           <td
             v-for="k in 9"
-            class="w-8 h-8 b-1 b-gray-500 b-solid dark:b-gray-400 text-center"
+            class="w-8 h-8 b-1 b-gray-500 b-solid dark:b-gray-400 text-center cursor-pointer"
             @click="handleClick((i - 1) * 3 + (j - 1), k - 1)"
           >
             <!-- {{ `${i},${j},${k}` }} -->
@@ -117,7 +124,6 @@
     &:has(td:nth-child(7):hover) td:nth-child(7),
     &:has(td:nth-child(8):hover) td:nth-child(8),
     &:has(td:nth-child(9):hover) td:nth-child(9) {
-      --un-bg-opacity: 1;
       background-color: rgba(250, 204, 21, var(--un-bg-opacity));
     }
 
