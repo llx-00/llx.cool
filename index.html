@@ -25,7 +25,9 @@
   <script>
     // 防止移动端双击时缩放
     document.body.addEventListener('click', e => {
-      e.preventDefault()
+      if (e.target.nodeName !== 'A') {
+        e.preventDefault()
+      }
     })
   </script>
   <script type="module" src="/src/main.ts"></script>
