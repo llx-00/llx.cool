@@ -4,7 +4,10 @@
   const boardSize = 9;
   const subgridSize = 3;
 
-  function generateSudokuBoard(): { map: number[][]; ans: number[][] } {
+  function generateSudokuBoard(): {
+    map: (number | null)[][];
+    ans: number[][];
+  } {
     const board: number[][] = Array(boardSize)
       .fill(0)
       .map(() => Array(boardSize).fill(0));
@@ -67,7 +70,13 @@
     // 开始填数
     solve(0, 0);
 
-    return { map: board, ans: board };
+    const _map: (number | null)[][] = [];
+    board.forEach(row => {
+      const _row = row.map(i => (Math.random() < 0.3 ? null : i));
+      _map.push(_row);
+    });
+
+    return { map: _map, ans: board };
   }
 
   const initVal = generateSudokuBoard();
