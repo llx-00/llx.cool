@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { shuffle } from "lodash";
+  import lodash from "lodash";
 
   const boardSize = 9;
   const subgridSize = 3;
@@ -8,7 +8,7 @@
     const board: number[][] = Array(boardSize)
       .fill(0)
       .map(() => Array(boardSize).fill(0));
-    board[0] = shuffle(
+    board[0] = lodash.shuffle(
       Array(boardSize)
         .fill(0)
         .map((_, index) => index + 1)
