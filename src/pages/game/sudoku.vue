@@ -1,8 +1,5 @@
 <script setup lang="ts">
   import lodash from "lodash";
-  import { TdHTMLAttributes } from "vue";
-
-  UIEvent;
 
   const boardSize = 9;
   const subgridSize = 3;
@@ -134,7 +131,7 @@
             :contenteditable="initMap[(i - 1) * 3 + (j - 1)][k - 1] === null"
             @input="
               e => {
-                (e.target as TdHTMLAttributes).innerHTML =
+                (e.target as HTMLElement).innerHTML =
                   (e as InputEvent)?.data?.toString() || '';
               }
             "
