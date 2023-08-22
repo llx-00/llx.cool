@@ -1,6 +1,8 @@
 <script setup lang="ts">
   import lodash from "lodash";
 
+  UIEvent;
+
   const boardSize = 9;
   const subgridSize = 3;
 
@@ -82,16 +84,16 @@
   const initVal = generateSudokuBoard();
   devLog("initVal", initVal);
   const initMap = reactive(initVal.map);
-  const initAns = reactive(initVal.ans);
+  // const initAns = reactive(initVal.ans);
 
-  function handleClick(i: number, j: number) {
-    const clickItem = initMap[i][j];
-    devLog(`(${i},${j}):`, clickItem);
-  }
+  // function handleClick(i: number, j: number) {
+  //   const clickItem = initMap[i][j];
+  //   devLog(`(${i},${j}):`, clickItem);
+  // }
 </script>
 
 <template>
-  <div class="xy-center select-none text-xl">
+  <div class="xy-center select-none text-2xl">
     <table class="border-collapse font-mono">
       <colgroup
         v-for="i in 3"
@@ -109,10 +111,20 @@
         >
           <td
             v-for="k in 9"
-            class="w-8 h-8 b-1 b-gray-500 b-solid dark:b-gray-400 text-center cursor-pointer"
-            @click="handleClick((i - 1) * 3 + (j - 1), k - 1)"
+            class="w-8 h-8 b-1 b-gray-500 b-solid dark:b-gray-400 text-center cursor-pointer outline-none"
+            :class="[
+              initMap[(i - 1) * 3 + (j - 1)][k - 1] === null
+                ? 'text-green'
+                : null,
+            ]"
+            :contenteditable="initMap[(i - 1) * 3 + (j - 1)][k - 1] === null"
+            @input="
+              e => {
+                (e.target as HTMLDivElement).innerHTML =
+                  (e as InputEvent)?.data?.toString() || '';
+              }
+            "
           >
-            <!-- {{ `${i},${j},${k}` }} -->
             {{ initMap[(i - 1) * 3 + (j - 1)][k - 1] }}
           </td>
         </tr>
