@@ -133,10 +133,11 @@
     &:has(td:nth-child(7):hover) td:nth-child(7),
     &:has(td:nth-child(8):hover) td:nth-child(8),
     &:has(td:nth-child(9):hover) td:nth-child(9) {
+      --un-bg-opacity: 1;
       background-color: rgba(250, 204, 21, var(--un-bg-opacity));
     }
 
-    // 选中所在的3*3
+    // 选中所在的九宫格
     &:has(tbody:nth-of-type(1) td:nth-child(n + 1):nth-child(-n + 3):hover)
       tbody:nth-of-type(1)
       td:nth-child(n + 1):nth-child(-n + 3),
