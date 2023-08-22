@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import lodash from "lodash";
+  import { TdHTMLAttributes } from "vue";
 
   UIEvent;
 
@@ -83,18 +84,31 @@
 
   const initVal = generateSudokuBoard();
   devLog("initVal", initVal);
-  const initMap = reactive(initVal.map);
+  const initMap = ref(initVal.map);
+  const show = ref(true);
   // const initAns = reactive(initVal.ans);
 
   // function handleClick(i: number, j: number) {
   //   const clickItem = initMap[i][j];
   //   devLog(`(${i},${j}):`, clickItem);
   // }
+
+  function reload() {
+    const newVal = generateSudokuBoard();
+    show.value = false;
+    setTimeout(() => {
+      initMap.value = newVal.map;
+      show.value = true;
+    });
+  }
 </script>
 
 <template>
-  <div class="xy-center select-none text-2xl">
-    <table class="border-collapse font-mono">
+  <div class="xy-center flex-col select-none text-2xl">
+    <table
+      class="border-collapse font-mono"
+      :class="[show ? null : 'op-0']"
+    >
       <colgroup
         v-for="i in 3"
         class="b-3 b-gray-500 b-solid dark:b-gray-400"
@@ -120,7 +134,7 @@
             :contenteditable="initMap[(i - 1) * 3 + (j - 1)][k - 1] === null"
             @input="
               e => {
-                (e.target as HTMLDivElement).innerHTML =
+                (e.target as TdHTMLAttributes).innerHTML =
                   (e as InputEvent)?.data?.toString() || '';
               }
             "
@@ -130,6 +144,13 @@
         </tr>
       </tbody>
     </table>
+
+    <div class="my-2">
+      <i
+        class="i-lucide-refresh-ccw w-6"
+        @click="reload"
+      />
+    </div>
   </div>
 </template>
 
