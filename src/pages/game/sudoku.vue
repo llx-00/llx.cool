@@ -114,7 +114,7 @@
             class="w-8 h-8 b-1 b-gray-500 b-solid dark:b-gray-400 text-center cursor-pointer outline-none"
             :class="[
               initMap[(i - 1) * 3 + (j - 1)][k - 1] === null
-                ? 'text-green'
+                ? 'text-green font-bold'
                 : null,
             ]"
             :contenteditable="initMap[(i - 1) * 3 + (j - 1)][k - 1] === null"
