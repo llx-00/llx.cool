@@ -1,88 +1,88 @@
 <script setup lang="ts">
-  import lodash from "lodash";
+  import lodash from "lodash"
 
-  const boardSize = 9;
-  const subgridSize = 3;
+  const boardSize = 9
+  const subgridSize = 3
 
   function generateSudokuBoard(): {
-    map: (number | null)[][];
-    ans: number[][];
+    map: (number | null)[][]
+    ans: number[][]
   } {
     const board: number[][] = Array(boardSize)
       .fill(0)
-      .map(() => Array(boardSize).fill(0));
+      .map(() => Array(boardSize).fill(0))
     board[0] = lodash.shuffle(
       Array(boardSize)
         .fill(0)
         .map((_, index) => index + 1)
-    );
+    )
 
     function isValid(num: number, row: number, col: number): boolean {
       // 检查行和列
       for (let i = 0; i < boardSize; i++) {
         if (board[row][i] === num || board[i][col] === num) {
-          return false;
+          return false
         }
       }
 
       // 检查九宫格
-      const subgridRowStart = Math.floor(row / subgridSize) * subgridSize;
-      const subgridColStart = Math.floor(col / subgridSize) * subgridSize;
+      const subgridRowStart = Math.floor(row / subgridSize) * subgridSize
+      const subgridColStart = Math.floor(col / subgridSize) * subgridSize
 
       for (let i = subgridRowStart; i < subgridRowStart + subgridSize; i++) {
         for (let j = subgridColStart; j < subgridColStart + subgridSize; j++) {
           if (board[i][j] === num) {
-            return false;
+            return false
           }
         }
       }
 
-      return true;
+      return true
     }
 
     function solve(row: number, col: number): boolean {
       if (row === boardSize - 1 && col === boardSize) {
-        return true; // 递归终止条件：已经填满了整个数独板
+        return true // 递归终止条件：已经填满了整个数独板
       }
 
       if (col === boardSize) {
-        row++;
-        col = 0;
+        row++
+        col = 0
       }
 
       if (board[row][col] > 0) {
-        return solve(row, col + 1);
+        return solve(row, col + 1)
       }
 
       for (let num = 1; num <= boardSize; num++) {
         if (isValid(num, row, col)) {
-          board[row][col] = num;
+          board[row][col] = num
           if (solve(row, col + 1)) {
-            return true;
+            return true
           }
-          board[row][col] = 0;
+          board[row][col] = 0
         }
       }
 
-      return false;
+      return false
     }
 
     // 开始填数
-    solve(0, 0);
+    solve(0, 0)
 
-    const _map: (number | null)[][] = [];
+    const _map: (number | null)[][] = []
     board.forEach(row => {
-      const _row = row.map(i => (Math.random() < 0.3 ? null : i));
-      _map.push(_row);
-    });
+      const _row = row.map(i => (Math.random() < 0.3 ? null : i))
+      _map.push(_row)
+    })
 
-    return { map: _map, ans: board };
+    return { map: _map, ans: board }
   }
 
-  const initVal = generateSudokuBoard();
-  devLog("initVal", initVal);
-  const initMap = ref(initVal.map);
-  const show = ref(true);
+  const initVal = generateSudokuBoard()
+  devLog("initVal", initVal)
+  const initMap = ref(initVal.map)
+  const show = ref(true)
   // const initAns = reactive(initVal.ans);
 
   // function handleClick(i: number, j: number) {
@@ -91,12 +91,13 @@
   // }
 
   function reload() {
-    const newVal = generateSudokuBoard();
-    show.value = false;
+    const newVal = generateSudokuBoard()
+    show.value = false
+    initMap.value = newVal.ans
     setTimeout(() => {
-      initMap.value = newVal.map;
-      show.value = true;
-    });
+      initMap.value = newVal.map
+      show.value = true
+    })
   }
 </script>
 
@@ -131,8 +132,8 @@
             :contenteditable="initMap[(i - 1) * 3 + (j - 1)][k - 1] === null"
             @input="
               e => {
-                (e.target as HTMLElement).innerHTML =
-                  (e as InputEvent)?.data?.toString() || '';
+                ;(e.target as HTMLElement).innerHTML =
+                  (e as InputEvent)?.data?.toString() || ''
               }
             "
           >
