@@ -7,8 +7,13 @@
       { name: "twitter:card", content: "summary" },
       { name: "twitter:creator", content: "@lilongxiang2000" },
       { name: "twitter:image", content: "https://llx.cool/og/index.png" },
+      {
+        name: "msapplication-TileColor",
+        content: isDark ? "#000000" : "#ffffff",
+      },
     ],
-  });
+    link: [{ rel: "icon", href: "/logo.svg" }],
+  })
 </script>
 <template>
   <Header />
