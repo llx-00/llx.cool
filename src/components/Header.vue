@@ -5,7 +5,14 @@
       class="select-none outline-none absolute left-4"
     >
       <img
-        :src="isDark ? '/logo-dark.svg' : '/logo.svg'"
+        v-show="isDark"
+        :src="'/logo-dark.svg'"
+        class="w6"
+        alt="logo"
+      />
+      <img
+        v-show="!isDark"
+        :src="'/logo.svg'"
         class="w6"
         alt="logo"
       />
