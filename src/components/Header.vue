@@ -1,3 +1,15 @@
+<script setup lang="ts">
+  watch(isDark, isDark => {
+    useHead({
+      meta: [
+        {
+          name: "msapplication-TileColor",
+          content: isDark ? "#000000" : "#ffffff",
+        },
+      ],
+    })
+  })
+</script>
 <template>
   <nav class="flex justify-end items-start p4 text-base">
     <RouterLink

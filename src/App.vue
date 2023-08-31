@@ -1,7 +1,6 @@
 <script setup lang="ts">
   useHead({
     meta: [
-      { name: "description", content: "Longxiang Li's Website" },
       { property: "og:title", content: "Longxiang Li" },
       { property: "og:image", content: "https://llx.cool/og/index.png" },
       { name: "twitter:card", content: "summary" },
@@ -9,10 +8,9 @@
       { name: "twitter:image", content: "https://llx.cool/og/index.png" },
       {
         name: "msapplication-TileColor",
-        content: isDark ? "#000000" : "#ffffff",
+        content: isDark.value ? "#000000" : "#ffffff",
       },
     ],
-    link: [{ rel: "icon", href: "/logo.svg" }],
   })
 </script>
 <template>
