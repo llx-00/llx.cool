@@ -38,3 +38,21 @@ function mySqrt(x: number) {
   return ans >> 0
 }
 ```
+
+## Typescript 实现 `Range<0, 100>`
+
+```ts
+type Max<
+  N,
+  A extends number[] = [0],
+  B extends number[] = [],
+> = B["length"] extends N ? B[number] : Max<N, [...A, 0], [...B, A["length"]]>
+
+type Min<N, A extends number[] = []> = A["length"] extends N
+  ? A[number]
+  : Min<N, [...A, A["length"]]>
+
+type Range<min, max> = Exclude<Max<max>, Min<min>>
+
+type t100_200 = Range<0, 100>
+```
