@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  const route = useRoute();
+  const route = useRoute()
 
-  const router = useRouter();
+  const router = useRouter()
 </script>
 
 <template>

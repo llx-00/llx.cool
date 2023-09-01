@@ -12,4 +12,4 @@ export default [
   "Hallo",
   "Hej",
   "你好",
-];
+]

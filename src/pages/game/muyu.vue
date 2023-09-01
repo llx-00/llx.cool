@@ -1,70 +1,70 @@
 <script setup lang="ts">
-  import SoundMuyuOgg from "~/assets/muyu/muyu.ogg";
-  import SoundMuyuMp3 from "~/assets/muyu/muyu.mp3";
-  import ImgMuyuLight from "~/assets/muyu/muyu-light.png";
-  import ImgMuyuDark from "~/assets/muyu/muyu-dark.png";
+  import SoundMuyuOgg from "~/assets/muyu/muyu.ogg"
+  import SoundMuyuMp3 from "~/assets/muyu/muyu.mp3"
+  import ImgMuyuLight from "~/assets/muyu/muyu-light.png"
+  import ImgMuyuDark from "~/assets/muyu/muyu-dark.png"
 
-  const MaxCount = 999999;
+  const MaxCount = 999999
 
-  const localCount = useStorage("muyu-count", 0);
+  const localCount = useStorage("muyu-count", 0)
   const { count, inc, reset } = useCounter(localCount.value, {
     min: 0,
     max: MaxCount,
-  });
+  })
   watch([count], () => {
-    localCount.value = count.value;
-  });
+    localCount.value = count.value
+  })
 
-  const refImg1 = ref<HTMLImageElement | null>(null);
-  const refImg2 = ref<HTMLImageElement | null>(null);
-  const refAudio = ref<HTMLAudioElement | null>(null);
+  const refImg1 = ref<HTMLImageElement | null>(null)
+  const refImg2 = ref<HTMLImageElement | null>(null)
+  const refAudio = ref<HTMLAudioElement | null>(null)
 
   const onClickHandle = useThrottleFn(() => {
-    if (count.value === MaxCount) reset(0);
-    else inc(1);
+    if (count.value === MaxCount) reset(0)
+    else inc(1)
 
     if (refAudio.value) {
-      refAudio.value.muted = false;
-      refAudio.value.play();
+      refAudio.value.muted = false
+      refAudio.value.play()
     }
 
-    const elMeg = document.createElement("div");
-    elMeg.textContent = "功德+1";
-    elMeg.className = "msg";
+    const elMeg = document.createElement("div")
+    elMeg.textContent = "功德+1"
+    elMeg.className = "msg"
 
-    document.body.appendChild(elMeg);
+    document.body.appendChild(elMeg)
 
     // 确保动画播从头开始
-    refImg1.value?.classList.remove("click-animation");
-    refImg1.value?.classList.add("click-animation");
-    refImg2.value?.classList.remove("click-animation");
-    refImg2.value?.classList.add("click-animation");
+    refImg1.value?.classList.remove("click-animation")
+    refImg1.value?.classList.add("click-animation")
+    refImg2.value?.classList.remove("click-animation")
+    refImg2.value?.classList.add("click-animation")
     setTimeout(() => {
-      refImg1.value?.classList.remove("click-animation");
-      refImg2.value?.classList.remove("click-animation");
-    }, 400); // 立即结束未完成的动画
+      refImg1.value?.classList.remove("click-animation")
+      refImg2.value?.classList.remove("click-animation")
+    }, 400) // 立即结束未完成的动画
     setTimeout(() => {
       if (refAudio.value) {
-        refAudio.value.muted = true;
+        refAudio.value.muted = true
       }
-    }, 800);
+    }, 800)
     setTimeout(() => {
-      document.body.removeChild(elMeg);
-    }, 800); // 移除时间略小于动画时间 防止闪烁
-  }, 900); // 节流时间略大于点击动画时间
+      document.body.removeChild(elMeg)
+    }, 800) // 移除时间略小于动画时间 防止闪烁
+  }, 900) // 节流时间略大于点击动画时间
 
   const ePreventDefault = (e: Event) => {
-    e.preventDefault();
-  };
+    e.preventDefault()
+  }
 
   onMounted(() => {
     // 防止移动端双击时局部视图被放大
-    document.body.addEventListener("click", ePreventDefault);
+    document.body.addEventListener("click", ePreventDefault)
 
     return () => {
-      document.body.removeEventListener("click", ePreventDefault);
-    };
-  });
+      document.body.removeEventListener("click", ePreventDefault)
+    }
+  })
 </script>
 
 <template>

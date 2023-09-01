@@ -1,44 +1,44 @@
 <script setup lang="ts">
   type TypeMap = {
     [row in number]: {
-      [col in number]: null | boolean;
-    };
-  };
+      [col in number]: null | boolean
+    }
+  }
 
   const map = reactive<TypeMap>({
     1: { 1: null, 2: null, 3: null },
     2: { 1: null, 2: null, 3: null },
     3: { 1: null, 2: null, 3: null },
-  });
-  const steps = ref<{ i: number; j: number; v: boolean }[]>([]);
-  const isWin = ref(false);
-  const winner = ref<null | boolean>();
+  })
+  const steps = ref<{ i: number; j: number; v: boolean }[]>([])
+  const isWin = ref(false)
+  const winner = ref<null | boolean>()
 
-  const isRound = ref<boolean>(true);
+  const isRound = ref<boolean>(true)
   function onClick(i: number, j: number) {
     if (steps.value.length === 9 || isWin.value) {
-      steps.value = [];
-      isWin.value = false;
-      winner.value = null;
+      steps.value = []
+      isWin.value = false
+      winner.value = null
 
-      map[1] = { 1: null, 2: null, 3: null };
-      map[2] = { 1: null, 2: null, 3: null };
-      map[3] = { 1: null, 2: null, 3: null };
+      map[1] = { 1: null, 2: null, 3: null }
+      map[2] = { 1: null, 2: null, 3: null }
+      map[3] = { 1: null, 2: null, 3: null }
     } else {
       if (map[i][j] === null) {
-        map[i][j] = isRound.value;
+        map[i][j] = isRound.value
         steps.value.push({
           i,
           j,
           v: isRound.value,
-        });
+        })
 
         if (checkWin()) {
-          isWin.value = true;
-          winner.value = isRound.value;
+          isWin.value = true
+          winner.value = isRound.value
         } else {
-          isWin.value = false;
-          isRound.value = !isRound.value;
+          isWin.value = false
+          isRound.value = !isRound.value
         }
       }
     }
@@ -49,53 +49,53 @@
       map[1][1] === map[1][2] &&
       map[1][1] === map[1][3]
     )
-      return true;
+      return true
     if (
       map[2][1] !== null &&
       map[2][1] === map[2][2] &&
       map[2][1] === map[2][3]
     )
-      return true;
+      return true
     if (
       map[3][1] !== null &&
       map[3][1] === map[3][2] &&
       map[3][1] === map[3][3]
     )
-      return true;
+      return true
 
     if (
       map[1][1] !== null &&
       map[1][1] === map[2][1] &&
       map[1][1] === map[3][1]
     )
-      return true;
+      return true
     if (
       map[1][2] !== null &&
       map[1][2] === map[2][2] &&
       map[1][2] === map[3][2]
     )
-      return true;
+      return true
     if (
       map[1][3] !== null &&
       map[1][3] === map[2][3] &&
       map[1][3] === map[3][3]
     )
-      return true;
+      return true
 
     if (
       map[1][1] !== null &&
       map[1][1] === map[2][2] &&
       map[1][1] === map[3][3]
     )
-      return true;
+      return true
     if (
       map[1][3] !== null &&
       map[1][3] === map[2][2] &&
       map[1][3] === map[3][1]
     )
-      return true;
+      return true
 
-    return false;
+    return false
   }
 </script>
 

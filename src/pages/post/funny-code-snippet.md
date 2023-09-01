@@ -9,32 +9,32 @@ date: 2023-7-27
 ## 柯里化 `add(1)(2)(3)`
 
 ```ts
-type TypeFunAdd = (...arg: number[]) => TypeFunAdd;
+type TypeFunAdd = (...arg: number[]) => TypeFunAdd
 
 function add(...arg: number[]) {
-  const f: TypeFunAdd = add.bind(null, ...arg);
+  const f: TypeFunAdd = add.bind(null, ...arg)
 
-  f.toString = () => arg.reduce((sum, i) => sum + i, 0).toString();
+  f.toString = () => arg.reduce((sum, i) => sum + i, 0).toString()
 
-  return f;
+  return f
 }
 
-add(1)(2)(3); // 6
+add(1)(2)(3) // 6
 ```
 
 ## 牛顿迭代法实现 `Math.sqrt()`
 
 ```ts
 function mySqrt(x: number) {
-  const precision = 0.1;
+  const precision = 0.1
   let ans = x / 2,
-    last;
+    last
 
   do {
-    last = ans;
-    ans = (ans + x / ans) / 2;
-  } while (Math.abs(ans - last) > precision);
+    last = ans
+    ans = (ans + x / ans) / 2
+  } while (Math.abs(ans - last) > precision)
 
-  return ans >> 0;
+  return ans >> 0
 }
 ```

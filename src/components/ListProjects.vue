@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import { Project } from "~/types";
+  import { Project } from "~/types"
 
-  const { projects } = defineProps<{ projects?: Project[] }>();
+  const { projects } = defineProps<{ projects?: Project[] }>()
 </script>
 
 <template>

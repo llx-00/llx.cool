@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import { Game } from "~/types";
+  import { Game } from "~/types"
 
-  const { games } = defineProps<{ games: Game[] }>();
+  const { games } = defineProps<{ games: Game[] }>()
 </script>
 
 <template>

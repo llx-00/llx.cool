@@ -1,51 +1,49 @@
 <script setup lang="ts">
-  import lodash from "lodash";
+  import lodash from "lodash"
 
-  type TypeState = "ready" | "playing" | "end";
-  type TypeDirection = "LEFT" | "RIGHT" | "UP" | "DOWN";
-  type TypePoint = { x: number; y: number };
+  type TypeState = "ready" | "playing" | "end"
+  type TypeDirection = "LEFT" | "RIGHT" | "UP" | "DOWN"
+  type TypePoint = { x: number; y: number }
 
-  const state = ref<TypeState>("ready");
-  const score = ref<number>(0);
-  const topScore = ref<number>(0);
-  const replayBtnShow = ref<boolean>(false);
-  const matrix = ref<number[][]>(getMatrix()!);
-  const touchesPoints = ref<TypePoint[]>([]);
-  const vacancy = ref<number>(14);
-  const moveLock = ref<boolean>(false);
+  const state = ref<TypeState>("ready")
+  const score = ref<number>(0)
+  const topScore = ref<number>(0)
+  const replayBtnShow = ref<boolean>(false)
+  const matrix = ref<number[][]>(getMatrix()!)
+  const touchesPoints = ref<TypePoint[]>([])
+  const vacancy = ref<number>(14)
+  const moveLock = ref<boolean>(false)
 
   watchEffect(() => {
     if (score.value > topScore.value) {
-      topScore.value = score.value;
+      topScore.value = score.value
     }
 
     if (state.value === "end") {
-      replayBtnShow.value = true;
+      replayBtnShow.value = true
     }
-  });
+  })
   watch([topScore], () => {
-    localStorage.setItem("game-2048-topScore", topScore.value.toString());
-  });
+    localStorage.setItem("game-2048-topScore", topScore.value.toString())
+  })
   watch([matrix], () => {
-    const _vacancy = lodash.flattenDeep(matrix.value).filter(it => !it).length;
-    vacancy.value = _vacancy;
-  });
+    const _vacancy = lodash.flattenDeep(matrix.value).filter(it => !it).length
+    vacancy.value = _vacancy
+  })
 
   onMounted(() => {
-    topScore.value = parseInt(
-      localStorage.getItem("game-2048-topScore") || "0"
-    );
-    initGame();
-    document.body.addEventListener("keydown", keydownHandler);
-  });
+    topScore.value = parseInt(localStorage.getItem("game-2048-topScore") || "0")
+    initGame()
+    document.body.addEventListener("keydown", keydownHandler)
+  })
   onUnmounted(() => {
-    document.body.removeEventListener("keydown", keydownHandler);
-  });
+    document.body.removeEventListener("keydown", keydownHandler)
+  })
 
   function initGame() {
-    state.value = "ready";
-    matrix.value = getMatrix()!;
-    replayBtnShow.value = false;
+    state.value = "ready"
+    matrix.value = getMatrix()!
+    replayBtnShow.value = false
   }
 
   function touchmoveHandler(e: TouchEvent) {
@@ -53,158 +51,158 @@
       touchesPoints.value[1] = {
         x: e.touches[0].clientX,
         y: e.touches[0].clientY,
-      };
+      }
     } else {
       touchesPoints.value.push({
         x: e.touches[0].clientX,
         y: e.touches[0].clientY,
-      });
+      })
     }
   }
   function touchendHandler(e: TouchEvent) {
     if (touchesPoints.value.length === 2) {
-      const startPoint = touchesPoints.value[0];
-      const endPoint = touchesPoints.value[1];
-      const direction = TouthPoints2Direction(startPoint, endPoint);
-      move(direction);
+      const startPoint = touchesPoints.value[0]
+      const endPoint = touchesPoints.value[1]
+      const direction = TouthPoints2Direction(startPoint, endPoint)
+      move(direction)
     }
-    touchesPoints.value = [];
+    touchesPoints.value = []
   }
   function TouthPoints2Direction(startPoint: TypePoint, lastPoint: TypePoint) {
-    const diffX = lastPoint.x - startPoint.x;
-    const diffY = lastPoint.y - startPoint.y;
+    const diffX = lastPoint.x - startPoint.x
+    const diffY = lastPoint.y - startPoint.y
     if (Math.abs(diffX) > Math.abs(diffY)) {
-      if (diffX > 0) return "RIGHT";
-      else return "LEFT";
+      if (diffX > 0) return "RIGHT"
+      else return "LEFT"
     } else {
-      if (diffY > 0) return "DOWN";
-      else return "UP";
+      if (diffY > 0) return "DOWN"
+      else return "UP"
     }
   }
   function keydownHandler(e: KeyboardEvent) {
-    const key = e.key;
+    const key = e.key
 
     switch (key) {
       case "w":
       case "ArrowUp":
-        move("UP");
-        break;
+        move("UP")
+        break
       case "s":
       case "ArrowDown":
-        move("DOWN");
-        break;
+        move("DOWN")
+        break
       case "a":
       case "ArrowLeft":
-        move("LEFT");
-        break;
+        move("LEFT")
+        break
       case "d":
       case "ArrowRight":
-        move("RIGHT");
-        break;
+        move("RIGHT")
+        break
       case "r":
-        initGame();
-        break;
+        initGame()
+        break
     }
   }
 
   function move(direction: TypeDirection) {
     if (state.value === "ready" || state.value === "playing") {
-      let movedRes: { moved: boolean; _matrix: number[][] } | null = null;
+      let movedRes: { moved: boolean; _matrix: number[][] } | null = null
       if (moveLock.value === false) {
         switch (direction) {
           case "RIGHT":
-            movedRes = moveRIGHT(matrix.value);
-            break;
+            movedRes = moveRIGHT(matrix.value)
+            break
           case "LEFT":
-            movedRes = moveLEFT(matrix.value);
-            break;
+            movedRes = moveLEFT(matrix.value)
+            break
           case "UP":
-            movedRes = moveUP(matrix.value);
-            break;
+            movedRes = moveUP(matrix.value)
+            break
           case "DOWN":
-            movedRes = moveDOWN(matrix.value);
-            break;
+            movedRes = moveDOWN(matrix.value)
+            break
         }
       }
 
       if (movedRes?.moved) {
-        state.value = "playing";
-        matrix.value = movedRes._matrix;
-        moveLock.value = true;
+        state.value = "playing"
+        matrix.value = movedRes._matrix
+        moveLock.value = true
 
         setTimeout(() => {
-          addNum();
-          moveLock.value = false;
+          addNum()
+          moveLock.value = false
 
-          const nextMoved = moveCheck();
-          if (!nextMoved) state.value = "end";
-        }, 200);
+          const nextMoved = moveCheck()
+          if (!nextMoved) state.value = "end"
+        }, 200)
       } else {
-        const nextMoved = moveCheck();
-        if (!nextMoved) state.value = "end";
+        const nextMoved = moveCheck()
+        if (!nextMoved) state.value = "end"
       }
     }
   }
   // 主要实现 左右移动，上下移动等价于旋转90度后左右移动
   function moveRIGHT(matrix: number[][]) {
-    let moved = false;
+    let moved = false
 
-    const _matrix: number[][] = [];
+    const _matrix: number[][] = []
     matrix.forEach(row => {
-      let _row = row.filter(it => it);
+      let _row = row.filter(it => it)
 
       for (let i = _row.length - 1; i > 0; i--) {
         if (_row[i] == _row[i - 1]) {
-          moved = true;
+          moved = true
           // 与下一个相同，合并该项，下一项清零并跳过
-          _row[i] += _row[i];
-          score.value += _row[i];
-          _row[--i] = 0;
+          _row[i] += _row[i]
+          score.value += _row[i]
+          _row[--i] = 0
         }
       }
-      _row = _row.filter(it => it); // 去除被清零跳过的项
-      _row = new Array(4 - _row.length).fill(0).concat(_row); // 左边空隙补0
+      _row = _row.filter(it => it) // 去除被清零跳过的项
+      _row = new Array(4 - _row.length).fill(0).concat(_row) // 左边空隙补0
 
       // 若未合并，也有可能平移过 [2,4,0,0] -> [0,0,2,4]
       if (+row.join("") != +_row.join("")) {
-        moved = true;
-        _matrix.push(_row);
-      } else _matrix.push(row);
-    });
+        moved = true
+        _matrix.push(_row)
+      } else _matrix.push(row)
+    })
 
-    return { moved, _matrix };
+    return { moved, _matrix }
   }
   function moveLEFT(matrix: number[][]) {
-    let moved = false;
+    let moved = false
 
-    const _matrix: number[][] = [];
+    const _matrix: number[][] = []
     matrix.forEach(row => {
-      let _row = row.filter(it => it);
+      let _row = row.filter(it => it)
 
       // 合并相同
       for (let i = 0; i < _row.length - 1; i++) {
         if (_row[i] == _row[i + 1]) {
-          moved = true;
+          moved = true
           // 与下一个相同，合并该项，下一项清零并跳过
-          _row[i] += _row[i];
-          score.value += _row[i];
-          _row[++i] = 0;
+          _row[i] += _row[i]
+          score.value += _row[i]
+          _row[++i] = 0
         }
       }
-      _row = _row.filter(it => it); // 去除被清零跳过的项
-      _row = _row.concat(new Array(4 - _row.length).fill(0)); // 右边空隙补0
+      _row = _row.filter(it => it) // 去除被清零跳过的项
+      _row = _row.concat(new Array(4 - _row.length).fill(0)) // 右边空隙补0
 
       // 若未合并，也有可能平移过 [0,0,2,4] -> [2,4,0,0]
       if (+row.join("") != +_row.join("")) {
-        moved = true;
-        _matrix.push(_row);
-      } else _matrix.push(row);
-    });
+        moved = true
+        _matrix.push(_row)
+      } else _matrix.push(row)
+    })
 
-    return { moved, _matrix };
+    return { moved, _matrix }
   }
   function moveUP(matrix: number[][]) {
-    const { moved, _matrix } = moveRIGHT(rotateMatrix(matrix));
+    const { moved, _matrix } = moveRIGHT(rotateMatrix(matrix))
 
     // 右旋三次复位 😓 懒得写左旋了
     return {
@@ -212,10 +210,10 @@
       _matrix: moved
         ? rotateMatrix(rotateMatrix(rotateMatrix(_matrix)))
         : matrix,
-    };
+    }
   }
   function moveDOWN(matrix: number[][]) {
-    const { moved, _matrix } = moveLEFT(rotateMatrix(matrix));
+    const { moved, _matrix } = moveLEFT(rotateMatrix(matrix))
 
     // 右旋三次复位 😓 懒得写左旋了
     return {
@@ -223,7 +221,7 @@
       _matrix: moved
         ? rotateMatrix(rotateMatrix(rotateMatrix(_matrix)))
         : matrix,
-    };
+    }
   }
 
   /**
@@ -235,24 +233,24 @@
       moveLEFT(matrix.value).moved ||
       moveUP(matrix.value).moved ||
       moveDOWN(matrix.value).moved
-    );
+    )
   }
 
   function addNum() {
     if (vacancy.value) {
-      const zorePoints: { i: number; j: number }[] = [];
+      const zorePoints: { i: number; j: number }[] = []
       for (let i = 0; i < matrix.value.length; i++) {
         for (let j = 0; j < matrix.value[i].length; j++) {
           if (matrix.value[i][j] == 0) {
-            zorePoints.push({ i, j });
+            zorePoints.push({ i, j })
           }
         }
       }
-      const { i, j } = zorePoints[lodash.random(vacancy.value - 1)];
-      const _matrix = lodash.cloneDeep(matrix.value);
+      const { i, j } = zorePoints[lodash.random(vacancy.value - 1)]
+      const _matrix = lodash.cloneDeep(matrix.value)
 
-      _matrix[i][j] = getRandom2or4();
-      matrix.value = _matrix;
+      _matrix[i][j] = getRandom2or4()
+      matrix.value = _matrix
     }
   }
 </script>

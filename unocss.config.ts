@@ -4,7 +4,7 @@ import {
   presetIcons,
   presetUno,
   presetWebFonts,
-} from "unocss";
+} from "unocss"
 
 export default defineConfig({
   shortcuts: [
@@ -32,4 +32,4 @@ export default defineConfig({
       },
     }),
   ],
-});
+})

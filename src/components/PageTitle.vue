@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  const { meta } = useRoute();
+  const { meta } = useRoute()
 </script>
 
 <template>

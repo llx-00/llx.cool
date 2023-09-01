@@ -1,15 +1,15 @@
-import path, { resolve } from "path";
-import fs from "fs-extra";
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
-import Unocss from "unocss/vite";
-import Components from "unplugin-vue-components/vite";
-import AutoImport from "unplugin-auto-import/vite";
-import Pages from "vite-plugin-pages";
-import Markdown from "unplugin-vue-markdown/vite";
-import matter from "gray-matter";
-import IconsResolver from "unplugin-icons/resolver";
-import Shiki from "markdown-it-shiki";
+import path, { resolve } from "path"
+import fs from "fs-extra"
+import { defineConfig } from "vite"
+import vue from "@vitejs/plugin-vue"
+import Unocss from "unocss/vite"
+import Components from "unplugin-vue-components/vite"
+import AutoImport from "unplugin-auto-import/vite"
+import Pages from "vite-plugin-pages"
+import Markdown from "unplugin-vue-markdown/vite"
+import matter from "gray-matter"
+import IconsResolver from "unplugin-icons/resolver"
+import Shiki from "markdown-it-shiki"
 
 export default defineConfig({
   resolve: {
@@ -28,15 +28,15 @@ export default defineConfig({
       extensions: ["vue", "md"],
       dirs: "src/pages",
       extendRoute(route) {
-        const path = resolve(__dirname, route.component.slice(1));
-        console.log(`pages: .${route.component}`);
+        const path = resolve(__dirname, route.component.slice(1))
+        console.log(`pages: .${route.component}`)
         if (path.endsWith(".md")) {
-          const md = fs.readFileSync(path, "utf-8");
-          const { data } = matter(md);
+          const md = fs.readFileSync(path, "utf-8")
+          const { data } = matter(md)
           // console.log(`matter(md).data: ${JSON.stringify(data, null, 2)}`)
-          route.meta = Object.assign(route.meta || {}, { frontmatter: data });
+          route.meta = Object.assign(route.meta || {}, { frontmatter: data })
         }
-        return route;
+        return route
       },
     }),
 
@@ -52,7 +52,7 @@ export default defineConfig({
             light: "github-light",
           },
           highlightLines: true,
-        });
+        })
       },
     }),
 
@@ -75,4 +75,4 @@ export default defineConfig({
       ],
     }),
   ],
-});
+})

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  import { useRouter } from "vue-router";
-  import type { Post } from "~/types";
+  import { useRouter } from "vue-router"
+  import type { Post } from "~/types"
 
-  const router = useRouter();
+  const router = useRouter()
   const routes: Post[] = router
     .getRoutes()
     .filter(
@@ -14,11 +14,11 @@
       path: i.path,
       title: i.meta.frontmatter.title,
       date: i.meta.frontmatter.date,
-    }));
+    }))
 
   const posts = computed(() =>
     routes.sort((a, b) => +new Date(b.date) - +new Date(a.date))
-  );
+  )
 </script>
 
 <template>
