@@ -1,108 +1,81 @@
 <script setup lang="ts">
-  import { StyleValue } from "vue"
-  // import { createTheme, codeDark, useMessage, zhCN, dateZhCN } from "naive-ui"
-  import { NConfigProvider } from "naive-ui"
-  // import { NConfigProvider, NCode } from "naive-ui"
-  import highlight from "highlight.js"
-  import hljsCSS from "highlight.js/lib/languages/css"
-
-  highlight.registerLanguage("css", hljsCSS)
-
-  // const darkTheme = createTheme([codeDark])
-
   useHead({
     title: "Preview Box Shadows",
   })
 
-  const refBox = ref()
+  const initStyle = [
+    "-10px -10px 10px -10px rgba(255, 255, 255, 0.5)",
+    "10px 10px 10px -10px rgba(0, 0, 0, 0.5)",
+  ]
+  const boxStyles = ref<string[]>([...initStyle])
+  const refBox = ref<HTMLDivElement>()
 
-  const initStyle: StyleValue = {
-    boxShadow: `
-      inset 5px 5px 5px rgba(0, 0, 0, 0.1),
-      0 0 0 2px rgb(255, 255, 255),
-      0.3em 0.3em 1em rgba(0, 0, 0, 0.3)
-    `,
+  function getCssCode() {
+    return (
+      "box-shadow: \n" + boxStyles.value.map(i => "  " + i).join(",\n") + ";"
+    )
   }
 
-  const inputColor = ref("")
-  const inputStyle = computed(() => {
-    return {
-      boxShadow: `5px 5px 5px ${inputColor.value || "rgba(0, 0, 0, 0.1)"};`,
+  function getRandomBoxShadow() {
+    return `${(Math.random() * 10 * (Math.random() > 0.5 ? -1 : 1)) >> 0}px ${
+      (Math.random() * 10 * (Math.random() > 0.5 ? -1 : 1)) >> 0
+    }px ${(Math.random() * 5 * (Math.random() > 0.5 ? -1 : 1)) >> 0}px ${
+      (Math.random() * 5 * (Math.random() > 0.5 ? -1 : 1)) >> 0
+    }px rgba(${(Math.random() * 255) >> 0}, ${(Math.random() * 255) >> 0}, ${
+      (Math.random() * 255) >> 0
+    }, ${Math.random().toFixed(2)})${Math.random() > 0.8 ? " inset" : ""}`
+  }
+
+  watch(boxStyles, () => {
+    if (refBox.value) {
+      refBox.value.style.boxShadow = boxStyles.value.join(", ")
     }
   })
 
-  const showCode = ref(false)
+  onMounted(() => {
+    if (refBox.value) {
+      refBox.value.style.boxShadow = boxStyles.value.join(", ")
+    }
+  })
 </script>
 
 <template>
-  <!-- <NConfigProvider
-    :theme="isDark ? darkTheme : null"
-    :locale="zhCN"
-    :date-locale="dateZhCN"
-    :hljs="highlight"
-  > -->
   <h1>施工中</h1>
+
   <div class="flex justify-between flex-wrap gap-4 text-base">
+    <nav class="w-100% flex justify-end items-center gap-4">
+      <i
+        class="i-lucide-paintbrush cursor-pointer"
+        title="重置"
+        @click="boxStyles = [...initStyle]"
+      />
+      <i
+        class="i-lucide-copy cursor-pointer"
+        title="复制"
+        @click="writeClipboardText(getCssCode())"
+      />
+      <i
+        title="添加样式"
+        class="i-lucide-plus-circle cursor-pointer"
+        @click="boxStyles = [...boxStyles, getRandomBoxShadow()]"
+      />
+    </nav>
     <div
-      class="b-solid b-gray rd-1 flex-1 min-w-300px w-100% flex flex-col gap-2 p-2 overflow-hidden"
+      class="b-solid b-gray rd-1 flex-1 min-w-300px w-100% h-25vh p-2 xy-center bg-gray-200 dark:bg-gray-800"
     >
-      <div class="w-100% flex justify-end items-center gap-2">
-        <i
-          class="i-lucide-copy cursor-pointer"
-          @click=""
-        />
-        <i
-          class="cursor-pointer"
-          :class="showCode ? 'i-lucide-code-2' : 'i-lucide-code'"
-          @click="showCode = !showCode"
-        />
-      </div>
       <div
-        class="flex-1 min-h-240px p-2 rd-1 xy-center"
-        :class="[showCode ? 'bg-gray-200 dark:bg-gray-800' : null]"
-      >
-        <div
-          v-if="!showCode"
-          ref="refBox"
-          class="rd-1 w-100px h-100px"
-          :style="initStyle"
-        />
-        <!-- <NCode
-            v-else
-            class="w-100% h-100% text-xs overflow-x-auto select-none"
-            language="css"
-            trim
-            :code="`boxShadow: ${initStyle.boxShadow}`"
-          /> -->
-      </div>
+        class="rd-1 w-100px h-100px"
+        ref="refBox"
+      />
     </div>
     <div
-      class="b-solid b-gray rd-1 flex-1 min-w-300px min-h-240px w-100% flex flex-col p-2"
+      class="b-solid b-gray rd-1 flex-1 min-w-300px w-100% h-25vh p-2 overflow-auto bg-gray-200 dark:bg-gray-800"
     >
-      <div>
-        <span class="min-w-30% inline-block">阴影颜色</span>
-        <input
-          type="color"
-          v-model="inputColor"
-        />
-      </div>
-      <div>
-        <span class="min-w-30% inline-block">X轴偏移量</span>
-        <input
-          type="number"
-          class="w-20%"
-        />
-        px
-      </div>
-      <div>
-        <span class="min-w-30% inline-block">Y轴偏移量</span>
-        <input
-          type="number"
-          class="w-20%"
-        />
-        px
-      </div>
+      <pre
+        class="w-100% h-100% m-0 text-sm select-none"
+        language="css"
+        >{{ getCssCode() }}</pre
+      >
     </div>
   </div>
-  <!-- </NConfigProvider> -->
 </template>
