@@ -63,6 +63,7 @@
         target="_blank"
         title="Twitter"
       />
+
       <a
         class="link i-lucide-github"
         href="https://github.com/llx-00"
@@ -72,6 +73,7 @@
 
       <a
         class="link i-lucide-sun dark:i-lucide-moon"
+        title="Toggle theme"
         @click="toggleDark()"
       />
     </div>
