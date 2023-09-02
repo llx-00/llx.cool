@@ -87,5 +87,9 @@ export function devLog(...arg: any[]) {
  * 写入粘贴板文字
  */
 export function writeClipboardText(text: string) {
-  return navigator?.clipboard.writeText(text)
+  if (navigator?.clipboard?.writeText) {
+    return navigator.clipboard.writeText(text)
+  } else {
+    console.error(`'navigator.clipboard.writeText' not found`)
+  }
 }
