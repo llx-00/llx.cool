@@ -2,9 +2,12 @@
   --c-bg: #fff;
 }
 
+* {
+  transition: background-color 0.5s ease-in-out;
+}
+
 html {
   background-color: var(--c-bg);
-  transition: background-color 0.5s ease-in-out;
 
   &.dark {
     --c-bg: #000;
