@@ -61,19 +61,19 @@
       class: ["bg-dark"],
     },
     {
-      text: "a",
-    },
-    {
-      text: "b",
+      text: "x",
     },
     {
       text: "c",
+    },
+    {
+      text: "y",
     },
   ]
 </script>
 
 <template>
-  <h1>施工中</h1>
+  <h1>Preview `box-shadow`</h1>
 
   <div class="flex flex-col justify-between gap-4 text-base">
     <nav class="w-100% flex justify-end items-center gap-4">
