@@ -6,10 +6,7 @@
     title: "Preview Box Shadows",
   })
 
-  const initStyle = [
-    "10px 10px 10px 10px rgba(128, 128, 128, 0.5)",
-    "-10px -10px 10px -5px rgba(255, 255, 255, 0.5)",
-  ]
+  const initStyle = ["10px 10px 10px 5px rgba(128, 128, 128, 0.5)"]
   const boxStyles = ref<string[]>([...initStyle])
   const refBox = ref<HTMLDivElement>()
   const preHtml = ref<string>()
