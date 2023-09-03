@@ -1,4 +1,7 @@
 <script setup lang="ts">
+  import hljs from "highlight.js"
+  import("highlight.js/styles/github.css")
+
   useHead({
     title: "Preview Box Shadows",
   })
@@ -42,16 +45,16 @@
 <template>
   <h1>施工中</h1>
 
-  <div class="flex justify-between flex-wrap gap-4 text-base">
+  <div class="flex flex-col justify-between gap-4 text-base">
     <nav class="w-100% flex justify-end items-center gap-4">
       <i
         class="i-lucide-paintbrush cursor-pointer"
-        title="重置"
-        @click="boxStyles = [...initStyle]"
+        title="清空"
+        @click="boxStyles = []"
       />
       <i
         class="i-lucide-copy cursor-pointer"
-        title="复制"
+        title="复制CSS"
         @click="writeClipboardText(getCssCode())"
       />
       <i
@@ -61,7 +64,7 @@
       />
     </nav>
     <div
-      class="b-solid b-gray rd-1 flex-1 min-w-300px w-100% h-25vh p-2 xy-center bg-gray-200 dark:bg-gray-800"
+      class="b-solid b-gray rd-1 w-100% h-25vh xy-center bg-gray-100 dark:bg-gray-900"
     >
       <div
         class="rd-1 w-100px h-100px"
@@ -69,13 +72,12 @@
       />
     </div>
     <div
-      class="b-solid b-gray rd-1 flex-1 min-w-300px w-100% h-25vh p-2 overflow-auto bg-gray-200 dark:bg-gray-800"
+      class="b-solid b-gray rd-1 w-100% h-25vh overflow-auto bg-gray-100 dark:bg-gray-900"
     >
       <pre
-        class="w-100% h-100% m-0 text-sm select-none"
-        language="css"
-        >{{ getCssCode() }}</pre
-      >
+        class="w-100% h-100% m-2 text-sm select-none"
+        v-html="hljs.highlight(getCssCode(), { language: 'css' }).value"
+      />
     </div>
   </div>
 </template>
