@@ -12,6 +12,7 @@
   ]
   const boxStyles = ref<string[]>([...initStyle])
   const refBox = ref<HTMLDivElement>()
+  const preHtml = ref<string>()
 
   function getCssCode() {
     return (
@@ -32,14 +33,23 @@
     }, ${Math.random().toFixed(2)})${Math.random() > 0.8 ? " inset" : ""}`
   }
 
-  watch(boxStyles, () => {
+  function addStyle() {
+    const _css = prompt("请输入样式")
+    if (_css) {
+      boxStyles.value = [...boxStyles.value, _css]
+    }
+  }
+
+  watch(boxStyles, boxStyles => {
     if (refBox.value) {
-      const _css = boxStyles.value.join(", ")
+      const _css = boxStyles.join(", ")
       const children = refBox.value.children
       for (let i = 0; i < children.length; i++) {
         ;(children[i].children[0] as HTMLDivElement).style.boxShadow = _css
       }
     }
+
+    preHtml.value = hljs.highlight(getCssCode(), { language: "css" }).value
   })
 
   onMounted(() => {
@@ -50,6 +60,8 @@
         ;(children[i].children[0] as HTMLDivElement).style.boxShadow = _css
       }
     }
+
+    preHtml.value = hljs.highlight(getCssCode(), { language: "css" }).value
   })
 
   const showStatus: { text: string; class?: string[] }[] = [
@@ -58,7 +70,7 @@
     },
     {
       text: "dark",
-      class: ["bg-dark"],
+      class: ["bg-#000"],
     },
     {
       text: "x",
@@ -78,23 +90,28 @@
   <div class="flex flex-col justify-between gap-4 text-base">
     <nav class="w-100% flex justify-end items-center gap-4">
       <i
-        class="i-lucide-paintbrush cursor-pointer"
+        class="i-lucide-trash-2 cursor-pointer"
         title="清空样式"
         @click="boxStyles = []"
       />
       <i
-        class="i-lucide-copy cursor-pointer"
-        title="复制CSS"
+        class="i-lucide-code cursor-pointer"
+        title="复制代码"
         @click="writeClipboardText(getCssCode())"
+      />
+      <i
+        class="i-lucide-dices cursor-pointer"
+        title="添加随机样式"
+        @click="boxStyles = [...boxStyles, getRandomBoxShadow()]"
       />
       <i
         title="添加样式"
         class="i-lucide-plus-circle cursor-pointer"
-        @click="boxStyles = [...boxStyles, getRandomBoxShadow()]"
+        @click="addStyle"
       />
     </nav>
     <div
-      class="b-1 b-solid b-gray rd-1 w-100% h-25vh flex items-center overflow-x-auto box-border"
+      class="b-1 b-solid b-gray rd-1 w-100% h-25vh flex items-center overflow-y-hidden overflow-x-auto"
       ref="refBox"
     >
       <div
@@ -116,7 +133,8 @@
     >
       <pre
         class="flex-1 m-2 text-sm select-none"
-        v-html="hljs.highlight(getCssCode(), { language: 'css' }).value"
+        v-show="preHtml"
+        v-html="preHtml"
       />
     </div>
   </div>
