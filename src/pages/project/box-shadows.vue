@@ -128,9 +128,7 @@
         </div>
       </div>
     </div>
-    <div
-      class="b-1 b-solid b-gray rd-1 w-100% h-25vh flex overflow-auto box-border"
-    >
+    <div class="b-1 b-solid b-gray rd-1 w-100% h-25vh flex overflow-auto">
       <pre
         class="flex-1 m-2 text-sm select-none"
         v-show="preHtml"
