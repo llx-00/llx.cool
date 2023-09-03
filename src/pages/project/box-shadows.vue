@@ -7,8 +7,8 @@
   })
 
   const initStyle = [
-    "-10px -10px 10px -10px rgba(255, 255, 255, 0.5)",
-    "10px 10px 10px -10px rgba(0, 0, 0, 0.5)",
+    "10px 10px 10px 10px rgba(128, 128, 128, 0.5)",
+    "-10px -10px 10px -5px rgba(255, 255, 255, 0.5)",
   ]
   const boxStyles = ref<string[]>([...initStyle])
   const refBox = ref<HTMLDivElement>()
@@ -31,13 +31,19 @@
 
   watch(boxStyles, () => {
     if (refBox.value) {
-      refBox.value.style.boxShadow = boxStyles.value.join(", ")
+      const _css = boxStyles.value.join(", ")
+      refBox.value.childNodes.forEach(child => {
+        ;(child as HTMLDivElement).style.boxShadow = _css
+      })
     }
   })
 
   onMounted(() => {
     if (refBox.value) {
-      refBox.value.style.boxShadow = boxStyles.value.join(", ")
+      const _css = boxStyles.value.join(", ")
+      refBox.value.childNodes.forEach(child => {
+        ;(child as HTMLDivElement).style.boxShadow = _css
+      })
     }
   })
 </script>
@@ -64,20 +70,25 @@
       />
     </nav>
     <div
-      class="b-solid b-gray rd-1 w-100% h-25vh xy-center bg-gray-100 dark:bg-gray-900"
+      class="b-solid b-gray rd-1 w-100% h-25vh flex items-center gap-16 overflow-auto"
+      ref="refBox"
     >
-      <div
-        class="rd-1 w-100px h-100px"
-        ref="refBox"
-      />
+      <div class="xy-center rd-1 min-w-100px min-h-100px ml-8">normal</div>
+      <div class="xy-center rd-1 min-w-100px min-h-100px mr-8">dark</div>
     </div>
-    <div
-      class="b-solid b-gray rd-1 w-100% h-25vh overflow-auto bg-gray-100 dark:bg-gray-900"
-    >
+    <div class="b-solid b-gray rd-1 w-100% h-25vh flex overflow-auto">
       <pre
-        class="w-100% h-100% m-2 text-sm select-none"
+        class="flex-1 m-2 text-sm select-none"
         v-html="hljs.highlight(getCssCode(), { language: 'css' }).value"
       />
     </div>
   </div>
 </template>
+
+<style>
+  /**
+   * todo
+   * dark mode 对比
+   * 可选 element state
+   */
+</style>
