@@ -15,7 +15,10 @@
 
   function getCssCode() {
     return (
-      "box-shadow: \n" + boxStyles.value.map(i => "  " + i).join(",\n") + ";"
+      "box-shadow: " +
+      (boxStyles.value.length ? "\n" : "") +
+      boxStyles.value.map(i => "  " + i).join(",\n") +
+      ";"
     )
   }
 
@@ -32,20 +35,41 @@
   watch(boxStyles, () => {
     if (refBox.value) {
       const _css = boxStyles.value.join(", ")
-      refBox.value.childNodes.forEach(child => {
-        ;(child as HTMLDivElement).style.boxShadow = _css
-      })
+      const children = refBox.value.children
+      for (let i = 0; i < children.length; i++) {
+        ;(children[i].children[0] as HTMLDivElement).style.boxShadow = _css
+      }
     }
   })
 
   onMounted(() => {
     if (refBox.value) {
       const _css = boxStyles.value.join(", ")
-      refBox.value.childNodes.forEach(child => {
-        ;(child as HTMLDivElement).style.boxShadow = _css
-      })
+      const children = refBox.value.children
+      for (let i = 0; i < children.length; i++) {
+        ;(children[i].children[0] as HTMLDivElement).style.boxShadow = _css
+      }
     }
   })
+
+  const showStatus: { text: string; class?: string[] }[] = [
+    {
+      text: "normal",
+    },
+    {
+      text: "dark",
+      class: ["bg-dark"],
+    },
+    {
+      text: "a",
+    },
+    {
+      text: "b",
+    },
+    {
+      text: "c",
+    },
+  ]
 </script>
 
 <template>
@@ -55,7 +79,7 @@
     <nav class="w-100% flex justify-end items-center gap-4">
       <i
         class="i-lucide-paintbrush cursor-pointer"
-        title="清空"
+        title="清空样式"
         @click="boxStyles = []"
       />
       <i
@@ -70,13 +94,26 @@
       />
     </nav>
     <div
-      class="b-solid b-gray rd-1 w-100% h-25vh flex items-center gap-16 overflow-auto"
+      class="b-1 b-solid b-gray rd-1 w-100% h-25vh flex items-center overflow-x-auto box-border"
       ref="refBox"
     >
-      <div class="xy-center rd-1 min-w-100px min-h-100px ml-8">normal</div>
-      <div class="xy-center rd-1 min-w-100px min-h-100px mr-8">dark</div>
+      <div
+        v-for="(status, index) in showStatus"
+        class="min-w-200px h-100% xy-center flex-1 b-1 b-solid b-gray"
+        :class="[
+          ...(status.class || []),
+          index === 0 ? 'b-l-0' : null,
+          index === showStatus.length - 1 ? 'b-r-0' : null,
+        ]"
+      >
+        <div class="min-w-100px min-h-100px xy-center b-1 b-solid b-gray rd-1">
+          {{ status.text }}
+        </div>
+      </div>
     </div>
-    <div class="b-solid b-gray rd-1 w-100% h-25vh flex overflow-auto">
+    <div
+      class="b-1 b-solid b-gray rd-1 w-100% h-25vh flex overflow-auto box-border"
+    >
       <pre
         class="flex-1 m-2 text-sm select-none"
         v-html="hljs.highlight(getCssCode(), { language: 'css' }).value"
