@@ -3,7 +3,7 @@
   import("highlight.js/styles/github.css")
 
   useHead({
-    title: "Preview Box Shadows",
+    title: "Preview `box-shadow`",
   })
 
   const initStyle = ["10px 10px 10px 5px rgba(128, 128, 128, 0.5)"]
@@ -32,34 +32,33 @@
   }
 
   function addStyle() {
-    const _css = prompt("请输入样式")
+    const _css = prompt("请输入样式", initStyle[0])
     if (_css) {
       boxStyles.value = [...boxStyles.value, _css]
     }
   }
 
-  watch(boxStyles, boxStyles => {
-    if (refBox.value) {
-      const _css = boxStyles.join(", ")
-      const children = refBox.value.children
-      for (let i = 0; i < children.length; i++) {
-        ;(children[i].children[0] as HTMLDivElement).style.boxShadow = _css
-      }
+  function updateCss(el: HTMLDivElement, css: string) {
+    const children = el.children
+    for (let i = 0; i < children.length; i++) {
+      ;(children[i].children[0] as HTMLDivElement).style.boxShadow = css
     }
 
     preHtml.value = hljs.highlight(getCssCode(), { language: "css" }).value
+  }
+
+  watch(boxStyles, boxStyles => {
+    if (refBox.value) {
+      const _css = boxStyles.join(", ")
+      updateCss(refBox.value, _css)
+    }
   })
 
   onMounted(() => {
     if (refBox.value) {
       const _css = boxStyles.value.join(", ")
-      const children = refBox.value.children
-      for (let i = 0; i < children.length; i++) {
-        ;(children[i].children[0] as HTMLDivElement).style.boxShadow = _css
-      }
+      updateCss(refBox.value, _css)
     }
-
-    preHtml.value = hljs.highlight(getCssCode(), { language: "css" }).value
   })
 
   const showStatus: { text: string; class?: string[] }[] = [
@@ -70,15 +69,15 @@
       text: "dark",
       class: ["bg-#000"],
     },
-    {
-      text: "x",
-    },
-    {
-      text: "c",
-    },
-    {
-      text: "y",
-    },
+    // {
+    //   text: "x",
+    // },
+    // {
+    //   text: "c",
+    // },
+    // {
+    //   text: "y",
+    // },
   ]
 </script>
 
