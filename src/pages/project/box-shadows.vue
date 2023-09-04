@@ -10,6 +10,7 @@
   const boxStyles = ref<string[]>([...initStyle])
   const refBox = ref<HTMLDivElement>()
   const preHtml = ref<string>()
+  const copyState = ref(true)
 
   function getCssCode() {
     return (
@@ -47,6 +48,20 @@
     preHtml.value = hljs.highlight(getCssCode(), { language: "css" }).value
   }
 
+  function copyCodeHandle() {
+    if (copyState.value) {
+      const p = writeClipboardText(getCssCode())
+      if (p) {
+        copyState.value = false
+        p.then(() => {
+          setTimeout(() => {
+            copyState.value = true
+          }, 1000)
+        })
+      }
+    }
+  }
+
   watch(boxStyles, boxStyles => {
     if (refBox.value) {
       const _css = boxStyles.join(", ")
@@ -64,20 +79,21 @@
   const showStatus: { text: string; class?: string[] }[] = [
     {
       text: "normal",
+      class: ["bg-#fff text-#000"],
     },
     {
       text: "dark",
-      class: ["bg-#000"],
+      class: ["bg-#000 text-#fff"],
     },
-    // {
-    //   text: "x",
-    // },
-    // {
-    //   text: "c",
-    // },
-    // {
-    //   text: "y",
-    // },
+    {
+      text: "x",
+    },
+    {
+      text: "c",
+    },
+    {
+      text: "y",
+    },
   ]
 </script>
 
@@ -92,9 +108,12 @@
         @click="boxStyles = []"
       />
       <i
-        class="i-lucide-code cursor-pointer"
+        class="cursor-pointer"
+        :class="[
+          copyState ? 'i-lucide-code ' : 'i-lucide-check-circle c-green',
+        ]"
         title="复制代码"
-        @click="writeClipboardText(getCssCode())"
+        @click="copyCodeHandle"
       />
       <i
         class="i-lucide-dices cursor-pointer"
