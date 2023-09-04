@@ -74,7 +74,7 @@
       <a
         class="link i-lucide-sun dark:i-lucide-moon"
         title="Toggle theme"
-        @click="toggleDark()"
+        @click="toggleDarkTransition"
       />
     </div>
   </nav>

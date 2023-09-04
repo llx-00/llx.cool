@@ -3,7 +3,7 @@
 }
 
 * {
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.4s ease-in-out;
 }
 
 html {
@@ -48,4 +48,22 @@ h6 {
   min-width: 350px;
 
   overflow-x: hidden;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 9999;
+}
+.dark::view-transition-old(root) {
+  z-index: 9999;
+}
+.dark::view-transition-new(root) {
+  z-index: 1;
 }
