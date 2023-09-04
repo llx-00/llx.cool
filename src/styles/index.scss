@@ -1,3 +1,5 @@
+@import "./font-face.scss";
+
 :root {
   --c-bg: #fff;
 }
@@ -43,6 +45,11 @@ h6 {
   font-size: 1.2rem;
 }
 
+pre,
+code {
+  font-family: "JetBrains Mono", monospace;
+}
+
 #app {
   width: 100%;
   min-width: 350px;
@@ -61,9 +68,13 @@ h6 {
 ::view-transition-new(root) {
   z-index: 9999;
 }
-.dark::view-transition-old(root) {
-  z-index: 9999;
-}
-.dark::view-transition-new(root) {
-  z-index: 1;
+
+html.dark {
+  &::view-transition-old(root) {
+    z-index: 9999;
+  }
+
+  &::view-transition-new(root) {
+    z-index: 1;
+  }
 }
