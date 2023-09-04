@@ -21,12 +21,13 @@
   }
 
   function getRandomBoxShadow() {
-    return `${(Math.random() * 10 * (Math.random() > 0.5 ? -1 : 1)) >> 0}px ${
+    // blur-radius 必须为正数
+    return `${(Math.random() * 20 * (Math.random() > 0.5 ? -1 : 1)) >> 0}px ${
+      (Math.random() * 20 * (Math.random() > 0.5 ? -1 : 1)) >> 0
+    }px ${(Math.random() * 10) >> 0}px ${
       (Math.random() * 10 * (Math.random() > 0.5 ? -1 : 1)) >> 0
-    }px ${(Math.random() * 5 * (Math.random() > 0.5 ? -1 : 1)) >> 0}px ${
-      (Math.random() * 5 * (Math.random() > 0.5 ? -1 : 1)) >> 0
-    }px rgba(${(Math.random() * 255) >> 0}, ${(Math.random() * 255) >> 0}, ${
-      (Math.random() * 255) >> 0
+    }px rgba(${(Math.random() * 256) >> 0}, ${(Math.random() * 256) >> 0}, ${
+      (Math.random() * 256) >> 0
     }, ${Math.random().toFixed(2)})${Math.random() > 0.8 ? " inset" : ""}`
   }
 
@@ -134,11 +135,3 @@
     </div>
   </div>
 </template>
-
-<style>
-  /**
-   * todo
-   * dark mode 对比
-   * 可选 element state
-   */
-</style>
