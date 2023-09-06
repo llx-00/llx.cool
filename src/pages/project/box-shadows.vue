@@ -32,7 +32,9 @@
     }, ${Math.random().toFixed(2)})${Math.random() > 0.8 ? " inset" : ""}`
   }
 
-  function addStyle() {
+  function addStyle(e: MouseEvent) {
+    const { pageX, pageY } = e
+    devLog(pageX, pageY)
     const _css = prompt("请输入样式", initStyle[0])
     if (_css) {
       boxStyles.value = [...boxStyles.value, _css]
@@ -64,26 +66,24 @@
 
   watch(boxStyles, boxStyles => {
     if (refBox.value) {
-      const _css = boxStyles.join(", ")
-      updateCss(refBox.value, _css)
+      updateCss(refBox.value, boxStyles.join(", "))
     }
   })
 
   onMounted(() => {
     if (refBox.value) {
-      const _css = boxStyles.value.join(", ")
-      updateCss(refBox.value, _css)
+      updateCss(refBox.value, boxStyles.value.join(", "))
     }
   })
 
-  const showStatus: { text: string; class?: string[] }[] = [
+  const showStatus: { text: string; class?: string }[] = [
     {
       text: "normal",
-      class: ["bg-#fff text-#000"],
+      class: "bg-#fff text-#000",
     },
     {
       text: "dark",
-      class: ["bg-#000 text-#fff"],
+      class: "bg-#000 text-#fff",
     },
     {
       text: "x",
@@ -100,7 +100,7 @@
 <template>
   <h1>Preview `box-shadow`</h1>
 
-  <div class="flex flex-col justify-between gap-4 text-base">
+  <div class="flex flex-col gap-4 text-base overflow-y-auto">
     <nav class="w-100% flex justify-end items-center gap-4">
       <i
         class="i-lucide-trash-2 cursor-pointer"
@@ -127,14 +127,14 @@
       />
     </nav>
     <div
-      class="b-1 b-solid b-gray rd-1 w-100% h-25vh flex items-center overflow-y-hidden overflow-x-auto"
+      class="b-1 b-solid b-gray box-border rd-1 w-100% flex items-center overflow-x-auto"
       ref="refBox"
     >
       <div
         v-for="(status, index) in showStatus"
-        class="min-w-200px h-100% xy-center flex-1 b-1 b-solid b-gray"
+        class="min-w-200px min-h-200px w-200px h-200px xy-center flex-1 b-1 b-y-0 b-dotted b-gray"
         :class="[
-          ...(status.class || []),
+          status.class,
           index === 0 ? 'b-l-0' : null,
           index === showStatus.length - 1 ? 'b-r-0' : null,
         ]"
@@ -144,7 +144,9 @@
         </div>
       </div>
     </div>
-    <div class="b-1 b-solid b-gray rd-1 w-100% h-25vh flex overflow-auto">
+    <div
+      class="b-1 b-solid b-gray box-border rd-1 w-100% min-h-200px h-200px flex overflow-auto"
+    >
       <pre
         class="flex-1 m-2 text-sm select-none"
         v-show="preHtml"
