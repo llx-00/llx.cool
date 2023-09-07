@@ -56,14 +56,26 @@
 </script>
 
 <template>
-  <!--  -->
   <h1 v-if="show">💗 距离见到闹闹，还有</h1>
   <div
     v-if="show"
     class="w-100% xy-center text-2xl"
   >
-    <span>{{ diffTime?.day ? diffTime.day + "天" : "" }}</span>
-    <span>{{ diffTime?.minute ? diffTime.minute + "分" : "" }}</span>
-    <span>{{ diffTime?.second ? diffTime.second + "秒" : "" }}</span>
+    <span>
+      <code>{{ diffTime?.day || "" }}</code>
+      <span>{{ diffTime?.day ? "天" : "" }}</span>
+    </span>
+    <span>
+      <code>{{ diffTime?.hour || "" }}</code>
+      <span>小时</span>
+    </span>
+    <span>
+      <code>{{ diffTime?.minute.toString().padStart(2, "0") }}</code>
+      <span>分</span>
+    </span>
+    <span>
+      <code>{{ diffTime?.second.toString().padStart(2, "0") }}</code>
+      <span>秒</span>
+    </span>
   </div>
 </template>
