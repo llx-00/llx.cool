@@ -1,19 +1,21 @@
 <script setup lang="ts">
+  import md5 from "md5"
   import AllHello from "~/hello"
+  import { PAGE_PWD } from "~/config"
 
   const { defaultVal, iterval } = defineProps<{
     defaultVal?: string
     iterval?: number
   }>()
 
-  const _hello = ref<string>(defaultVal || AllHello[0])
-  const _index = ref(0)
+  const hello = ref<string>(defaultVal || AllHello[0])
+  const index = ref(0)
   onMounted(() => {
     const t = setInterval(() => {
-      _hello.value = AllHello[_index.value++]
+      hello.value = AllHello[index.value++]
 
-      if (_index.value === AllHello.length) {
-        _index.value = 0
+      if (index.value === AllHello.length) {
+        index.value = 0
       }
     }, iterval || 1000)
 
@@ -21,8 +23,20 @@
       clearInterval(t)
     })
   })
+
+  const router = useRouter()
+
+  function goLove() {
+    const inputStr = prompt("Who are you? 👀")
+
+    if (inputStr) {
+      router.push(`love?pwd=${md5(inputStr)}`)
+    }
+  }
 </script>
 
 <template>
-  👋 <span>{{ _hello }}</span>
+  <span @click="goLove">👋</span>
+  <span>{{ " " }}</span>
+  <span>{{ hello }}</span>
 </template>
