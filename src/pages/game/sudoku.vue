@@ -102,9 +102,18 @@
 </script>
 
 <template>
-  <div class="xy-center flex-col select-none text-2xl">
+  <h1>数独</h1>
+
+  <div class="xy-center flex-col select-none gap-4">
+    <nav class="w-full max-w-400px flex justify-end items-center gap-4">
+      <i
+        class="i-lucide-refresh-ccw cursor-pointer"
+        title="重置"
+        @click="reload"
+      />
+    </nav>
     <table
-      class="border-collapse font-mono"
+      class="border-collapse text-2xl font-mono w-full max-w-400px max-h-400px aspect-ratio-square"
       :class="[show ? null : 'op-0']"
     >
       <colgroup
@@ -123,7 +132,7 @@
         >
           <td
             v-for="k in 9"
-            class="w-8 h-8 b-1 b-gray-500 b-solid dark:b-gray-400 text-center cursor-pointer outline-none"
+            class="b-1 b-gray-500 b-solid dark:b-gray-400 text-center cursor-pointer outline-none"
             :class="[
               initMap[(i - 1) * 3 + (j - 1)][k - 1] === null
                 ? 'text-green font-bold'
@@ -142,13 +151,6 @@
         </tr>
       </tbody>
     </table>
-
-    <div class="my-2">
-      <i
-        class="i-lucide-refresh-ccw w-6"
-        @click="reload"
-      />
-    </div>
   </div>
 </template>
 
