@@ -1,16 +1,14 @@
 <script setup lang="ts">
   import dayjs from "dayjs"
-  import { PAGE_PWD } from "~/config"
+  import { globalStore } from "~/composables"
 
   const router = useRouter()
-  const route = useRoute()
 
   const show = ref(false)
-  if (route.query.pwd !== PAGE_PWD) {
-    router.push("404")
-  } else {
+  if (globalStore.showHiddenPage) {
     show.value = true
-    history.replaceState({}, "", "love")
+  } else {
+    router.push("/")
   }
 
   const TARGET_TIME = "2023/9/8 22:00:00"
@@ -61,12 +59,12 @@
     v-if="show"
     class="w-100% xy-center text-2xl"
   >
-    <span>
-      <code>{{ diffTime?.day || "" }}</code>
-      <span>{{ diffTime?.day ? "天" : "" }}</span>
+    <span v-if="diffTime?.day">
+      <code>{{ diffTime?.day }}</code>
+      <span>天</span>
     </span>
-    <span>
-      <code>{{ diffTime?.hour || "" }}</code>
+    <span v-if="diffTime?.hour">
+      <code>{{ diffTime?.hour }}</code>
       <span>小时</span>
     </span>
     <span>
