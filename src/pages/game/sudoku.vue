@@ -113,7 +113,7 @@
       />
     </nav>
     <table
-      class="border-collapse text-2xl font-mono w-full max-w-400px max-h-400px aspect-ratio-square"
+      class="border-collapse text-2xl font-mono w-full max-w-400px max-h-400px"
       :class="[show ? null : 'op-0']"
     >
       <colgroup
