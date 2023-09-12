@@ -16,4 +16,4 @@ games:
     desc: "敲电子木鱼，见赛博佛主"
 ---
 
-<ListGames :games="frontmatter.games" />
+<ListItems :items="frontmatter.games" />

@@ -7,4 +7,4 @@ projects:
     desc: "CSS `box-shadow` 预览"
 ---
 
-<ListProjects :projects="frontmatter.projects" />
+<ListItems :items="frontmatter.projects" />
