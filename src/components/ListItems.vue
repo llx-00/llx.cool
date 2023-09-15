@@ -13,7 +13,7 @@
       class="flex flex-col flex-1 items-start min-w-350px"
     >
       <h5 class="my5 font-bold">
-        <RouterLink :to="`project/${item.link}`">
+        <RouterLink :to="item.link">
           {{ item.name }}
         </RouterLink>
       </h5>
