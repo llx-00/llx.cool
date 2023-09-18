@@ -32,5 +32,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.4.3
         with:
           branch: github-pages
-          folder: build
+          folder: .
           CLEAN: true # Automatically remove deleted files from the deploy branch
