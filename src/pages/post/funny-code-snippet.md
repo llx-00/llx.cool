@@ -6,7 +6,7 @@ date: 2023-7-27
 
 <PageTitle />
 
-## 柯里化 `add(1)(2)(3)`
+## 柯里化`add(1)(2)(3)`
 
 ```ts
 type TypeFunAdd = (...arg: number[]) => TypeFunAdd
@@ -22,7 +22,7 @@ function add(...arg: number[]) {
 add(1)(2)(3) // 6
 ```
 
-## 牛顿迭代法实现 `Math.sqrt()`
+## 牛顿迭代法实现`Math.sqrt()`
 
 ```ts
 function mySqrt(x: number) {
@@ -39,13 +39,13 @@ function mySqrt(x: number) {
 }
 ```
 
-## Typescript 实现 `Range<0, 100>`
+## `Typescript` 实现`Range<0, 100>`
 
 ```ts
 type Max<
   N,
   A extends number[] = [0],
-  B extends number[] = [],
+  B extends number[] = []
 > = B["length"] extends N ? B[number] : Max<N, [...A, 0], [...B, A["length"]]>
 
 type Min<N, A extends number[] = []> = A["length"] extends N
@@ -55,4 +55,24 @@ type Min<N, A extends number[] = []> = A["length"] extends N
 type Range<min, max> = Exclude<Max<max>, Min<min>>
 
 type t100_200 = Range<0, 100>
+```
+
+## `Typescript` 使用动态`key`解构
+
+```ts
+function fromRecords<T>(items: T[], key: keyof T, value: keyof T) {
+  return Object.fromEntries(items.map(({ [key]: k, [value]: v }) => [k, v]))
+}
+
+// { xcy: 18, llx: 22 }
+console.log(
+  fromRecords(
+    [
+      { name: "xcy", age: 18 },
+      { name: "llx", age: 22 },
+    ],
+    "name",
+    "age"
+  )
+)
 ```
