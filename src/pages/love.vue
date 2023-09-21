@@ -11,7 +11,7 @@
     router.push("/")
   }
 
-  const TARGET_TIME = "2023/9/22 21:30:00"
+  const TARGET_TIME = "2023/9/22 19:00:00"
 
   function getDiffTime(targetTime: string) {
     const _targetTime = dayjs(targetTime)
