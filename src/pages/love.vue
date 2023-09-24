@@ -5,11 +5,6 @@
   const router = useRouter()
 
   const show = ref(false)
-  if (globalStore.showHiddenPage) {
-    show.value = true
-  } else {
-    router.push("/")
-  }
 
   const TARGET_TIME = "2023/10/3 11:00:00"
 
@@ -41,15 +36,21 @@
   const diffTime = ref<ReturnType<typeof getDiffTime>>()
 
   onMounted(() => {
-    diffTime.value = getDiffTime(TARGET_TIME)
-
-    const t = setInterval(() => {
+    if (globalStore.showHiddenPage) {
       diffTime.value = getDiffTime(TARGET_TIME)
-    }, 1000)
 
-    onUnmounted(() => {
-      clearInterval(t)
-    })
+      const t = setInterval(() => {
+        diffTime.value = getDiffTime(TARGET_TIME)
+      }, 1000)
+
+      onUnmounted(() => {
+        clearInterval(t)
+      })
+
+      show.value = true
+    } else {
+      router.push("/")
+    }
   })
 </script>
 
