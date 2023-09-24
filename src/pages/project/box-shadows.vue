@@ -32,9 +32,7 @@
     }, ${Math.random().toFixed(2)})${Math.random() > 0.8 ? " inset" : ""}`
   }
 
-  function addStyle(e: MouseEvent) {
-    const { pageX, pageY } = e
-    devLog(pageX, pageY)
+  function addStyle() {
     const _css = prompt("请输入样式", initStyle[0])
     if (_css) {
       boxStyles.value = [...boxStyles.value, _css]
