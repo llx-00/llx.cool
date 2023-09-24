@@ -85,15 +85,6 @@
       text: "dark",
       class: "bg-#000 text-#fff",
     },
-    {
-      text: "x",
-    },
-    {
-      text: "c",
-    },
-    {
-      text: "y",
-    },
   ]
 </script>
 
@@ -102,29 +93,44 @@
 
   <div class="flex flex-col gap-4 text-base overflow-y-auto">
     <nav class="w-100% flex justify-end items-center gap-4">
-      <i
-        class="i-lucide-trash-2 cursor-pointer"
+      <span
+        class="cursor-pointer"
         title="清空样式"
         @click="boxStyles = []"
-      />
-      <i
+      >
+        <i class="i-lucide-trash-2" />
+        <span class="lt-sm:hidden ml-1">清空样式</span>
+      </span>
+      <span
         class="cursor-pointer"
-        :class="[
-          copyState ? 'i-lucide-code ' : 'i-lucide-check-circle c-green',
-        ]"
         title="复制代码"
         @click="copyCodeHandle"
-      />
-      <i
-        class="i-lucide-dices cursor-pointer"
+      >
+        <i
+          :class="[
+            copyState ? 'i-lucide-code ' : 'i-lucide-check-circle c-green',
+          ]"
+        />
+        <span class="lt-sm:hidden ml-1">复制代码</span>
+      </span>
+
+      <span
+        class="cursor-pointer"
         title="添加随机样式"
         @click="boxStyles = [...boxStyles, getRandomBoxShadow()]"
-      />
-      <i
+      >
+        <i class="i-lucide-dices" />
+        <span class="lt-sm:hidden ml-1">添加随机样式</span>
+      </span>
+
+      <span
+        class="cursor-pointer"
         title="添加样式"
-        class="i-lucide-plus-circle cursor-pointer"
         @click="addStyle"
-      />
+      >
+        <i class="i-lucide-plus-circle" />
+        <span class="lt-sm:hidden ml-1">添加样式</span>
+      </span>
     </nav>
     <div
       class="b-1 b-solid b-gray box-border rd-1 w-100% flex items-center overflow-x-auto"
