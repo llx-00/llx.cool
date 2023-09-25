@@ -3,7 +3,7 @@
   import("highlight.js/styles/github.css")
 
   useHead({
-    title: "Preview `box-shadow`",
+    title: "Preview box-shadow",
   })
 
   const initStyle = ["10px 10px 10px 5px rgba(128, 128, 128, 0.5)"]
@@ -33,7 +33,10 @@
   }
 
   function addStyle() {
-    const _css = prompt("请输入样式", initStyle[0])
+    const _css = prompt(
+      "x偏移量 y偏移量 阴影模糊半径 阴影扩散半径 颜色",
+      initStyle[0]
+    )
     if (_css) {
       boxStyles.value = [...boxStyles.value, _css]
     }
@@ -76,7 +79,7 @@
 
   const showStatus: { text: string; class?: string }[] = [
     {
-      text: "normal",
+      text: "light",
       class: "bg-#fff text-#000",
     },
     {
@@ -84,21 +87,61 @@
       class: "bg-#000 text-#fff",
     },
   ]
+
+  const historyList: string[] = []
+
+  function backward() {
+    const pop = boxStyles.value.at(-1)
+    if (pop) {
+      historyList.push(pop)
+      boxStyles.value = [...boxStyles.value.slice(0, -1)]
+    }
+  }
+  function forward() {
+    const pop = historyList.pop()
+    if (pop) {
+      boxStyles.value = [...boxStyles.value, pop]
+    }
+  }
 </script>
 
 <template>
-  <h1>Preview `box-shadow`</h1>
+  <h1>Preview <code>`box-shadow`</code></h1>
 
   <div class="flex flex-col gap-4 text-base overflow-y-auto">
-    <nav class="w-100% flex justify-end items-center gap-4">
+    <nav class="w-100% flex justify-end items-center gap-4 select-none">
       <span
         class="cursor-pointer"
+        title="上一步"
+        @click="backward"
+      >
+        <i class="i-lucide-undo" />
+        <span class="lt-sm:hidden ml-1">上一步</span>
+      </span>
+
+      <span
+        class="cursor-pointer"
+        title="下一步"
+        @click="forward"
+      >
+        <i class="i-lucide-redo" />
+        <span class="lt-sm:hidden ml-1">下一步</span>
+      </span>
+
+      <span
+        class="cursor-pointer c-red-500"
         title="清空样式"
-        @click="boxStyles = []"
+        @click="
+          () => {
+            boxStyles = []
+            historyList = []
+          }
+        "
       >
         <i class="i-lucide-trash-2" />
         <span class="lt-sm:hidden ml-1">清空样式</span>
       </span>
+
       <span
         class="cursor-pointer"
         title="复制代码"
