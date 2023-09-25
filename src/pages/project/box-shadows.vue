@@ -106,7 +106,7 @@
 </script>
 
 <template>
-  <h1>Preview <code>`box-shadow`</code></h1>
+  <h1>Preview <code>box-shadow</code></h1>
 
   <div class="flex flex-col gap-4 text-base overflow-y-auto">
     <nav class="w-100% flex justify-end items-center gap-4 select-none">
@@ -202,3 +202,9 @@
     </div>
   </div>
 </template>
+
+<style scoped lang="scss">
+  h1 > code {
+    text-shadow: 5px 5px 5px rgba(128, 128, 128, 0.5);
+  }
+</style>
