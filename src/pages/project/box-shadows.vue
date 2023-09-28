@@ -88,17 +88,17 @@
     },
   ]
 
-  const historyList: string[] = []
+  const historyList = ref<string[]>([])
 
   function backward() {
     const pop = boxStyles.value.at(-1)
     if (pop) {
-      historyList.push(pop)
+      historyList.value.push(pop)
       boxStyles.value = [...boxStyles.value.slice(0, -1)]
     }
   }
   function forward() {
-    const pop = historyList.pop()
+    const pop = historyList.value.pop()
     if (pop) {
       boxStyles.value = [...boxStyles.value, pop]
     }

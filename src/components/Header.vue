@@ -1,14 +1,15 @@
 <script setup lang="ts">
-  watch(isDark, isDark => {
+  function toggleThemeHandle(e: MouseEvent) {
     useHead({
       meta: [
         {
           name: "msapplication-TileColor",
-          content: isDark ? "#000000" : "#ffffff",
+          content: isDark.value ? "#000000" : "#ffffff",
         },
       ],
     })
-  })
+    toggleDarkTransition(e)
+  }
 </script>
 <template>
   <nav class="flex justify-end items-start p4 text-base">
@@ -74,7 +75,7 @@
       <a
         class="link i-lucide-sun dark:i-lucide-moon"
         title="Toggle theme"
-        @click="toggleDarkTransition"
+        @click="toggleThemeHandle"
       />
     </div>
   </nav>
