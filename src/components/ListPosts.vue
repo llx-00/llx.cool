@@ -29,12 +29,12 @@
       :key="route.path"
       class="my4"
     >
-      <h3 class="inline-block mr-2">
-        <RouterLink :to="route.path">{{ route.title }}</RouterLink>
-      </h3>
-      <span class="text-sm text-right ws-nowrap">
+      <span class="text-sm text-right ws-nowrap op75">
         {{ formatDate(route.date) }}
       </span>
+      <h3 class="mt-0">
+        <RouterLink :to="route.path">{{ route.title }}</RouterLink>
+      </h3>
     </div>
   </template>
 </template>
