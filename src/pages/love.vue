@@ -6,7 +6,7 @@
 
   const show = ref(false)
 
-  const TARGET_TIME = "2023/10/13 21:00:00"
+  const TARGET_TIME = "2023/10/27 21:00:00"
 
   function getDiffTime(targetTime: string) {
     const _targetTime = dayjs(targetTime)
