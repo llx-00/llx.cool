@@ -2,12 +2,16 @@
   import { useRouter } from "vue-router"
   import type { Post } from "~/types"
 
+  const { dir } = defineProps<{
+    dir: string
+  }>()
+
   const router = useRouter()
   const routes: Post[] = router
     .getRoutes()
     .filter(
       i =>
-        i.path.startsWith("/post/") &&
+        i.path.startsWith(dir) &&
         (import.meta.env.DEV ? true : i.meta.frontmatter.date)
     )
     .map(i => ({

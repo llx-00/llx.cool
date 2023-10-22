@@ -16,7 +16,8 @@
       padding: 0 0.2rem;
     }
 
-    &[href^="/post/"] {
+    &[href^="/post/"],
+    &[href^="/cookbook/"] {
       margin: 0;
 
       &::before {

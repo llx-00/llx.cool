@@ -30,14 +30,24 @@
         alt="logo"
       />
     </RouterLink>
+
     <div class="flex gap6 items-center">
       <RouterLink
         to="/posts"
         title="Blog"
         class="link"
       >
-        <span class="lt-sm:hidden">Blog</span>
-        <i class="i-lucide-file-text sm:hidden" />
+        <i class="i-lucide-file-text mr-0.75" />
+        <span class="lt-sm:hidden">博客</span>
+      </RouterLink>
+
+      <RouterLink
+        to="/cookbooks"
+        title="Cookbooks"
+        class="link"
+      >
+        <i class="i-lucide-salad mr-0.75" />
+        <span class="lt-sm:hidden">食谱</span>
       </RouterLink>
 
       <RouterLink
@@ -45,8 +55,8 @@
         title="Games"
         class="link"
       >
-        <span class="lt-sm:hidden">Games</span>
-        <i class="i-lucide-gamepad-2 sm:hidden" />
+        <i class="i-lucide-gamepad-2 mr-0.75" />
+        <span class="lt-sm:hidden">游戏</span>
       </RouterLink>
 
       <RouterLink
@@ -54,8 +64,8 @@
         title="Projects"
         class="link"
       >
-        <span class="lt-sm:hidden">Projects</span>
-        <i class="i-lucide-lightbulb sm:hidden" />
+        <i class="i-lucide-lightbulb mr-0.75" />
+        <span class="lt-sm:hidden">项目</span>
       </RouterLink>
 
       <a
