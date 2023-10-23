@@ -48,10 +48,10 @@
         v-for="i in navItems"
       >
         <i
-          class="lt-sm:hidden"
+          class="sm:hidden"
           :class="i.icon"
         />
-        <span>{{ i.label }}</span>
+        <span class="lt-sm:hidden">{{ i.label }}</span>
       </RouterLink>
 
       <a
