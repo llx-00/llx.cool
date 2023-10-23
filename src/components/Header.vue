@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import { NavItem } from "~/types"
+
   function toggleThemeHandle(e: MouseEvent) {
     useHead({
       meta: [
@@ -10,12 +12,21 @@
     })
     toggleDarkTransition(e)
   }
+
+  const navItems: NavItem[] = [
+    { label: "博客", path: "/posts", icon: "i-lucide-file-text" },
+    { label: "食谱", path: "/cookbooks", icon: "i-lucide-salad" },
+    { label: "游戏", path: "/games", icon: "i-lucide-gamepad-2" },
+    { label: "项目", path: "/projects", icon: "i-lucide-lightbulb" },
+  ]
+
+  const showColMenu = ref(false)
 </script>
 <template>
-  <nav class="flex justify-end items-start p4 text-base">
+  <nav class="flex justify-between items-start p4 text-base">
     <RouterLink
       to="/"
-      class="select-none outline-none"
+      class="link select-none outline-none"
     >
       <img
         v-show="isDark"
@@ -31,63 +42,73 @@
       />
     </RouterLink>
 
-    <div class="flex-1" />
-    <div class="flex gap6 items-center">
-      <RouterLink
-        to="/posts"
-        title="Blog"
-        class="link"
+    <div class="flex gap4">
+      <a
+        class="link sm:hidden"
+        @click="
+          () => {
+            showColMenu = !showColMenu
+          }
+        "
       >
-        <i class="i-lucide-file-text mr-0.75" />
-        <span class="lt-sm:hidden">博客</span>
-      </RouterLink>
+        <i class="i-lucide-more-horizontal" />
+      </a>
 
-      <RouterLink
-        to="/cookbooks"
-        title="Cookbooks"
-        class="link"
+      <div
+        class="flex gap4 items-center lt-sm:flex-col lt-sm:absolute lt-sm:top-14 lt-sm:translate-x--60%"
+        :class="['showColMenuBtn', showColMenu ? 'show' : 'hidden']"
       >
-        <i class="i-lucide-salad mr-0.75" />
-        <span class="lt-sm:hidden">食谱</span>
-      </RouterLink>
-
-      <RouterLink
-        to="/games"
-        title="Games"
-        class="link"
-      >
-        <i class="i-lucide-gamepad-2 mr-0.75" />
-        <span class="lt-sm:hidden">游戏</span>
-      </RouterLink>
-
-      <RouterLink
-        to="/projects"
-        title="Projects"
-        class="link"
-      >
-        <i class="i-lucide-lightbulb mr-0.75" />
-        <span class="lt-sm:hidden">项目</span>
-      </RouterLink>
+        <RouterLink
+          :to="i.path"
+          class="link"
+          :title="i.label"
+          v-for="i in navItems"
+        >
+          <i :class="i.icon" />
+          <span>{{ i.label }}</span>
+        </RouterLink>
+      </div>
 
       <a
-        class="link i-lucide-twitter"
+        class="link"
         href="https://twitter.com/lilongxiang2000"
         target="_blank"
-        title="Twitter"
-      />
+      >
+        <i class="i-lucide-twitter" />
+      </a>
 
       <a
-        class="link i-lucide-github"
+        class="link"
         href="https://github.com/llx-00"
         target="_blank"
-        title="GitHub"
-      />
+      >
+        <i class="i-lucide-github" />
+      </a>
 
       <a
-        class="link i-lucide-sun dark:i-lucide-moon"
-        title="Toggle theme"
+        class="link"
         @click="toggleThemeHandle"
-      />
+      >
+        <i class="i-lucide-sun dark:i-lucide-moon" />
+      </a>
     </div>
   </nav>
 </template>
+
+<style lang="scss" scoped>
+  .showColMenuBtn {
+    top: -10rem;
+    // opacity: 0;
+    transition: all 0.2s ease-in-out;
+
+    &.show {
+      // opacity: 1;
+      top: 3.5rem;
+    }
+    &.hidden {
+      // opacity: 0;
+      top: -10rem;
+      pointer-events: none;
+    }
+  }
+</style>
