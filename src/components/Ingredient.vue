@@ -6,7 +6,7 @@
   <ul class="xy-center flex-wrap">
     <li
       v-for="i in items"
-      class="tag m-1 px-2 b-rd outline-none bg-yellow-300 bg-op-50 text-nowrap hover:bg-op-100"
+      class="tag m-1 p-2 b-rd outline-none bg-yellow-300 bg-op-50 text-nowrap hover:bg-op-100"
     >
       {{ i }}
     </li>
