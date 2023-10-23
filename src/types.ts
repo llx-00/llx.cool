@@ -2,6 +2,7 @@ export interface Post {
   path: string
   title: string
   date: string
+  type?: "post" | "cook"
 }
 
 export interface Game {

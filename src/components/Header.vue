@@ -15,7 +15,7 @@
 
   const navItems: NavItem[] = [
     { label: "博客", path: "/posts", icon: "i-lucide-file-text" },
-    { label: "食谱", path: "/cookbooks", icon: "i-lucide-salad" },
+    // { label: "食谱", path: "/cookbooks", icon: "i-lucide-salad" },
     { label: "游戏", path: "/games", icon: "i-lucide-gamepad-2" },
     { label: "项目", path: "/projects", icon: "i-lucide-lightbulb" },
   ]
@@ -48,7 +48,7 @@
         v-for="i in navItems"
       >
         <i
-          class="sm:hidden"
+          class="sm:mr-0.5"
           :class="i.icon"
         />
         <span class="lt-sm:hidden">{{ i.label }}</span>

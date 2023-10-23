@@ -1,6 +1,8 @@
 ---
 title: 冬瓜玉米排骨
+subtitle: 给闹闹的食谱
 date: 2023-10-23
+type: cook
 ingredient:
   - 冬瓜
   - 玉米

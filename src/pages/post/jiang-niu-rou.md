@@ -1,6 +1,8 @@
 ---
 title: 酱牛肉
+subtitle: 给闹闹的食谱
 date: 2023-10-22
+type: cook
 ingredient:
   - 老抽
   - 姜片🫚

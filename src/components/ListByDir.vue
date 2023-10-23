@@ -16,28 +16,39 @@
     )
     .map(i => ({
       path: i.path,
-      title: i.meta.frontmatter.title,
-      date: i.meta.frontmatter.date,
+      ...i.meta.frontmatter,
     }))
 
   const posts = computed(() =>
     routes.sort((a, b) => +new Date(b.date) - +new Date(a.date))
   )
+
+  devLog(posts.value)
 </script>
 
 <template>
   <PageTitle />
   <template v-if="posts.length">
     <div
-      v-for="route in posts"
-      :key="route.path"
+      v-for="post in posts"
+      :key="post.path"
       class="my4"
     >
       <span class="text-sm text-right ws-nowrap op75">
-        {{ formatDate(route.date) }}
+        {{ formatDate(post.date) }}
       </span>
       <h3 class="mt-0">
-        <RouterLink :to="route.path">{{ route.title }}</RouterLink>
+        <RouterLink :to="post.path">
+          <i
+            v-if="post.type === 'cook'"
+            class="i-lucide-chef-hat mr-1"
+          />
+          <i
+            v-else
+            class="i-lucide-file-signature mr-1"
+          />
+          <span>{{ post.title }}</span>
+        </RouterLink>
       </h3>
     </div>
   </template>
