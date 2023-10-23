@@ -24,3 +24,9 @@ export interface Frontmatter {
   subtitle?: string
   date?: string
 }
+
+export interface NavItem {
+  label: string
+  path: string
+  icon: string
+}
