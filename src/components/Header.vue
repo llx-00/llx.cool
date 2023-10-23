@@ -45,18 +45,14 @@
     <div class="flex gap4">
       <a
         class="link sm:hidden"
-        @click="
-          () => {
-            showColMenu = !showColMenu
-          }
-        "
+        @click="showColMenu = !showColMenu"
       >
         <i class="i-lucide-more-horizontal" />
       </a>
 
       <div
         class="flex gap4 items-center lt-sm:flex-col lt-sm:absolute lt-sm:top-14 lt-sm:translate-x--60%"
-        :class="['showColMenuBtn', showColMenu ? 'show' : 'hidden']"
+        :class="['showColMenuBtn', showColMenu ? 'show' : 'colse']"
       >
         <RouterLink
           :to="i.path"
@@ -98,17 +94,13 @@
 <style lang="scss" scoped>
   .showColMenuBtn {
     top: -10rem;
-    // opacity: 0;
     transition: all 0.2s ease-in-out;
 
     &.show {
-      // opacity: 1;
       top: 3.5rem;
     }
-    &.hidden {
-      // opacity: 0;
+    &.colse {
       top: -10rem;
-      pointer-events: none;
     }
   }
 </style>
