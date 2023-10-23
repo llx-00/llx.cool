@@ -15,7 +15,7 @@
   <nav class="flex justify-end items-start p4 text-base">
     <RouterLink
       to="/"
-      class="select-none outline-none absolute left-4"
+      class="select-none outline-none"
     >
       <img
         v-show="isDark"
@@ -31,6 +31,7 @@
       />
     </RouterLink>
 
+    <div class="flex-1" />
     <div class="flex gap6 items-center">
       <RouterLink
         to="/posts"

@@ -15,24 +15,10 @@
 </script>
 <template>
   <Header />
-  <div class="body max-w-800px box-border mx-auto p4">
+  <div class="max-w-800px box-border mx-auto p4">
     <RouterView />
     <WrapperPost />
     <Footer />
   </div>
   <!-- <PaperBg /> -->
 </template>
-
-<style scoped lang="scss">
-  .body {
-    @media (min-width: 420px) {
-      font-size: 1.25rem;
-      line-height: 1.75rem;
-    }
-
-    @media (max-width: 419.9px) {
-      font-size: 1rem;
-      line-height: 1.5rem;
-    }
-  }
-</style>
