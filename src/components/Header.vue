@@ -19,8 +19,6 @@
     { label: "游戏", path: "/games", icon: "i-lucide-gamepad-2" },
     { label: "项目", path: "/projects", icon: "i-lucide-lightbulb" },
   ]
-
-  const showColMenu = ref(false)
 </script>
 <template>
   <nav class="flex justify-between items-start p4 text-base">
@@ -43,27 +41,18 @@
     </RouterLink>
 
     <div class="flex gap4">
-      <a
-        class="link sm:hidden"
-        @click="showColMenu = !showColMenu"
+      <RouterLink
+        class="link"
+        :to="i.path"
+        :title="i.label"
+        v-for="i in navItems"
       >
-        <i class="i-lucide-more-horizontal" />
-      </a>
-
-      <div
-        class="flex gap4 items-center lt-sm:flex-col lt-sm:absolute lt-sm:top-14 lt-sm:translate-x--60%"
-        :class="['showColMenuBtn', showColMenu ? 'show' : 'colse']"
-      >
-        <RouterLink
-          :to="i.path"
-          class="link"
-          :title="i.label"
-          v-for="i in navItems"
-        >
-          <i :class="i.icon" />
-          <span>{{ i.label }}</span>
-        </RouterLink>
-      </div>
+        <i
+          class="lt-sm:hidden"
+          :class="i.icon"
+        />
+        <span>{{ i.label }}</span>
+      </RouterLink>
 
       <a
         class="link"
@@ -90,17 +79,3 @@
     </div>
   </nav>
 </template>
-
-<style lang="scss" scoped>
-  .showColMenuBtn {
-    top: -10rem;
-    transition: all 0.2s ease-in-out;
-
-    &.show {
-      top: 3.5rem;
-    }
-    &.colse {
-      top: -10rem;
-    }
-  }
-</style>
