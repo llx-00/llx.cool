@@ -17,10 +17,11 @@
     .map(i => ({
       path: i.path,
       ...i.meta.frontmatter,
+      date: formatDate(i.meta.frontmatter.date),
     }))
 
   const posts = computed(() =>
-    routes.sort((a, b) => +new Date(b.date) - +new Date(a.date))
+    routes.sort((a, b) => +new Date(b.date!) - +new Date(a.date!))
   )
 
   devLog(posts.value)
@@ -28,6 +29,7 @@
 
 <template>
   <PageTitle />
+  <!-- <pre>{{ JSON.stringify(posts, null, 2) }}</pre> -->
   <template v-if="posts.length">
     <div
       v-for="post in posts"
@@ -35,7 +37,7 @@
       class="my4"
     >
       <span class="text-sm text-right ws-nowrap op75">
-        {{ formatDate(post.date) }}
+        {{ formatDate(post.date!) }}
       </span>
       <h3 class="mt-0">
         <RouterLink :to="post.path">

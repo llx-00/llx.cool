@@ -1,7 +1,9 @@
 export interface Post {
   path: string
   title: string
-  date: string
+  display?: string
+  subtitle?: string
+  date?: string
   type?: "post" | "cook"
 }
 
@@ -17,13 +19,6 @@ export interface Project {
   logo?: string
   link: string
   name: string
-}
-
-export interface Frontmatter {
-  title: string
-  display?: string
-  subtitle?: string
-  date?: string
 }
 
 export interface NavItem {
