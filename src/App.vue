@@ -21,15 +21,14 @@
 
     const newContent = isDark.value ? "#000000" : "#ffffff"
 
-    // 移除旧标签添加新标签，确保触发重新渲染
     if (el) {
       el.content = newContent
-      document.head.removeChild(el)
+    } else {
+      const _el = document.createElement("meta") as HTMLMetaElement
+      _el.name = "msapplication-TileColor"
+      _el.content = newContent
+      document.head.appendChild(_el)
     }
-    const _el = document.createElement("meta") as HTMLMetaElement
-    _el.name = "msapplication-TileColor"
-    _el.content = newContent
-    document.head.appendChild(_el)
   })
 </script>
 <template>
