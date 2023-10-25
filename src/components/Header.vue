@@ -2,14 +2,6 @@
   import { NavItem } from "~/types"
 
   function toggleThemeHandle(e: MouseEvent) {
-    useHead({
-      meta: [
-        {
-          name: "msapplication-TileColor",
-          content: isDark.value ? "#000000" : "#ffffff",
-        },
-      ],
-    })
     toggleDarkTransition(e)
   }
 

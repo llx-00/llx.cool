@@ -12,6 +12,24 @@
       },
     ],
   })
+
+  // 同步 msapplication-TileColor
+  watchEffect(() => {
+    const el = document.querySelector(
+      'meta[name="msapplication-TileColor"]'
+    ) as HTMLMetaElement | null
+
+    const newContent = isDark.value ? "#000000" : "#ffffff"
+
+    if (el) {
+      el.content = newContent
+    } else {
+      const _el = document.createElement("meta") as HTMLMetaElement
+      _el.name = "msapplication-TileColor"
+      _el.content = newContent
+      document.head.appendChild(_el)
+    }
+  })
 </script>
 <template>
   <Header />
