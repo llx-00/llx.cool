@@ -4,8 +4,6 @@ subtitle: 持续更新中
 date: 2023-7-27
 ---
 
-<PageTitle />
-
 ## 柯里化`add(1)(2)(3)`
 
 ```ts

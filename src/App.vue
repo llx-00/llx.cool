@@ -16,6 +16,7 @@
 <template>
   <Header />
   <div class="max-w-800px box-border mx-auto p4">
+    <PageTitle />
     <RouterView />
     <WrapperPost />
     <Footer />

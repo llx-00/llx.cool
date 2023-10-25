@@ -16,8 +16,6 @@ ingredient:
   - 火锅底料
 ---
 
-<PageTitle />
-
 ## 食材
 
 <Ingredient :items="frontmatter.ingredient"/>

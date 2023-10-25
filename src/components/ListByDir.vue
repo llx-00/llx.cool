@@ -23,12 +23,9 @@
   const posts = computed(() =>
     routes.sort((a, b) => +new Date(b.date!) - +new Date(a.date!))
   )
-
-  devLog(posts.value)
 </script>
 
 <template>
-  <PageTitle />
   <!-- <pre>{{ JSON.stringify(posts, null, 2) }}</pre> -->
   <template v-if="posts.length">
     <div

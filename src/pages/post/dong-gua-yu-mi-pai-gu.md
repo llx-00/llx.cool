@@ -15,8 +15,6 @@ ingredient:
   - 小葱
 ---
 
-<PageTitle />
-
 ## 食材
 
 <Ingredient :items="frontmatter.ingredient"/>

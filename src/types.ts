@@ -1,6 +1,6 @@
 export interface Post {
   path: string
-  title: string
+  title?: string
   display?: string
   subtitle?: string
   date?: string

@@ -5,7 +5,6 @@
 </script>
 
 <template>
-  <PageTitle />
   <div class="p2 flex flex-wrap gap8">
     <div
       v-for="item in items"

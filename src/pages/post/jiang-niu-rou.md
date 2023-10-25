@@ -14,8 +14,6 @@ ingredient:
   - 牛腱子
 ---
 
-<PageTitle />
-
 ## 食材
 
 <Ingredient :items="frontmatter.ingredient"/>

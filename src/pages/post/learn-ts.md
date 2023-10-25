@@ -4,8 +4,6 @@ subtitle: 持续更新中
 date: 2023-8-16
 ---
 
-<PageTitle />
-
 ## `any` & `unknown`
 
 `any` 类型除了关闭类型检查，还会污染其他具有正确类型的变量。
@@ -217,10 +215,7 @@ type MyType = Parameters<Func> // [a: string, b: number]
 
 ```ts
 class Person {
-  constructor(
-    public name: string,
-    public age: number
-  ) {}
+  constructor(public name: string, public age: number) {}
 }
 
 // [name: string, age: number]
