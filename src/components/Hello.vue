@@ -1,8 +1,22 @@
 <script setup lang="ts">
   import md5 from "md5"
-  import AllHello from "~/hello"
   import { PAGE_PWD } from "~/config"
   import { globalStore } from "~/composables"
+
+  const AllHello = [
+    "你好",
+    "Hello",
+    "こんにちは",
+    "안녕하세요",
+    "Привет",
+    "Hola",
+    "Bonjour",
+    "Hallo",
+    "Ciao",
+    "Olá",
+    "Merhaba",
+    "Hej",
+  ]
 
   const { defaultVal, iterval } = defineProps<{
     defaultVal?: string
@@ -18,7 +32,7 @@
       if (index.value === AllHello.length) {
         index.value = 0
       }
-    }, iterval || 1000)
+    }, 2000)
 
     onUnmounted(() => {
       clearInterval(t)
