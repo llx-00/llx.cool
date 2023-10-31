@@ -2,6 +2,7 @@
 title: 记录些有趣的代码片段
 subtitle: 持续更新中
 date: 2023-7-27
+type: post
 ---
 
 ## 柯里化`add(1)(2)(3)`

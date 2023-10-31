@@ -2,6 +2,7 @@
 title: TypeScript 笔记
 subtitle: 持续更新中
 date: 2023-8-16
+type: post
 ---
 
 ## `any` & `unknown`

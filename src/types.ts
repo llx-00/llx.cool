@@ -4,8 +4,10 @@ export interface Post {
   display?: string
   subtitle?: string
   date?: string
-  type?: "post" | "cook"
+  type?: PostType
 }
+
+export type PostType = "post" | "cook" | "photo"
 
 export interface Game {
   desc: string

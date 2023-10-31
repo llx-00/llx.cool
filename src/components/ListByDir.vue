@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { useRouter } from "vue-router"
-  import type { Post } from "~/types"
+  import type { Post, PostType } from "~/types"
 
   const { dir } = defineProps<{
     dir: string
@@ -23,6 +23,12 @@
   const posts = computed(() =>
     routes.sort((a, b) => +new Date(b.date!) - +new Date(a.date!))
   )
+
+  const iconConfig: { [key in PostType]: string } = {
+    photo: "i-lucide-camera",
+    post: "i-lucide-file-signature",
+    cook: "i-lucide-chef-hat",
+  }
 </script>
 
 <template>
@@ -39,12 +45,8 @@
       <h3 class="mt-0">
         <RouterLink :to="post.path">
           <i
-            v-if="post.type === 'cook'"
-            class="i-lucide-chef-hat mr-1"
-          />
-          <i
-            v-else
-            class="i-lucide-file-signature mr-1"
+            v-if="post.type"
+            :class="['mr-1', iconConfig[post.type]]"
           />
           <span>{{ post.title }}</span>
         </RouterLink>
