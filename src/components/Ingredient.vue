@@ -3,10 +3,10 @@
 </script>
 
 <template>
-  <ul class="xy-center flex-wrap">
+  <ul class="xy-center flex-wrap gap2">
     <li
       v-for="i in items"
-      class="tag m-1 p-2 b-rd outline-none bg-yellow-300 bg-op-50 text-nowrap hover:bg-op-100"
+      class="tag cursor-pointer p-2 b-rd outline-none bg-yellow-300 bg-op-50 hover:bg-op-100"
     >
       {{ i }}
     </li>
@@ -15,7 +15,6 @@
 
 <style lang="scss" scoped>
   .tag {
-    cursor: pointer;
     box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.5);
 
     transition: all 0.2s ease-in-out;
