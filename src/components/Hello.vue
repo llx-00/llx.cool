@@ -4,7 +4,6 @@
   import { globalStore } from "~/composables"
 
   const AllHello = [
-    "你好",
     "Hello",
     "こんにちは",
     "안녕하세요",
@@ -16,6 +15,7 @@
     "Olá",
     "Merhaba",
     "Hej",
+    "你好",
   ]
 
   const { defaultVal, iterval } = defineProps<{
