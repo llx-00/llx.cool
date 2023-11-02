@@ -2,10 +2,10 @@
   useHead({
     meta: [
       { property: "og:title", content: "Longxiang Li" },
-      { property: "og:image", content: "https://llx.cool/og/index.png" },
+      { property: "og:image", content: "/og/index.jpeg" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:creator", content: "@lilongxiang2000" },
-      { name: "twitter:image", content: "https://llx.cool/og/index.png" },
+      { name: "twitter:image", content: "/og/index.jpeg" },
       {
         name: "msapplication-TileColor",
         content: isDark.value ? "#000000" : "#ffffff",
