@@ -15,11 +15,11 @@
         meta: [
           {
             property: "og:image",
-            content: `/og/${path.split("/").at(-1)}.jepg`,
+            content: `/${path.split("/").at(-1)}.jpeg`,
           },
           {
             property: "twitter:image",
-            content: `/og/${path.split("/").at(-1)}.jepg`,
+            content: `/${path.split("/").at(-1)}.jpeg`,
           },
         ],
       })
