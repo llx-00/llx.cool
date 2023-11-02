@@ -1,18 +1,4 @@
 <script setup lang="ts">
-  useHead({
-    meta: [
-      { property: "og:title", content: "Longxiang Li" },
-      { property: "og:image", content: "/og/index.jpeg" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:creator", content: "@lilongxiang2000" },
-      { name: "twitter:image", content: "/og/index.jpeg" },
-      {
-        name: "msapplication-TileColor",
-        content: isDark.value ? "#000000" : "#ffffff",
-      },
-    ],
-  })
-
   // 同步 msapplication-TileColor
   watchEffect(() => {
     const el = document.querySelector(
