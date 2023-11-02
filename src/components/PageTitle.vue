@@ -6,25 +6,6 @@
   const frontmatter = computed(() => {
     return route.meta.frontmatter as Post | undefined
   })
-
-  watchEffect(() => {
-    const { path } = route
-
-    if (path.startsWith("/post/")) {
-      useHead({
-        meta: [
-          {
-            property: "og:image",
-            content: `/${path.split("/").at(-1)}.jpeg`,
-          },
-          {
-            property: "twitter:image",
-            content: `/${path.split("/").at(-1)}.jpeg`,
-          },
-        ],
-      })
-    }
-  })
 </script>
 
 <template>
