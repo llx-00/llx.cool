@@ -4,10 +4,7 @@
   const boardSize = 9
   const subgridSize = 3
 
-  function generateSudokuBoard(): {
-    map: (number | null)[][]
-    ans: number[][]
-  } {
+  function generateSudokuBoard() {
     const board: number[][] = Array(boardSize)
       .fill(0)
       .map(() => Array(boardSize).fill(0))
@@ -70,34 +67,61 @@
     // 开始填数
     solve(0, 0)
 
-    const _map: (number | null)[][] = []
+    const _map: { val?: number; canFill: boolean }[][] = []
     board.forEach(row => {
-      const _row = row.map(i => (Math.random() < 0.3 ? null : i))
+      const _row = row.map(i => {
+        const _bool = Math.random() < 0.3
+
+        return _bool
+          ? {
+              canFill: true,
+            }
+          : {
+              val: i,
+              canFill: false,
+            }
+      })
       _map.push(_row)
     })
 
-    return { map: _map, ans: board }
+    return _map
   }
 
   const initVal = generateSudokuBoard()
   devLog("initVal", initVal)
-  const initMap = ref(initVal.map)
+  const initMap = ref(initVal)
   const show = ref(true)
-  // const initAns = reactive(initVal.ans);
-
-  // function handleClick(i: number, j: number) {
-  //   const clickItem = initMap[i][j];
-  //   devLog(`(${i},${j}):`, clickItem);
-  // }
 
   function reload() {
     const newVal = generateSudokuBoard()
     show.value = false
-    initMap.value = newVal.ans
+    initMap.value = newVal
+    mapIndex.value = undefined
     setTimeout(() => {
-      initMap.value = newVal.map
+      initMap.value = newVal
       show.value = true
     })
+  }
+
+  function fillVal(val: number) {
+    if (mapIndex.value !== undefined) {
+      if (initMap.value[mapIndex.value.i][mapIndex.value.j].canFill) {
+        initMap.value[mapIndex.value.i][mapIndex.value.j].val = val
+        mapIndex.value = undefined
+      }
+    }
+  }
+
+  const mapIndex = ref<{ i: number; j: number }>()
+  function setIndex(i: number, j: number) {
+    if (initMap.value[i][j].canFill) {
+      mapIndex.value = {
+        i,
+        j,
+      }
+    } else {
+      mapIndex.value = undefined
+    }
   }
 </script>
 
@@ -112,8 +136,27 @@
         @click="reload"
       />
     </nav>
+
     <table
       class="border-collapse text-2xl font-mono w-full max-w-400px max-h-400px"
+      :class="[show ? null : 'op-0']"
+    >
+      <tbody class="b-3 b-gray-500 b-solid dark:b-gray-400">
+        <tr>
+          <td
+            v-for="i in 9"
+            class="b-1 b-gray-500 b-solid dark:b-gray-400 text-center cursor-pointer outline-none w-8 h-8"
+            :class="[mapIndex !== undefined ? 'bg-yellow' : null]"
+            @click="fillVal(i)"
+          >
+            {{ i }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table
+      class="main border-collapse text-2xl font-mono w-full max-w-400px max-h-400px"
       :class="[show ? null : 'op-0']"
     >
       <colgroup
@@ -132,21 +175,15 @@
         >
           <td
             v-for="k in 9"
-            class="b-1 b-gray-500 b-solid dark:b-gray-400 text-center cursor-pointer outline-none"
+            class="b-1 b-gray-500 b-solid dark:b-gray-400 text-center cursor-pointer w-8 h-8"
             :class="[
-              initMap[(i - 1) * 3 + (j - 1)][k - 1] === null
-                ? 'text-green font-bold'
+              initMap[(i - 1) * 3 + (j - 1)][k - 1].canFill
+                ? 'text-green font-bold '
                 : null,
             ]"
-            :contenteditable="initMap[(i - 1) * 3 + (j - 1)][k - 1] === null"
-            @input="
-              e => {
-                ;(e.target as HTMLElement).innerHTML =
-                  (e as InputEvent)?.data?.toString() || ''
-              }
-            "
+            @click="setIndex((i - 1) * 3 + (j - 1), k - 1)"
           >
-            {{ initMap[(i - 1) * 3 + (j - 1)][k - 1] }}
+            {{ initMap[(i - 1) * 3 + (j - 1)][k - 1].val }}
           </td>
         </tr>
       </tbody>
@@ -155,7 +192,7 @@
 </template>
 
 <style scoped lang="scss">
-  table {
+  table.main {
     // 选中所在列
     &:has(td:nth-child(1):hover) td:nth-child(1),
     &:has(td:nth-child(2):hover) td:nth-child(2),
