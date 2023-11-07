@@ -93,3 +93,19 @@ export function writeClipboardText(text: string) {
     console.error(`'navigator.clipboard.writeText' not found`)
   }
 }
+
+/**
+ * 更新或新增 `<mate>` 标签
+ */
+export function updateMetaElement(name: string, content: string) {
+  const el = document.querySelector(
+    `meta[name="${name}"]`
+  ) as HTMLMetaElement | null
+
+  if (el) document.head.removeChild(el)
+
+  const _el = document.createElement("meta") as HTMLMetaElement
+  _el.name = name
+  _el.content = content
+  document.head.appendChild(_el)
+}

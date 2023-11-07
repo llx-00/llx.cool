@@ -1,18 +1,12 @@
 <script setup lang="ts">
-  // 同步 msapplication-TileColor
   watchEffect(() => {
-    const el = document.querySelector(
-      'meta[name="msapplication-TileColor"]'
-    ) as HTMLMetaElement | null
+    const newColor = isDark.value ? "#000000" : "#ffffff"
 
-    const newContent = isDark.value ? "#000000" : "#ffffff"
-
-    if (el) document.head.removeChild(el)
-
-    const _el = document.createElement("meta") as HTMLMetaElement
-    _el.name = "msapplication-TileColor"
-    _el.content = newContent
-    document.head.appendChild(_el)
+    // 网页启动时，Safari 的状态栏样式
+    updateMetaElement("apple-mobile-web-app-status-bar-style", newColor)
+    // 移动设备浏览器的主题色
+    updateMetaElement("theme-color", newColor)
+    updateMetaElement("msapplication-TileColor", newColor)
   })
 </script>
 <template>
