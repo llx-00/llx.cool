@@ -129,7 +129,7 @@
   <h1>数独</h1>
 
   <div class="xy-center flex-col select-none gap-4">
-    <nav class="w-full max-w-400px flex justify-end items-center gap-4">
+    <nav class="max-w-400px flex justify-end items-center gap-4">
       <i
         class="i-lucide-refresh-ccw cursor-pointer"
         title="重置"
@@ -137,16 +137,19 @@
       />
     </nav>
 
-    <table
-      class="border-collapse text-2xl font-mono w-full max-w-400px max-h-400px"
-      :class="[show ? null : 'op-0']"
-    >
+    <table class="border-collapse text-2xl font-mono">
+      <colgroup
+        v-for="i in 3"
+        class="b-3 b-gray-500 b-solid dark:b-gray-400"
+      >
+        <col v-for="j in 3" />
+      </colgroup>
       <tbody class="b-3 b-gray-500 b-solid dark:b-gray-400">
         <tr>
           <td
             v-for="i in 9"
-            class="b-1 b-gray-500 b-solid dark:b-gray-400 text-center cursor-pointer outline-none w-8 h-8"
-            :class="[mapIndex !== undefined ? 'bg-yellow' : null]"
+            class="b-1 b-gray-500 b-solid dark:b-gray-400 text-center cursor-pointer outline-none min-w-8 min-h-8 aspect-ratio-square"
+            :class="[mapIndex !== undefined ? 'bg-gray-5' : null]"
             @click="fillVal(i)"
           >
             {{ i }}
@@ -156,7 +159,7 @@
     </table>
 
     <table
-      class="main border-collapse text-2xl font-mono w-full max-w-400px max-h-400px"
+      class="main border-collapse text-2xl font-mono max-w-400px max-h-400px"
       :class="[show ? null : 'op-0']"
     >
       <colgroup
@@ -171,14 +174,17 @@
       >
         <tr
           v-for="j in 3"
-          class="hover:bg-yellow"
+          class="hover:bg-gray-5"
         >
           <td
             v-for="k in 9"
-            class="b-1 b-gray-500 b-solid dark:b-gray-400 text-center cursor-pointer w-8 h-8"
+            class="b-1 b-gray-500 b-solid dark:b-gray-400 text-center cursor-pointer min-w-8 min-h-8 aspect-ratio-square"
             :class="[
               initMap[(i - 1) * 3 + (j - 1)][k - 1].canFill
-                ? 'text-green font-bold '
+                ? 'text-green font-bold'
+                : null,
+              mapIndex?.i === (i - 1) * 3 + (j - 1) && mapIndex.j === k - 1
+                ? 'bg-gray-8!'
                 : null,
             ]"
             @click="setIndex((i - 1) * 3 + (j - 1), k - 1)"
@@ -192,51 +198,53 @@
 </template>
 
 <style scoped lang="scss">
-  table.main {
-    // 选中所在列
-    &:has(td:nth-child(1):hover) td:nth-child(1),
-    &:has(td:nth-child(2):hover) td:nth-child(2),
-    &:has(td:nth-child(3):hover) td:nth-child(3),
-    &:has(td:nth-child(4):hover) td:nth-child(4),
-    &:has(td:nth-child(5):hover) td:nth-child(5),
-    &:has(td:nth-child(6):hover) td:nth-child(6),
-    &:has(td:nth-child(7):hover) td:nth-child(7),
-    &:has(td:nth-child(8):hover) td:nth-child(8),
-    &:has(td:nth-child(9):hover) td:nth-child(9) {
-      --un-bg-opacity: 1;
-      background-color: rgba(250, 204, 21, var(--un-bg-opacity));
-    }
+  table {
+    --un-bg-opacity: 1;
+    --bgc: rgba(107, 114, 128, var(--un-bg-opacity));
+    &.main {
+      // 选中所在列
+      &:has(td:nth-child(1):hover) td:nth-child(1),
+      &:has(td:nth-child(2):hover) td:nth-child(2),
+      &:has(td:nth-child(3):hover) td:nth-child(3),
+      &:has(td:nth-child(4):hover) td:nth-child(4),
+      &:has(td:nth-child(5):hover) td:nth-child(5),
+      &:has(td:nth-child(6):hover) td:nth-child(6),
+      &:has(td:nth-child(7):hover) td:nth-child(7),
+      &:has(td:nth-child(8):hover) td:nth-child(8),
+      &:has(td:nth-child(9):hover) td:nth-child(9) {
+        background-color: var(--bgc);
+      }
 
-    // 选中所在的九宫格
-    &:has(tbody:nth-of-type(1) td:nth-child(n + 1):nth-child(-n + 3):hover)
-      tbody:nth-of-type(1)
-      td:nth-child(n + 1):nth-child(-n + 3),
-    &:has(tbody:nth-of-type(1) td:nth-child(n + 4):nth-child(-n + 6):hover)
-      tbody:nth-of-type(1)
-      td:nth-child(n + 4):nth-child(-n + 6),
-    &:has(tbody:nth-of-type(1) td:nth-child(n + 7):nth-child(-n + 9):hover)
-      tbody:nth-of-type(1)
-      td:nth-child(n + 7):nth-child(-n + 9),
-    &:has(tbody:nth-of-type(2) td:nth-child(n + 1):nth-child(-n + 3):hover)
-      tbody:nth-of-type(2)
-      td:nth-child(n + 1):nth-child(-n + 3),
-    &:has(tbody:nth-of-type(2) td:nth-child(n + 4):nth-child(-n + 6):hover)
-      tbody:nth-of-type(2)
-      td:nth-child(n + 4):nth-child(-n + 6),
-    &:has(tbody:nth-of-type(2) td:nth-child(n + 7):nth-child(-n + 9):hover)
-      tbody:nth-of-type(2)
-      td:nth-child(n + 7):nth-child(-n + 9),
-    &:has(tbody:nth-of-type(3) td:nth-child(n + 1):nth-child(-n + 3):hover)
-      tbody:nth-of-type(3)
-      td:nth-child(n + 1):nth-child(-n + 3),
-    &:has(tbody:nth-of-type(3) td:nth-child(n + 4):nth-child(-n + 6):hover)
-      tbody:nth-of-type(3)
-      td:nth-child(n + 4):nth-child(-n + 6),
-    &:has(tbody:nth-of-type(3) td:nth-child(n + 7):nth-child(-n + 9):hover)
-      tbody:nth-of-type(3)
-      td:nth-child(n + 7):nth-child(-n + 9) {
-      --un-bg-opacity: 1;
-      background-color: rgba(250, 204, 21, var(--un-bg-opacity));
+      // 选中所在的九宫格
+      &:has(tbody:nth-of-type(1) td:nth-child(n + 1):nth-child(-n + 3):hover)
+        tbody:nth-of-type(1)
+        td:nth-child(n + 1):nth-child(-n + 3),
+      &:has(tbody:nth-of-type(1) td:nth-child(n + 4):nth-child(-n + 6):hover)
+        tbody:nth-of-type(1)
+        td:nth-child(n + 4):nth-child(-n + 6),
+      &:has(tbody:nth-of-type(1) td:nth-child(n + 7):nth-child(-n + 9):hover)
+        tbody:nth-of-type(1)
+        td:nth-child(n + 7):nth-child(-n + 9),
+      &:has(tbody:nth-of-type(2) td:nth-child(n + 1):nth-child(-n + 3):hover)
+        tbody:nth-of-type(2)
+        td:nth-child(n + 1):nth-child(-n + 3),
+      &:has(tbody:nth-of-type(2) td:nth-child(n + 4):nth-child(-n + 6):hover)
+        tbody:nth-of-type(2)
+        td:nth-child(n + 4):nth-child(-n + 6),
+      &:has(tbody:nth-of-type(2) td:nth-child(n + 7):nth-child(-n + 9):hover)
+        tbody:nth-of-type(2)
+        td:nth-child(n + 7):nth-child(-n + 9),
+      &:has(tbody:nth-of-type(3) td:nth-child(n + 1):nth-child(-n + 3):hover)
+        tbody:nth-of-type(3)
+        td:nth-child(n + 1):nth-child(-n + 3),
+      &:has(tbody:nth-of-type(3) td:nth-child(n + 4):nth-child(-n + 6):hover)
+        tbody:nth-of-type(3)
+        td:nth-child(n + 4):nth-child(-n + 6),
+      &:has(tbody:nth-of-type(3) td:nth-child(n + 7):nth-child(-n + 9):hover)
+        tbody:nth-of-type(3)
+        td:nth-child(n + 7):nth-child(-n + 9) {
+        background-color: var(--bgc);
+      }
     }
   }
 </style>
