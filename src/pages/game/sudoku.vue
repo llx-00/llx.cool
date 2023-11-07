@@ -119,8 +119,6 @@
         i,
         j,
       }
-    } else {
-      mapIndex.value = undefined
     }
   }
 </script>
@@ -128,7 +126,7 @@
 <template>
   <h1>数独</h1>
 
-  <div class="xy-center flex-col select-none gap-4">
+  <div class="xy-center flex-col select-none gap-2 text-2xl">
     <nav class="max-w-400px flex justify-end items-center gap-4">
       <i
         class="i-lucide-refresh-ccw cursor-pointer"
@@ -137,7 +135,7 @@
       />
     </nav>
 
-    <table class="border-collapse text-2xl font-mono">
+    <table class="border-collapse font-mono">
       <colgroup
         v-for="i in 3"
         class="b-3 b-gray-500 b-solid dark:b-gray-400"
@@ -148,7 +146,7 @@
         <tr>
           <td
             v-for="i in 9"
-            class="b-1 b-gray-500 b-solid dark:b-gray-400 text-center cursor-pointer outline-none min-w-8 min-h-8 aspect-ratio-square"
+            class="b-1 b-gray-500 b-solid dark:b-gray-400 text-center cursor-pointer outline-none min-w-8 min-h-8"
             :class="[mapIndex !== undefined ? 'bg-gray-5' : null]"
             @click="fillVal(i)"
           >
@@ -159,7 +157,7 @@
     </table>
 
     <table
-      class="main border-collapse text-2xl font-mono max-w-400px max-h-400px"
+      class="main border-collapse font-mono"
       :class="[show ? null : 'op-0']"
     >
       <colgroup
@@ -178,13 +176,13 @@
         >
           <td
             v-for="k in 9"
-            class="b-1 b-gray-500 b-solid dark:b-gray-400 text-center cursor-pointer min-w-8 min-h-8 aspect-ratio-square"
+            class="b-1 b-gray-500 b-solid dark:b-gray-400 text-center cursor-pointer min-w-8 min-h-8"
             :class="[
               initMap[(i - 1) * 3 + (j - 1)][k - 1].canFill
                 ? 'text-green font-bold'
                 : null,
               mapIndex?.i === (i - 1) * 3 + (j - 1) && mapIndex.j === k - 1
-                ? 'bg-gray-8!'
+                ? 'bg-gray-7!'
                 : null,
             ]"
             @click="setIndex((i - 1) * 3 + (j - 1), k - 1)"
