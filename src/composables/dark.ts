@@ -8,10 +8,8 @@ export const toggleDark = useToggle(isDark)
  * @see https://github.com/vuejs/vitepress/pull/2347
  */
 export function toggleDarkTransition(event: MouseEvent) {
-  const isAppearanceTransition =
-    // @ts-ignoreexperimental API
-    document.startViewTransition &&
-    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  // @ts-ignoreexperimental API
+  const isAppearanceTransition = document.startViewTransition
 
   if (!isAppearanceTransition) {
     devLog("过渡动画不可用")
