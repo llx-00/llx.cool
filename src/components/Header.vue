@@ -21,13 +21,13 @@
       <img
         v-show="isDark"
         :src="'/logo-dark.svg'"
-        class="w6"
+        class="w-8"
         alt="logo"
       />
       <img
         v-show="!isDark"
         :src="'/logo.svg'"
-        class="w6"
+        class="w-8"
         alt="logo"
       />
     </RouterLink>
