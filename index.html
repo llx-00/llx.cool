@@ -1,173 +1,81 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <meta
-      http-equiv="X-UA-Compatible"
-      content="chrome=1"
-    />
 
-    <meta
-      name="revisit-after"
-      content="3 days"
-    />
-    <meta
-      name="author"
-      content="Longxiang Li"
-    />
-    <link
-      rel="icon"
-      href="/favicon-256.png"
-      type="image/png"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1" />
 
-    <!-- 32x32 像素的 PNG 格式图标，适用于大多数现代浏览器 -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/favicon-32.png"
-    />
+  <meta name="revisit-after" content="3 days" />
+  <meta name="author" content="Longxiang Li" />
+  <link rel="icon" href="/favicon-256.png" type="image/png" />
 
-    <!-- 16x16 像素的 PNG 格式图标，适用于大多数现代浏览器 -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/favicon-32.png"
-    />
+  <!-- 32x32 像素的 PNG 格式图标，适用于大多数现代浏览器 -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 
-    <!-- 192x192 像素的 PNG 格式图标，适用于 Android 设备 -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="192x192"
-      href="/favicon-256.png"
-    />
+  <!-- 16x16 像素的 PNG 格式图标，适用于大多数现代浏览器 -->
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-32.png">
 
-    <!-- 152x152 像素的 PNG 格式图标，适用于 iOS 设备 -->
-    <link
-      rel="apple-touch-icon"
-      sizes="152x152"
-      href="/favicon-152.png"
-    />
+  <!-- 192x192 像素的 PNG 格式图标，适用于 Android 设备 -->
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-256.png">
 
-    <!-- Safari 标签栏图标 -->
-    <link
-      rel="mask-icon"
-      href="/favicon-256.png"
-      color="#fff"
-    />
+  <!-- 152x152 像素的 PNG 格式图标，适用于 iOS 设备 -->
+  <link rel="apple-touch-icon" sizes="152x152" href="/favicon-152.png">
 
-    <!-- IE 浏览器磁贴 -->
-    <meta
-      name="msapplication-TileImage"
-      content="/favicon-256.png"
-    />
-    <meta
-      name="msapplication-TileColor"
-      content="#000000"
-    />
+  <!-- Safari 标签栏图标 -->
+  <link rel="mask-icon" href="/favicon-256.png" color="#fff">
 
-    <!-- HTML Meta Tags -->
-    <title>Longxiang Li</title>
-    <meta
-      name="description"
-      content="Longxiang Li's personal website"
-    />
+  <!-- IE 浏览器磁贴 -->
+  <meta name="msapplication-TileImage" content="/favicon-256.png">
+  <meta name="msapplication-TileColor" content="#000000">
 
-    <!-- Facebook Meta Tags -->
-    <meta
-      property="og:url"
-      content="https://llx.cool"
-    />
-    <meta
-      property="og:type"
-      content="website"
-    />
-    <meta
-      property="og:title"
-      content="Longxiang Li"
-    />
-    <meta
-      property="og:description"
-      content="Longxiang Li's personal website"
-    />
-    <meta
-      property="og:image"
-      content="https://llx.cool/og/index.jpeg"
-    />
+  <!-- HTML Meta Tags -->
+  <title>Longxiang Li</title>
+  <meta name="description" content="Longxiang Li's personal website">
 
-    <!-- Twitter Meta Tags -->
-    <meta
-      name="twitter:card"
-      content="summary_large_image"
-    />
-    <meta
-      property="twitter:domain"
-      content="llx.cool"
-    />
-    <meta
-      property="twitter:url"
-      content="https://llx.cool"
-    />
-    <meta
-      name="twitter:title"
-      content="Longxiang Li"
-    />
-    <meta
-      name="twitter:description"
-      content="Longxiang Li's personal website"
-    />
-    <meta
-      name="twitter:image"
-      content="https://llx.cool/og/index.jpeg"
-    />
+  <!-- Facebook Meta Tags -->
+  <meta property="og:url" content="https://llx.cool">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Longxiang Li">
+  <meta property="og:description" content="Longxiang Li's personal website">
+  <meta property="og:image" content="https://llx.cool/og/index.jpeg">
 
-    <!-- Meta Tags Generated via https://www.opengraph.xyz -->
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:domain" content="llx.cool">
+  <meta property="twitter:url" content="https://llx.cool">
+  <meta name="twitter:title" content="Longxiang Li">
+  <meta name="twitter:description" content="Longxiang Li's personal website">
+  <meta name="twitter:image" content="https://llx.cool/og/index.jpeg">
 
-    <!-- 将网站添加到主屏幕后，是否显示为一个独立的应用程序。将其设置为yes表示启用。 -->
-    <meta
-      name="apple-mobile-web-app-capable"
-      content="yes"
-    />
+  <!-- Meta Tags Generated via https://www.opengraph.xyz -->
 
-    <script>
-      ;(function () {
-        const prefersDark =
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches
-        const setting = localStorage.getItem("vueuse-color-scheme") || "auto"
-        if (setting === "dark" || (prefersDark && setting !== "light"))
-          document.documentElement.classList.toggle("dark", true)
-      })()
-    </script>
-  </head>
+  <!-- 将网站添加到主屏幕后，是否显示为一个独立的应用程序。将其设置为yes表示启用。 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
 
-  <body>
-    <script>
-      // 防止移动端双击时缩放
-      document.body.addEventListener("click", e => {
-        // debugger
-        console.log(e.target)
-        console.log(e.target.nodeName)
-        if (e.target.nodeName !== "A") {
-          e.preventDefault()
-        }
-      })
-    </script>
+  <script>
+    (function () {
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+      const setting = localStorage.getItem('vueuse-color-scheme') || 'auto'
+      if (setting === 'dark' || (prefersDark && setting !== 'light'))
+        document.documentElement.classList.toggle('dark', true)
+    })()
+  </script>
+</head>
 
-    <div
-      id="app"
-      class="font-sans text-gray-700 dark:text-gray-200"
-    ></div>
-    <script
-      type="module"
-      src="/src/main.ts"
-    ></script>
-  </body>
+<body>
+
+  <script>
+    // 防止移动端双击时缩放
+    document.body.addEventListener('click', e => {
+      if (e.target.nodeName !== 'A') {
+        e.preventDefault()
+      }
+    })
+  </script>
+
+  <div id="app" class="font-sans text-gray-700 dark:text-gray-200"></div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>
