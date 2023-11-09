@@ -9,3 +9,4 @@ Words and images are licensed under
 
 - 木鱼图片替换为 svg
 - `/game/` 统一样式
+- icon 优化
