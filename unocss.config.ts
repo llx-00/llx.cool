@@ -28,7 +28,6 @@ export default defineConfig({
     presetWebFonts({
       provider: "google",
       fonts: {
-        sans: "Inter:400,600,800",
         mono: ["JetBrains Mono"],
       },
     }),
