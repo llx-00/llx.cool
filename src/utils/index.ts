@@ -109,3 +109,11 @@ export function updateMetaElement(name: string, content: string) {
   _el.content = content
   document.head.appendChild(_el)
 }
+
+export function outputPNG(file: File) {
+  const objUrl = URL.createObjectURL(file)
+
+  // return Promise.resolve(() => {
+  //   console.log(file)
+  // })
+}

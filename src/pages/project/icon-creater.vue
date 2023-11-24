@@ -1,34 +1,52 @@
 <script setup lang="ts">
+  import * as imageConversion from "image-conversion"
+
   useHead({
     title: "Icon creater",
   })
+
+  const fileInfo = ref<File | null>(null)
+
+  const prewViewImg = ref("")
+  const createDone = ref(false)
 
   const fileDialog = useFileDialog({
     accept: "image/*",
     multiple: false,
   })
-
-  const fileInfo = ref<File | null>(null)
-  const prewViewImg = ref("")
-
-  const outputList = ["16", "32", "64", "128", "152", "512"]
-
-  function uploadFile() {
-    fileDialog.open()
-  }
-
   watch(fileDialog.files, files => {
     if (files && files?.[0]) {
       const _file = files[0]
+      devLog(_file)
       fileInfo.value = _file
 
       const url = URL.createObjectURL(_file)
+      imageConversion.filetoDataURL(_file).then(dataUrl => {
+        imageConversion
+          .dataURLtoFile(dataUrl, imageConversion.EImageType.PNG)
+          .then(blob => {
+            const _url = URL.createObjectURL(blob)
+            console.log(_url)
+          })
+      })
+
       prewViewImg.value = url
     } else {
       fileInfo.value = null
       prewViewImg.value = ""
     }
   })
+
+  const outputList = ["16", "32", "64", "128", "152", "512"]
+
+  function uploadFile() {
+    if (fileInfo) {
+      fileDialog.reset()
+      createDone.value = false
+    }
+
+    fileDialog.open()
+  }
 
   function download() {}
 </script>
@@ -48,19 +66,7 @@
 
       <span
         class="cursor-pointer"
-        title="清空"
-        @click="
-          () => {
-            fileDialog.reset()
-          }
-        "
-      >
-        <i class="i-lucide-trash-2" />
-        <span class="lt-sm:hidden ml-1">清空</span>
-      </span>
-
-      <span
-        class="cursor-pointer"
+        :class="[createDone ? null : 'cursor-not-allowed op50']"
         title="下载全部"
         @click="download"
       >
@@ -70,19 +76,20 @@
 
       <span
         class="cursor-pointer"
-        title="上传文件"
+        :title="createDone ? '重新上传' : '上传图片'"
         @click="uploadFile"
       >
         <i class="i-lucide-upload" />
-        <span class="lt-sm:hidden ml-1">上传文件</span>
+        <span class="lt-sm:hidden ml-1">{{
+          fileInfo ? "重新上传" : "上传图片"
+        }}</span>
       </span>
     </nav>
 
     <div class="b-1 b-solid b-gray box-border rd-1 w-100% flex overflow-x-auto">
       <img
-        class="w-200px h-200px m2 b-dotted b-gray rd-1 overflow-hidden select-none"
+        class="w-200px h-200px m2 b-dotted b-gray rd-1 overflow-hidden select-none object-cover"
         :src="prewViewImg"
-        alt=""
       />
 
       <div
@@ -93,20 +100,20 @@
           v-for="output in outputList"
           class="w-100% p1 flex justify-between items-center"
         >
-          <span class="ml-1">
-            {{
-              fileDialog.files.value?.[0].name
-                .split(".")
-                .slice(0, -1)
-                .join(".")
-            }}_{{ output }}.{{
-              fileDialog.files.value?.[0].name.split(".").at(-1)
-            }}
+          <span>
+            {{ fileInfo.name.split(".").slice(0, -1).join(".") }}-{{
+              output
+            }}.png
           </span>
           <div>
-            <!-- todo 根据渲染状态显示不同图标 -->
-            <i class="i-lucide-loader-2" />
-            <i class="i-lucide-download" />
+            <i
+              v-if="createDone"
+              class="i-lucide-download cursor-pointer"
+            />
+            <i
+              v-else
+              class="rotate i-lucide-loader-2 cursor-not-allowed"
+            />
           </div>
         </div>
       </div>
@@ -115,7 +122,7 @@
 </template>
 
 <style scoped lang="scss">
-  i.i-lucide-loader-2 {
+  .rotate {
     @keyframes rotate {
       0% {
         transform: rotate(0);
