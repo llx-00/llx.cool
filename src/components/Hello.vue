@@ -32,7 +32,7 @@
       if (index.value === AllHello.length) {
         index.value = 0
       }
-    }, 2000)
+    }, iterval || 2000)
 
     onUnmounted(() => {
       clearInterval(t)
