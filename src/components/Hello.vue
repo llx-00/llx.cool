@@ -57,10 +57,37 @@
 
 <template>
   <span
-    class="cursor-pointer select-none"
+    class="cursor-pointer select-none hi"
     @click="goLove"
   >
-    👋
+    👋🏻
   </span>
+  <span>{{ " " }}</span>
   <span>{{ hello }}</span>
 </template>
+
+<style scoped lang="scss">
+  .hi {
+    @keyframes hi {
+      0% {
+        transform: rotate(0turn);
+      }
+      25% {
+        transform: rotate(-0.01turn);
+      }
+      50% {
+        transform: rotate(0turn);
+      }
+      75% {
+        transform: rotate(0.05turn);
+      }
+      100% {
+        transform: rotate(0turn);
+      }
+    }
+
+    display: inline-block;
+
+    animation: hi 2s 1s linear infinite;
+  }
+</style>

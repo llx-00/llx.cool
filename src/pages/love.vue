@@ -55,7 +55,9 @@
 </script>
 
 <template>
-  <h1 v-if="show">💗 距离见到闹闹，还有</h1>
+  <h1 v-if="show">
+    <span class="heartbeat">💗</span> <span>距离见到闹闹，还有</span>
+  </h1>
   <div
     v-if="show"
     class="w-100% xy-center text-2xl"
@@ -78,3 +80,25 @@
     </span>
   </div>
 </template>
+
+<style scoped lang="scss">
+  .heartbeat {
+    @keyframes heartbeat {
+      0% {
+        transform: scale(1);
+      }
+      10% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    display: inline-block;
+    animation: heartbeat 1s cubic-bezier(0.42, 0, 0.63, 1.41) infinite;
+  }
+</style>
