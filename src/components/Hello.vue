@@ -45,7 +45,7 @@
     if (globalStore.showHiddenPage) {
       router.push("love")
     } else {
-      const inputStr = prompt("Who are you? 👀")
+      const inputStr = prompt("暗号！👀")
 
       if (inputStr && md5(inputStr) === PAGE_PWD) {
         globalStore.showHiddenPage = true
