@@ -1,22 +1,11 @@
 <script setup lang="ts">
-  import { NavItem } from "~/types"
-
-  function toggleThemeHandle(e: MouseEvent) {
-    toggleDarkTransition(e)
-  }
-
-  const navItems: NavItem[] = [
-    { label: "博客", path: "/posts", icon: "i-lucide-file-text" },
-    // { label: "食谱", path: "/cookbooks", icon: "i-lucide-salad" },
-    { label: "游戏", path: "/games", icon: "i-lucide-gamepad-2" },
-    { label: "项目", path: "/projects", icon: "i-lucide-lightbulb" },
-  ]
+  import { NavItems } from "~/config"
 </script>
 <template>
-  <nav class="flex justify-between items-start p4 text-base">
+  <nav class="flex justify-end items-start p4 text-base">
     <RouterLink
       to="/"
-      class="link select-none outline-none"
+      class="link select-none outline-none absolute left-4"
     >
       <img
         v-show="isDark"
@@ -37,7 +26,7 @@
         class="link"
         :to="i.path"
         :title="i.label"
-        v-for="i in navItems"
+        v-for="i in NavItems"
       >
         <i
           class="sm:mr-0.5"
@@ -64,7 +53,7 @@
 
       <a
         class="link"
-        @click="toggleThemeHandle"
+        @click="toggleDarkTransition"
       >
         <i class="i-lucide-sun dark:i-lucide-moon" />
       </a>
