@@ -10,7 +10,7 @@
 
 <template>
   <template v-if="route.path !== '/'">
-    <h1 class="mb-0">
+    <h1 v-if="frontmatter?.display || frontmatter?.title">
       {{ frontmatter?.display || frontmatter?.title }}
     </h1>
     <div
@@ -19,7 +19,10 @@
     >
       {{ formatDate(frontmatter.date) }}
     </div>
-    <p class="font-italic text-base mb-10">
+    <p
+      v-if="frontmatter?.subtitle"
+      class="font-italic text-base"
+    >
       {{ frontmatter?.subtitle }}
     </p>
   </template>
