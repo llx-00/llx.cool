@@ -1,5 +1,11 @@
 <script setup lang="ts">
-  import { NavItems } from "~/config"
+  import { NavItem } from "~/types"
+
+  const NavItems: NavItem[] = [
+    { label: "博客", path: "/posts", icon: "i-lucide-file-text" },
+    { label: "游戏", path: "/games", icon: "i-lucide-gamepad-2" },
+    { label: "项目", path: "/projects", icon: "i-lucide-lightbulb" },
+  ]
 </script>
 <template>
   <nav class="flex justify-end items-start p4 text-base">
