@@ -10,7 +10,7 @@
     title: string
     date: string
   }[] = [
-    { title: "见闹闹", date: "2023/11/24 21:10:00" },
+    // { title: "见闹闹", date: "2023/11/24 21:10:00" },
     { title: "长沙行", date: "2023/12/31 19:10:00" },
   ]
 
@@ -85,13 +85,13 @@
     <h1>
       <span class="heartbeat">💗</span> <span>距离{{ i.title }}，还有</span>
     </h1>
-    <div class="w-100% xy-center text-2xl">
+    <div class="w-100% text-end text-2xl">
       <span>
         <code>{{ i.date.day }}</code>
         <span>天</span>
       </span>
       <span>
-        <code>{{ i.date.hour }}</code>
+        <code>{{ i.date.hour.toString().padStart(2, "0") }}</code>
         <span>小时</span>
       </span>
       <span>
@@ -124,6 +124,6 @@
     }
 
     display: inline-block;
-    animation: heartbeat 1s cubic-bezier(0.42, 0, 0.63, 1.41) infinite;
+    animation: heartbeat 1s ease-in-out infinite;
   }
 </style>
