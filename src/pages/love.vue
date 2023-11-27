@@ -6,13 +6,28 @@
 
   const show = ref(false)
 
-  const TARGET_TIME = "2023/11/24 21:10:00"
+  const TARGET_TIMES: {
+    title: string
+    date: string
+  }[] = [
+    { title: "见闹闹", date: "2023/11/24 21:10:00" },
+    { title: "长沙行", date: "2023/12/31 19:10:00" },
+  ]
 
   function getDiffTime(targetTime: string) {
     const _targetTime = dayjs(targetTime)
     const _now = dayjs()
 
     const _diffSecond = Math.max(0, _targetTime.diff(_now, "second"))
+
+    if (_diffSecond === 0) {
+      return {
+        day: 0,
+        hour: 0,
+        minute: 0,
+        second: 0,
+      }
+    }
 
     const day = Math.max(0, (_diffSecond / 86400) >> 0)
     const hour = Math.max(0, ((_diffSecond - day * 86400) / 3600) >> 0)
@@ -33,14 +48,22 @@
     }
   }
 
-  const diffTime = ref<ReturnType<typeof getDiffTime>>()
+  const diffTimes = ref<
+    { title: string; date: ReturnType<typeof getDiffTime> }[]
+  >([])
 
   onMounted(() => {
     if (globalStore.showHiddenPage) {
-      diffTime.value = getDiffTime(TARGET_TIME)
+      diffTimes.value = TARGET_TIMES.map(i => ({
+        ...i,
+        date: getDiffTime(i.date),
+      }))
 
       const t = setInterval(() => {
-        diffTime.value = getDiffTime(TARGET_TIME)
+        diffTimes.value = TARGET_TIMES.map(i => ({
+          ...i,
+          date: getDiffTime(i.date),
+        }))
       }, 1000)
 
       onUnmounted(() => {
@@ -55,30 +78,32 @@
 </script>
 
 <template>
-  <h1 v-if="show">
-    <span class="heartbeat">💗</span> <span>距离见到闹闹，还有</span>
-  </h1>
-  <div
+  <template
     v-if="show"
-    class="w-100% xy-center text-2xl"
+    v-for="i in diffTimes"
   >
-    <span v-if="diffTime?.day">
-      <code>{{ diffTime?.day }}</code>
-      <span>天</span>
-    </span>
-    <span v-if="diffTime?.hour">
-      <code>{{ diffTime?.hour }}</code>
-      <span>小时</span>
-    </span>
-    <span>
-      <code>{{ diffTime?.minute.toString().padStart(2, "0") }}</code>
-      <span>分</span>
-    </span>
-    <span>
-      <code>{{ diffTime?.second.toString().padStart(2, "0") }}</code>
-      <span>秒</span>
-    </span>
-  </div>
+    <h1>
+      <span class="heartbeat">💗</span> <span>距离{{ i.title }}，还有</span>
+    </h1>
+    <div class="w-100% xy-center text-2xl">
+      <span>
+        <code>{{ i.date.day }}</code>
+        <span>天</span>
+      </span>
+      <span>
+        <code>{{ i.date.hour }}</code>
+        <span>小时</span>
+      </span>
+      <span>
+        <code>{{ i.date.minute.toString().padStart(2, "0") }}</code>
+        <span>分</span>
+      </span>
+      <span>
+        <code>{{ i.date.second.toString().padStart(2, "0") }}</code>
+        <span>秒</span>
+      </span>
+    </div>
+  </template>
 </template>
 
 <style scoped lang="scss">
