@@ -39,14 +39,17 @@
   code:not(pre code) {
     margin: 0 0.2rem;
     padding: 0.1em 0.2em;
-    height: 1em;
+    box-sizing: border-box;
+    height: inherit;
     line-height: 1em;
-    font-size: 0.8em;
+    font-size: 1em;
     display: inline-block;
     vertical-align: middle;
     white-space: break-spaces;
     border-radius: 5px;
     background-color: rgba(175, 184, 193, 0.2);
+
+    transform: translateY(-1px);
   }
 
   pre {
