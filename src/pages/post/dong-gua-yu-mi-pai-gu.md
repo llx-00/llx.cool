@@ -15,6 +15,10 @@ ingredient:
   - 小葱
 ---
 
+## 展示
+
+![dong-gua-yu-mi-pai-gu](/dong-gua-yu-mi-pai-gu.jpeg)
+
 ## 食材
 
 <Ingredient :items="frontmatter.ingredient"/>
@@ -27,7 +31,3 @@ ingredient:
 4. 重新加提前备好的热水，排骨下锅，加姜片、八角、香叶、桂皮，开小火。
 5. 一小时后放入玉米（玉米切段），加盐。
 6. 一小时后放入切好的冬瓜，尝咸淡补盐再炖二十分钟。
-
-## 展示
-
-![dong-gua-yu-mi-pai-gu](/dong-gua-yu-mi-pai-gu.jpeg)

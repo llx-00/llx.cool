@@ -17,6 +17,10 @@ ingredient:
   - 火锅底料
 ---
 
+## 展示
+
+![gan-guo-xia](/gan-guo-xia.jpeg)
+
 ## 食材
 
 <Ingredient :items="frontmatter.ingredient"/>
@@ -29,7 +33,3 @@ ingredient:
 4. 放入沥干水的虾炒至虾全部变红，背部开缝完全打开。
 5. 焯水过的食材沥干水下锅，翻炒均匀出锅。
 6. 撒上香菜、熟芝麻。
-
-## 展示
-
-![gan-guo-xia](/gan-guo-xia.jpeg)

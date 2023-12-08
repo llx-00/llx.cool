@@ -12,6 +12,10 @@ ingredient:
   - 香菜
 ---
 
+## 展示
+
+![hong-shao-pai-gu](/hong-shao-pai-gu.jpeg)
+
 ## 食材
 
 <Ingredient :items="frontmatter.ingredient"/>
@@ -25,7 +29,3 @@ ingredient:
 5. 加没过排骨一半的水，焖半小时。
 6. 转大火收汁。
 7. 撒上小葱段，香菜。
-
-## 展示
-
-![hong-shao-pai-gu](/hong-shao-pai-gu.jpeg)

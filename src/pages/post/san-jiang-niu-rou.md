@@ -19,6 +19,10 @@ ingredient:
   - 牛腱子
 ---
 
+## 展示
+
+![san-jiang-niu-rou](/san-jiang-niu-rou.jpeg)
+
 ## 食材
 
 <Ingredient :items="frontmatter.ingredient"/>
@@ -39,7 +43,3 @@ ingredient:
 1. 碗中放入切碎的大蒜、小米辣。
 2. 放盐、蚝油、生抽、香油。
 3. 撒上香菜末。
-
-## 展示
-
-![san-jiang-niu-rou](/san-jiang-niu-rou.jpeg)
