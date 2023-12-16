@@ -13,7 +13,7 @@
     &::before {
       display: inline-block;
       content: "🔗";
-      padding: 0 0.2rem;
+      padding: 0.2em;
     }
 
     &[href^="/post/"] {
