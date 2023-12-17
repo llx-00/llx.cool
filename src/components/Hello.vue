@@ -49,6 +49,7 @@
 
       if (inputStr && md5(inputStr) === PAGE_PWD) {
         globalStore.showHiddenPage = true
+        localStorage.setItem("PAGE_PWD", md5(inputStr))
         router.push("love")
       }
     }
