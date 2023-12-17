@@ -10,8 +10,8 @@
     title: string
     date: string
   }[] = [
-    { title: "见闹闹", date: "2023/12/15 17:50:00" },
-    { title: "长沙行", date: "2023/12/31 19:10:00" },
+    { title: "见闹闹", date: "2023/12/22 19:40:00" },
+    { title: "长沙行", date: "2023/12/31 14:00:00" },
   ]
 
   function getDiffTime(targetTime: string) {
