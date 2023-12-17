@@ -45,12 +45,17 @@
     if (globalStore.showHiddenPage) {
       router.push("love")
     } else {
-      const inputStr = prompt("暗号！👀")
-
-      if (inputStr && md5(inputStr) === PAGE_PWD) {
+      if (localStorage.getItem("PAGE_PWD") === PAGE_PWD) {
         globalStore.showHiddenPage = true
-        localStorage.setItem("PAGE_PWD", md5(inputStr))
         router.push("love")
+      } else {
+        const inputStr = prompt("暗号！👀")
+
+        if (inputStr && md5(inputStr) === PAGE_PWD) {
+          globalStore.showHiddenPage = true
+          localStorage.setItem("PAGE_PWD", md5(inputStr))
+          router.push("love")
+        }
       }
     }
   }
