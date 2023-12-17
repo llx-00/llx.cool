@@ -16,10 +16,6 @@ ingredient:
   - 花椒
 ---
 
-## 展示
-
-![la-chao-ji-zhua](/la-chao-ji-zhua.jpeg)
-
 ## 食材
 
 <Ingredient :items="frontmatter.ingredient"/>
@@ -32,3 +28,7 @@ ingredient:
 4. 捞出鸡爪，留半碗汤。
 5. 冷油下蒜沫、小米辣、花椒大火炒出香味加入鸡爪翻炒均匀。
 6. 料汁分两次加入，第一次加入后转中火焖十分钟，第二次转大火收汁。
+
+## 展示
+
+![la-chao-ji-zhua](/la-chao-ji-zhua.jpeg)
