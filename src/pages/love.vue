@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import dayjs from "dayjs"
+  import md5 from "md5"
   import { globalStore } from "~/composables"
   import { PAGE_PWD } from "~/config"
 
@@ -41,29 +42,42 @@
     { title: string; date: ReturnType<typeof getDiffTime> }[]
   >([])
 
-  onMounted(() => {
-    if (globalStore.showHiddenPage) {
+  function startInterval() {
+    diffTimes.value = TARGET_TIMES.map(i => ({
+      ...i,
+      date: getDiffTime(i.date),
+    }))
+
+    const t = setInterval(() => {
       diffTimes.value = TARGET_TIMES.map(i => ({
         ...i,
         date: getDiffTime(i.date),
       }))
+    }, 1000)
 
-      const t = setInterval(() => {
-        diffTimes.value = TARGET_TIMES.map(i => ({
-          ...i,
-          date: getDiffTime(i.date),
-        }))
-      }, 1000)
+    onUnmounted(() => {
+      clearInterval(t)
+    })
 
-      onUnmounted(() => {
-        clearInterval(t)
-      })
+    show.value = true
+  }
 
-      show.value = true
+  onMounted(() => {
+    if (globalStore.showHiddenPage) {
+      startInterval()
     } else {
       if (localStorage.getItem("PAGE_PWD") === PAGE_PWD) {
         globalStore.showHiddenPage = true
-      } else router.push("/")
+        startInterval()
+      } else {
+        const inputStr = prompt("暗号！👀")
+
+        if (inputStr && md5(inputStr) === PAGE_PWD) {
+          globalStore.showHiddenPage = true
+          localStorage.setItem("PAGE_PWD", md5(inputStr))
+          startInterval()
+        } else router.push("/")
+      }
     }
   })
 </script>
