@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import dayjs from "dayjs"
   import { globalStore } from "~/composables"
+  import { PAGE_PWD } from "~/config"
 
   const router = useRouter()
   const show = ref(false)
@@ -60,7 +61,9 @@
 
       show.value = true
     } else {
-      router.push("/")
+      if (localStorage.getItem("PAGE_PWD") === PAGE_PWD) {
+        globalStore.showHiddenPage = true
+      } else router.push("/")
     }
   })
 </script>
