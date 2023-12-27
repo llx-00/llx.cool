@@ -3,13 +3,12 @@
   import { globalStore } from "~/composables"
 
   const router = useRouter()
-
   const show = ref(false)
 
-  const TARGET_TIMES: {
-    title: string
-    date: string
-  }[] = [
+  type TypeTargetTime = { title: string; date: string }
+  const TARGET_TIMES: TypeTargetTime[] = [
+    // <span>距离{{ i.title }}，{{ i.date.isMinus ? "已过去" : "还有" }}</span>
+    { title: "第一次💋", date: "2023/8/11 23:00:00" },
     { title: "见闹闹", date: "2023/12/29 21:10:00" },
     { title: "长沙行", date: "2023/12/31 14:00:00" },
   ]
@@ -18,33 +17,22 @@
     const _targetTime = dayjs(targetTime)
     const _now = dayjs()
 
-    const _diffSecond = Math.max(0, _targetTime.diff(_now, "second"))
+    let _diffSecond = _targetTime.diff(_now, "second")
+    const isMinus = _diffSecond < 0
 
-    if (_diffSecond === 0) {
-      return {
-        day: 0,
-        hour: 0,
-        minute: 0,
-        second: 0,
-      }
-    }
-
-    const day = Math.max(0, (_diffSecond / 86400) >> 0)
-    const hour = Math.max(0, ((_diffSecond - day * 86400) / 3600) >> 0)
-    const minute = Math.max(
-      0,
-      ((_diffSecond - (day * 86400 + hour * 3600)) / 60) >> 0
-    )
-    const second = Math.max(
-      0,
-      _diffSecond - (day * 86400 + hour * 3600 + minute * 60)
-    )
+    // 保证算出来的 天、时、分、秒为正
+    if (isMinus) _diffSecond = -_diffSecond
+    const day = (_diffSecond / 86400) >> 0
+    const hour = ((_diffSecond - day * 86400) / 3600) >> 0
+    const minute = ((_diffSecond - (day * 86400 + hour * 3600)) / 60) >> 0
+    const second = _diffSecond - (day * 86400 + hour * 3600 + minute * 60)
 
     return {
       day,
       hour,
       minute,
       second,
+      isMinus,
     }
   }
 
@@ -83,7 +71,8 @@
     v-for="i in diffTimes"
   >
     <h1>
-      <span class="heartbeat">💗</span> <span>距离{{ i.title }}，还有</span>
+      <span class="heartbeat">💗</span>
+      <span>距离{{ i.title }}，{{ i.date.isMinus ? "已过去" : "还有" }}</span>
     </h1>
     <div class="w-100% text-end text-2xl">
       <span>
