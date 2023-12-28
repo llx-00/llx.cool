@@ -13,6 +13,7 @@
     { title: "第一次💋", date: "2023/8/11 23:00:00" },
     { title: "见闹闹", date: "2023/12/29 21:10:00" },
     { title: "长沙行", date: "2023/12/31 14:00:00" },
+    { title: "绍兴行", date: "2023/12/30 6:00:00" },
   ]
 
   function getDiffTime(targetTime: string) {
@@ -43,16 +44,17 @@
   >([])
 
   function startInterval() {
-    diffTimes.value = TARGET_TIMES.map(i => ({
-      ...i,
-      date: getDiffTime(i.date),
-    }))
-
-    const t = setInterval(() => {
-      diffTimes.value = TARGET_TIMES.map(i => ({
+    function getDiffTimes() {
+      return TARGET_TIMES.sort((a, b) => (a.date < b.date ? 1 : -1)).map(i => ({
         ...i,
         date: getDiffTime(i.date),
       }))
+    }
+
+    diffTimes.value = getDiffTimes()
+
+    const t = setInterval(() => {
+      diffTimes.value = getDiffTimes()
     }, 1000)
 
     onUnmounted(() => {
@@ -83,33 +85,23 @@
 </script>
 
 <template>
-  <template
+  <h1><span class="heartbeat mr-1">💗</span>时间线</h1>
+  <p
     v-if="show"
     v-for="i in diffTimes"
   >
-    <h1>
-      <span class="heartbeat">💗</span>
-      <span>距离{{ i.title }}，{{ i.date.isMinus ? "已过去" : "还有" }}</span>
-    </h1>
-    <div class="w-100% text-end text-2xl">
-      <span>
-        <code>{{ i.date.day }}</code>
-        <span>天</span>
-      </span>
-      <span>
-        <code>{{ i.date.hour.toString().padStart(2, "0") }}</code>
-        <span>小时</span>
-      </span>
-      <span>
-        <code>{{ i.date.minute.toString().padStart(2, "0") }}</code>
-        <span>分</span>
-      </span>
-      <span>
-        <code>{{ i.date.second.toString().padStart(2, "0") }}</code>
-        <span>秒</span>
-      </span>
-    </div>
-  </template>
+    <span>距离{{ i.title }}，{{ i.date.isMinus ? "已过去" : "还有" }}</span>
+    <span class="w-100% text-end">
+      <code>{{ i.date.day }}</code>
+      <span>天</span>
+      <code>{{ i.date.hour.toString().padStart(2, "0") }}</code>
+      <span>小时</span>
+      <code>{{ i.date.minute.toString().padStart(2, "0") }}</code>
+      <span>分</span>
+      <code>{{ i.date.second.toString().padStart(2, "0") }}</code>
+      <span>秒</span>
+    </span>
+  </p>
 </template>
 
 <style scoped lang="scss">
