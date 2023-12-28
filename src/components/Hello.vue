@@ -63,7 +63,7 @@
 
 <template>
   <span
-    class="cursor-pointer select-none hi"
+    class="cursor-pointer select-none hi mr-1"
     @click="goLove"
   >
     👋🏻
