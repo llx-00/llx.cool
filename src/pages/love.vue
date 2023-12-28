@@ -88,7 +88,7 @@
 </script>
 
 <template>
-  <!-- <h1><span class="heartbeat mr-1">💗</span>时间线</h1> -->
+  <h1><span class="heartbeat mr-1">💗</span>时间线</h1>
   <p
     v-if="show"
     v-for="i in diffTimes"
