@@ -7,11 +7,11 @@
   const router = useRouter()
   const show = ref(false)
 
-  type TypeTargetTime = { title: string; date: string }
+  type TypeTargetTime = { title: string; date: string; top?: boolean }
   const TARGET_TIMES: TypeTargetTime[] = [
     // <span>距离{{ i.title }}，{{ i.date.isMinus ? "已过去" : "还有" }}</span>
     { title: "第一次💋", date: "2023/8/11 23:00:00" },
-    { title: "见闹闹", date: "2023/12/29 21:10:00" },
+    { title: "见闹闹", date: "2023/12/29 21:10:00", top: true },
     { title: "长沙行", date: "2023/12/31 14:00:00" },
     { title: "绍兴行", date: "2023/12/30 6:00:00" },
   ]
@@ -40,15 +40,18 @@
   }
 
   const diffTimes = ref<
-    { title: string; date: ReturnType<typeof getDiffTime> }[]
+    { title: string; top?: boolean; date: ReturnType<typeof getDiffTime> }[]
   >([])
 
   function startInterval() {
     function getDiffTimes() {
-      return TARGET_TIMES.sort((a, b) => (a.date < b.date ? 1 : -1)).map(i => ({
+      const arr = TARGET_TIMES.sort((a, b) => {
+        return a.date < b.date ? 1 : -1
+      }).map(i => ({
         ...i,
         date: getDiffTime(i.date),
       }))
+      return arr.filter(i => i.top).concat(arr.filter(i => !i.top))
     }
 
     diffTimes.value = getDiffTimes()
@@ -85,12 +88,20 @@
 </script>
 
 <template>
-  <h1><span class="heartbeat mr-1">💗</span>时间线</h1>
+  <!-- <h1><span class="heartbeat mr-1">💗</span>时间线</h1> -->
   <p
     v-if="show"
     v-for="i in diffTimes"
+    class="w-100% text-base flex flex-wrap justify-between items-center"
   >
-    <span>距离{{ i.title }}，{{ i.date.isMinus ? "已过去" : "还有" }}</span>
+    <span class="w-100% flex justify-between items-center">
+      <span>距离“{{ i.title }}”，{{ i.date.isMinus ? "已过去" : "还有" }}</span>
+      <i
+        v-show="i.top"
+        class="i-lucide-pin cursor-default"
+      />
+    </span>
+    <!-- <span class="flex-1" /> -->
     <span class="w-100% text-end">
       <code>{{ i.date.day }}</code>
       <span>天</span>
