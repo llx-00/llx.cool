@@ -35,4 +35,4 @@ ingredient:
 
 ## 展示
 
-![暂无](/ma-po-dou-fu.jpeg)
+![暂无]()
