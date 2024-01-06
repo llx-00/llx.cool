@@ -39,7 +39,7 @@
       :key="post.path"
       class="my4"
     >
-      <span class="text-sm text-right ws-nowrap op75">
+      <span class="text-sm font-mono text-right ws-nowrap op75">
         {{ formatDate(post.date!) }}
       </span>
       <h3 class="mt-0">

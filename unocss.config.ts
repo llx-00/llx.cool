@@ -10,7 +10,7 @@ export default defineConfig({
   shortcuts: [
     [
       "link",
-      "cursor-pointer select-none transition duration-200 ease-in-out op-70 hover:op-100",
+      "cursor-pointer select-none transition duration-200 ease-in-out op-75 hover:op-100",
     ],
     ["xy-center", "flex justify-center items-center"],
   ],

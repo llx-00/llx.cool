@@ -15,7 +15,7 @@
     </h1>
     <div
       v-if="frontmatter?.date"
-      class="text-base ws-nowrap font-normal"
+      class="text-base ws-nowrap font-normal font-mono"
     >
       {{ formatDate(frontmatter.date) }}
     </div>
